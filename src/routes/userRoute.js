@@ -3,7 +3,8 @@ const router = new express.Router();
 const auth = require("../middleware/auth");
 const User = require("../models/userModel");
 
-//GET ROUTEs
+//**********GET ROUTEs**********
+
 router.get("/user/me", auth, async (req, res) => {
   try {
     const user = req.user;
@@ -13,7 +14,19 @@ router.get("/user/me", auth, async (req, res) => {
   }
 });
 
-//POST ROUTES
+router.get("/user/allUsers", async (req, res) => {
+  try {
+    const users = await User.find({});
+    if (users.length === 0) {
+      return res.status(400).send({ "ERROR:": "No Users In Database" });
+    }
+    res.status(200).send(users);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
+//**********POST ROUTES**********
 //new user
 router.post("/newUser", async (req, res) => {
   try {
@@ -61,6 +74,22 @@ router.post("/user/logoutAll", auth, async (req, res) => {
     res.send(req.user);
   } catch (err) {
     res.status(500).send();
+  }
+});
+
+//**********Patch Routes**********
+//Route For Updating Password When User Has Forgotten Password
+router.patch("/user/changePassword", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      return res.status(400).send({ "ERROR : ": "No User Found" });
+    }
+    user.password = req.body.password;
+    await user.save();
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(500).send(err.message);
   }
 });
 

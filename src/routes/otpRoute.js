@@ -31,4 +31,16 @@ router.post("/sendOtp", async (req, res) => {
   } catch (err) {}
 });
 
+router.post("/getOtp", async (req, res) => {
+  try {
+    const otp = await OTP.findOne({ email: req.body.email });
+    if (!otp) {
+      return res.status(400).send();
+    }
+    res.send(otp);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+});
+
 module.exports = router;

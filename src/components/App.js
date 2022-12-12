@@ -5,6 +5,7 @@ import Login from "./Login";
 import ForgotPassword from "./ForgotPassword";
 import EnterOTP from "./EnterOTP";
 import ChangePassword from "./ChangePassword";
+import Home from "./Home";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
       <Route path="/enterOTP" element={<EnterOTP />}></Route>
       <Route path="/changePassword" element={<ChangePassword />}></Route>
+      <Route path="/home" element={<Home />}></Route>
     </Routes>
   );
 }

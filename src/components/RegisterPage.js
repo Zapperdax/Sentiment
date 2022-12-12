@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
+import {
+  TextField,
+  InputAdornment,
+  IconButton,
+  Alert,
+  AlertTitle,
+} from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../utils/axios";
@@ -10,6 +16,7 @@ function RegisterPage() {
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
 
+  const [error, setError] = React.useState(false);
   const [pClicked, setPClicked] = React.useState(false);
   const handlePClick = () => {
     setPClicked((preValue) => !preValue);
@@ -51,7 +58,7 @@ function RegisterPage() {
         }
       })
       .catch((err) => {
-        console.log(err);
+        setError(true);
       });
   };
   return (
@@ -124,11 +131,18 @@ function RegisterPage() {
             style={{ margin: "3.5rem", width: "100%" }}
             className="signUpForm"
           >
+            {error && (
+              <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+                This is an error alert — <strong>check it out!</strong>
+              </Alert>
+            )}
             <div
               style={{
                 fontSize: "1.5rem",
                 fontFamily: "Bebas Neue",
-                marginBottom: "1rem",
+                margin: "1rem 0",
+
                 textAlign: "center",
               }}
               className="createAccount"

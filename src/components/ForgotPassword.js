@@ -8,9 +8,7 @@ function ForgotPassword() {
   const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
-  const handleClick = () => {
-    navigate("/enterOTP");
-  };
+
   const [formData, setFormData] = React.useState({
     email: "",
   });
@@ -26,6 +24,10 @@ function ForgotPassword() {
   };
 
   console.log(formData);
+
+  const handleClick = () => {
+    navigate("/enterOTP", { state: { id: 1, email: formData.email } });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();

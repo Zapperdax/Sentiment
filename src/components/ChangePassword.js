@@ -2,8 +2,13 @@ import React from "react";
 import { TextField, InputAdornment, IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useLocation } from "react-router-dom";
+import { api } from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
@@ -21,6 +26,19 @@ function Login() {
     cPassword: "",
   });
 
+  const handleClick = () => {
+    api
+      .patch("/user/changePassword", {
+        email: location.state.email,
+        password: formData.password,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          navigate("/login");
+        }
+      });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((preValue) => {
@@ -31,7 +49,7 @@ function Login() {
     });
   };
   console.log(formData);
-
+  console.log(location.state.email);
   return (
     <div
       style={{
@@ -157,7 +175,9 @@ function Login() {
               />
             </form>
             <div style={{ margin: "2rem 0", textAlign: "center" }}>
-              <button className="createAccountButton">Continue</button>
+              <button onClick={handleClick} className="createAccountButton">
+                Continue
+              </button>
             </div>
           </div>
         </div>

@@ -1,18 +1,34 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { TextField } from "@mui/material";
+import { api } from "../utils/axios";
 
 function EnterOTP() {
+  const location = useLocation();
   const navigate = useNavigate();
   const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
-  const handleClick = () => {
-    navigate("/changePassword");
-  };
+
   const [formData, setFormData] = React.useState({
     otp: "",
   });
+
+  const handleClick = () => {
+    api
+      .post("/getOtp", {
+        email: location.state.email,
+      })
+      .then((response) => {
+        console.log(response.data.otp);
+        if (response.data.otp !== formData.otp) {
+          return console.log("Not Matched");
+        }
+        navigate("/changePassword", {
+          state: { id: 1, email: location.state.email },
+        });
+      });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,6 +41,8 @@ function EnterOTP() {
   };
 
   console.log(formData);
+  console.log(location.state.email);
+
   return (
     <div
       style={{

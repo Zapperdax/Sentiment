@@ -50,6 +50,8 @@ function Login() {
       .then((response) => {
         console.log(response.data);
         if (response.status === 200) {
+          const token = JSON.stringify(response.data.token);
+          localStorage.setItem("userToken", token);
           navigate("/home");
         }
       })

@@ -6,6 +6,8 @@ import ForgotPassword from "./ForgotPassword";
 import EnterOTP from "./EnterOTP";
 import ChangePassword from "./ChangePassword";
 import Home from "./Home";
+import ChatbotLandingPage from "./ChatbotLandingPage";
+import Chatbot from "./Chatbot";
 
 function App() {
   return (
@@ -16,6 +18,11 @@ function App() {
       <Route path="/enterOTP" element={<EnterOTP />}></Route>
       <Route path="/changePassword" element={<ChangePassword />}></Route>
       <Route path="/home" element={<Home />}></Route>
+      <Route
+        path="/chatbotlandingpage"
+        element={<ChatbotLandingPage />}
+      ></Route>
+      <Route path="/chatbot" element={<Chatbot />}></Route>
     </Routes>
   );
 }

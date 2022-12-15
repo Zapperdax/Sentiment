@@ -66,7 +66,31 @@ canvas{
   box-shadow: none;
   transform: translateY(0);
 }
-@media screen and (max-width: 820px){
+.chatbotPage{
+    height: 100vh;
+    background-color: #d3f2f5;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoContainer{
+    display: flex;
+    background-color: white;
+    border-radius: 25px 25px 25px 25px;
+    padding: 2rem 2rem 0.5rem 2rem;
+}
+.chatButtonContainer> Button{
+    margin: 1rem 1rem 1rem 0;
+}
+.phoneOnlyDoodle{
+    text-align: center;
+}
+.chatbotdoodle{
+    width: 15rem;
+}
+@media screen and (max-width: 799px){
     .leftSide{
         display: none;
     }
@@ -76,5 +100,37 @@ canvas{
     }
     .registerBox{
         grid-template-columns: 1fr !important;
+    }
+    .chatRightSide{
+        display: none;
+    }
+    .infoContainer{
+        flex-direction: column;
+    }
+
+    
+}
+
+@media screen and (min-width: 800px){
+    .phoneOnlyDoodle{
+        display: none;
+    }
+    .webChatbotDoodle{
+        width: 30rem;
+    }
+    
+    .chatLeftSide h1{
+        font-size: 3rem;
+    }
+    .chatLeftSide > p {
+        font-size: 2rem;
+    }
+    .chatleftparagraph{
+        font-size: 1.3rem !important;
+    }
+    
+    .chatButtonContainer> Button{
+        padding: 1rem 1.8rem;
+        font-size: 1.1rem;
     }
 }

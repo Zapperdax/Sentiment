@@ -71,8 +71,9 @@ canvas{
     background-color: #d3f2f5;
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column;
 }
 
 .infoContainer{
@@ -80,6 +81,17 @@ canvas{
     background-color: white;
     border-radius: 25px 25px 25px 25px;
     padding: 2rem 2rem 0.5rem 2rem;
+    align-items: center;
+}
+.chatInfoContainer{
+    background-color: white;
+    border-radius: 25px 25px 25px 25px;
+    padding: 2rem 2rem 0.5rem 2rem;
+    align-items: center;
+    justify-content: center;
+}
+.chatbotInformation{
+    text-align: center;
 }
 .chatButtonContainer> Button{
     margin: 1rem 1rem 1rem 0;
@@ -90,6 +102,20 @@ canvas{
 .chatbotdoodle{
     width: 15rem;
 }
+.chatleftparagraphcontainer{
+    display: flex;
+}
+.chatleftparagraph{
+    margin-right: 1rem;
+}
+
+.chatbotPNG{
+    width: 200px;
+    position: relative;
+    top: 1rem;
+}
+
+
 @media screen and (max-width: 799px){
     .leftSide{
         display: none;
@@ -118,7 +144,6 @@ canvas{
     .webChatbotDoodle{
         width: 30rem;
     }
-    
     .chatLeftSide h1{
         font-size: 3rem;
     }
@@ -127,10 +152,16 @@ canvas{
     }
     .chatleftparagraph{
         font-size: 1.3rem !important;
+        margin-right: 1rem;
     }
-    
     .chatButtonContainer> Button{
         padding: 1rem 1.8rem;
         font-size: 1.1rem;
+    }
+    .chatInfoContainer{
+        width: 75%;
+    }
+    .chatbotPNG{
+        width: 350px;
     }
 }

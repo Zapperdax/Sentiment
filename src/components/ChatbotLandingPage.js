@@ -18,11 +18,15 @@ const ChatbotLandingPage = () => {
               Get Started
             </Button>
           </div>
-          <p>Your Personal Mood Companion</p>
-          <p className="chatleftparagraph">Insert Links</p>
-          <p className="chatleftparagraph">Insert Links</p>
-          <p className="chatleftparagraph">Insert Links</p>
-          <p className="chatleftparagraph">Insert Links</p>
+          <p style={{ marginBottom: "0.5rem" }}>Your Personal Mood Companion</p>
+          <div className="chatleftparagraphcontainer">
+            <p className="chatleftparagraph">Insert Links</p>
+            <p className="chatleftparagraph">Insert Links</p>
+          </div>
+          <div className="chatleftparagraphcontainer">
+            <p className="chatleftparagraph">Insert Links</p>
+            <p className="chatleftparagraph">Insert Links</p>
+          </div>
         </div>
         <div className="phoneOnlyDoodle">
           <img

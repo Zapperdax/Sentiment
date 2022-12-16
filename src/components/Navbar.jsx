@@ -37,7 +37,7 @@ const Navbar = () => {
     <>
       <AppBar color="transparent" elevation={0} position='fixed' sx={!isMobile ? {marginTop : '1em'} : {marginTop : '0.5em'}} >
         <Toolbar style={styles.toolBar} >
-          <Typography style={styles.logoText}>Sentimento</Typography>
+          <Link style={styles.logoText} to='/'>Sentimento</Link>
           {!isMobile ? (
             <Box ml={2} style={styles.navbarLinks}>
               <Stack direction="row" gap={4}>
@@ -116,18 +116,16 @@ const Navbar = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem style={styles.menuItems}>
-          {" "}
           <ListItemIcon>
             <AccountCircle />
-          </ListItemIcon>{" "}
-          My Profile{" "}
+          </ListItemIcon>
+          My Profile
         </MenuItem>
         <MenuItem style={styles.menuItems}>
-          {" "}
           <ListItemIcon>
             <Settings />
-          </ListItemIcon>{" "}
-          Settings{" "}
+          </ListItemIcon>
+          Settings
         </MenuItem>
       </Menu>
     </>
@@ -154,6 +152,7 @@ const styles = {
     fontSize: "18px",
     lineHeight: "24.25px",
     cursor: "pointer",
+    fontFamily:'Manrope'
   },
   logoText: {
     textDecoration: "none",
@@ -164,6 +163,7 @@ const styles = {
     marginRight: "2rem",
     fontSize: "28px",
     lineHeight: "24.25px",
+    fontFamily:'Manrope'
   },
   signUpBtn: {
     backgroundColor: "#FF4820",
@@ -176,6 +176,7 @@ const styles = {
     fontWeight: 500,
     fontSize: "17px",
     lineHeight: "24.25px",
+    fontFamily:'Manrope'
   },
 };
 

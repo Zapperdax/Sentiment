@@ -84,7 +84,7 @@ function RegisterPage() {
           backgroundImage: `url(${innerBackground})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          borderRadius:"5px"
+          borderRadius: "5px",
         }}
         className="registerBox"
       >
@@ -127,8 +127,7 @@ function RegisterPage() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-          borderRadius:"5px"
-
+            borderRadius: "5px",
           }}
         >
           <div

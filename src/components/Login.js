@@ -79,7 +79,7 @@ function Login() {
           backgroundImage: `url(${innerBackground})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
-          borderRadius:"5px"
+          borderRadius: "5px",
         }}
         className="registerBox"
       >
@@ -122,7 +122,7 @@ function Login() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            borderRadius:"5px"
+            borderRadius: "5px",
           }}
         >
           <div

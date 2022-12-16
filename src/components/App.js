@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <Box style={{marginTop:'4.5em'}} pl='3rem' pr='3rem'>
+      <Box>
         <Routes>
           <Route path="/register" element={<RegisterPage />}></Route>
           <Route path="/login" element={<Login />}></Route>

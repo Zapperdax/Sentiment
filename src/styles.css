@@ -1,27 +1,24 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{
+    margin:0;
+    padding:0;
 }
-
-body {
-  background-color: #040c18;
+body{
+    background-color: #040c18;
 }
-
-.app {
-  display: flex;
+.app{
+    display: flex;
 }
-canvas {
-  position: absolute;
+canvas{
+    position: absolute;
 }
 
 .createAccountButton {
   appearance: none;
   background-color: transparent;
-  border: 2px solid #1a1a1a;
+  border: 2px solid #1A1A1A;
   border-radius: 15px;
   box-sizing: border-box;
-  color: #3b3b3b;
+  color: #3B3B3B;
   cursor: pointer;
   display: inline-block;
   font-family: "Playfair Display";
@@ -33,7 +30,7 @@ canvas {
   outline: none;
   text-align: center;
   text-decoration: none;
-  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
   user-select: none;
   padding: 8px 8px;
   -webkit-user-select: none;
@@ -48,28 +45,23 @@ canvas {
 
 .createAccountButton:hover {
   color: #fff;
-  background-color: #1a1a1a;
+  background-color: #1A1A1A;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
 
-.floating {
-  animation-name: floating;
-  animation-duration: 3s;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
+.floating { 
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    
 }
-
+ 
 @keyframes floating {
-  0% {
-    transform: translate(0, 0px);
-  }
-  50% {
-    transform: translate(0, 15px);
-  }
-  100% {
-    transform: translate(0, -0px);
-  }
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }   
 }
 
 .createAccountButton:active {
@@ -81,8 +73,9 @@ canvas {
     background-color: #d3f2f5;
     box-sizing: border-box;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column;
 }
 
 .infoContainer{
@@ -90,16 +83,85 @@ canvas {
     background-color: white;
     border-radius: 25px 25px 25px 25px;
     padding: 2rem 2rem 0.5rem 2rem;
+    align-items: center;
 }
+.chatInfoContainer{
+    background-color: white;
+    border-radius: 25px 25px 25px 25px;
+    padding: 2rem 2rem 0.5rem 2rem;
+    align-items: center;
+    justify-content: center;
+}
+.chatbotInformation{
+    text-align: center;
+}
+.chatMain{
+    margin-top: 1rem;
+    max-height: 12rem;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+}
+.chatMessageSend{
+    margin-top: 1rem;
+    width: 18rem;
+}
+ .chatMain::-webkit-scrollbar {
+    width: 5px;
+	background-color: #dfe6e9;
+ }
+ 
+ .chatMain::-webkit-scrollbar-track {
+    border: 5px solid white;
+	border-color: #cccccc; 
+	background-color: #b2bec3;
+ }
+ 
+ .chatMain::-webkit-scrollbar-thumb {
+    background-color:#1A1A1A;
+	border-radius: 10px;
+ }
+ ​
 .chatButtonContainer> Button{
     margin: 1rem 1rem 1rem 0;
 }
-.phoneOnlyDoodle {
-  text-align: center;
+.phoneOnlyDoodle{
+    text-align: center;
 }
-.chatbotdoodle {
-  width: 15rem;
+.chatbotdoodle{
+    width: 15rem;
 }
+.chatleftparagraphcontainer{
+    display: flex;
+}
+.chatleftparagraph{
+    margin-right: 1rem;
+}
+
+.chatbotPNG{
+    width: 200px;
+    position: relative;
+    top: 1rem;
+}
+.chatbotMessage{
+    margin-left: 1rem;
+}
+.userMessage{
+    text-align: right;
+    margin-right: 1rem;
+}
+.chatbotMessage>p, .userMessage>p{
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    max-width: 50%;
+    border-radius: 12px;
+    padding: 0.5rem;
+    background-color: #d3f2f5;
+    color: #1A1A1A;
+    font-weight: 500;
+    text-align: justify;
+}
+
+
 @media screen and (max-width: 799px){
     .leftSide{
         display: none;
@@ -128,7 +190,6 @@ canvas {
     .webChatbotDoodle{
         width: 30rem;
     }
-    
     .chatLeftSide h1{
         font-size: 3rem;
     }
@@ -137,23 +198,25 @@ canvas {
     }
     .chatleftparagraph{
         font-size: 1.3rem !important;
+        margin-right: 1rem;
     }
-    
     .chatButtonContainer> Button{
         padding: 1rem 1.8rem;
         font-size: 1.1rem;
     }
+    .chatInfoContainer{
+        width: 75%;
+    }
+    .chatbotPNG{
+        width: 250px;
+    }
+    .chatMain{
+        max-width: 100%;
+    }
+    .chatMessageSend{
+        width: 100%;
+    }
+    .chatbotMessage>p, .userMessage>p{
+        font-size: 1.2rem;
+    }
 }
-
-
-.gradient__bg {
-    background:-moz-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
-
-    background:-webkit-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
-  
-    background:-o-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
-  
-    background:-ms-radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
-  
-    background:radial-gradient(circle at 3% 25%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
-  }

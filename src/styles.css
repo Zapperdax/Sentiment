@@ -93,6 +93,32 @@ canvas{
 .chatbotInformation{
     text-align: center;
 }
+.chatMain{
+    margin-top: 1rem;
+    max-height: 12rem;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+}
+.chatMessageSend{
+    margin-top: 1rem;
+    width: 18rem;
+}
+ .chatMain::-webkit-scrollbar {
+    width: 5px;
+	background-color: #dfe6e9;
+ }
+ 
+ .chatMain::-webkit-scrollbar-track {
+    border: 5px solid white;
+	border-color: #cccccc; 
+	background-color: #b2bec3;
+ }
+ 
+ .chatMain::-webkit-scrollbar-thumb {
+    background-color:#1A1A1A;
+	border-radius: 10px;
+ }
+ ​
 .chatButtonContainer> Button{
     margin: 1rem 1rem 1rem 0;
 }
@@ -113,6 +139,24 @@ canvas{
     width: 200px;
     position: relative;
     top: 1rem;
+}
+.chatbotMessage{
+    margin-left: 1rem;
+}
+.userMessage{
+    text-align: right;
+    margin-right: 1rem;
+}
+.chatbotMessage>p, .userMessage>p{
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    max-width: 50%;
+    border-radius: 12px;
+    padding: 0.5rem;
+    background-color: #d3f2f5;
+    color: #1A1A1A;
+    font-weight: 500;
+    text-align: justify;
 }
 
 
@@ -162,6 +206,15 @@ canvas{
         width: 75%;
     }
     .chatbotPNG{
-        width: 350px;
+        width: 250px;
+    }
+    .chatMain{
+        max-width: 100%;
+    }
+    .chatMessageSend{
+        width: 100%;
+    }
+    .chatbotMessage>p, .userMessage>p{
+        font-size: 1.2rem;
     }
 }

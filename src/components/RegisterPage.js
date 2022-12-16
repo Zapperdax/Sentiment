@@ -64,25 +64,27 @@ function RegisterPage() {
   return (
     <div
       style={{
-        height: "100vh",
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
+        // height: "100vh",
+        // backgroundImage: `url(${image})`,
+        // backgroundSize: "cover",
+        // backgroundRepeat: "no-repeat",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        marginTop: "5em",
       }}
       className="registerForm"
     >
       <div
         style={{
           minHeight: "80%",
-          width: "70%",
+          width: "72%",
           display: "grid",
           gridTemplateColumns: "30% 70%",
           backgroundImage: `url(${innerBackground})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
+          borderRadius:"5px"
         }}
         className="registerBox"
       >
@@ -125,6 +127,8 @@ function RegisterPage() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+          borderRadius:"5px"
+
           }}
         >
           <div

@@ -4,14 +4,17 @@ import {
   AppBar,
   Box,
   Toolbar,
-  Typography,
+  ListItem,
   Stack,
   useMediaQuery,
+  Divider,
   Avatar,
   IconButton,
   Menu,
   MenuItem,
   ListItemIcon,
+  SwipeableDrawer,
+  List
 } from "@mui/material";
 import { Settings, AccountCircle } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -19,8 +22,11 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
-  const [first, setfirst] = useState(false);
+  const [drawerOpen, setdrawerOpen] = useState(false);
   const open = Boolean(anchorElement);
+  const isMobile = useMediaQuery("(max-width:700px)");
+  // const isTab = useMediaQuery("(max-width:900px)");
+  const isAuthenticated = false;
 
   const handleClick = (event) => {
     setAnchorElement(event.currentTarget);
@@ -28,14 +34,13 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorElement(null);
   };
-
-  const isMobile = useMediaQuery("(max-width:700px)");
-  // const isTab = useMediaQuery("(max-width:900px)");
-  const isAuthenticated = true;
+  const handleDrawer = () => {
+    setdrawerOpen(!drawerOpen);
+  }
 
   return (
     <>
-      <AppBar color="transparent" elevation={0} position='fixed' sx={!isMobile ? {marginTop : '1em'} : {marginTop : '0.5em'}} >
+      <AppBar color="transparent" elevation={0} position='fixed' sx={!isMobile ? { marginTop: '1em' } : { marginTop: '0.5em' }} >
         <Toolbar style={styles.toolBar} >
           <Link style={styles.logoText} to='/'>Sentimento</Link>
           {!isMobile ? (
@@ -70,8 +75,8 @@ const Navbar = () => {
               )}
             </Box>
           ) : (
-            <IconButton onClick={() => {setfirst(!first)}}>
-              {!first ? (
+            <IconButton onClick={handleDrawer}>
+              {!drawerOpen ? (
                 <MenuIcon sx={{ color: "#fff" }} fontSize="large" />
               ) : (
                 <CloseIcon sx={{ color: "#fff" }} fontSize="large" />
@@ -81,37 +86,13 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
+      {/* // Account Settings Menu */}
       <Menu
         open={open}
         anchorEl={anchorElement}
         onClick={handleClose}
         onClose={handleClose}
-        PaperProps={{
-          elevation: 0,
-          sx: {
-            overflow: "visible",
-            filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            mt: 1.5,
-            "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
-              mr: 1,
-            },
-            "&:before": {
-              content: '""',
-              display: "block",
-              position: "absolute",
-              top: 0,
-              right: 17,
-              width: 10,
-              height: 10,
-              bgcolor: "background.paper",
-              transform: "translateY(-50%) rotate(45deg)",
-              zIndex: 0,
-            },
-          },
-        }}
+        PaperProps={menuInputProps}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
@@ -128,6 +109,70 @@ const Navbar = () => {
           Settings
         </MenuItem>
       </Menu>
+
+
+      {/* Mobile Menu  */}
+      <SwipeableDrawer open={drawerOpen} anchor='right' PaperProps={{
+        sx: {
+          mt: '4rem', mr: '4rem', height: '35vh', width: '25vh',
+          borderRadius: '3px'
+        }
+      }} onOpen={() => setdrawerOpen(true)} onClose={() => setdrawerOpen(false)}>
+        <List mt={1} onClick={() => setdrawerOpen(false)}>
+          <ListItem >
+            <Link style={styles.menuItems} to="/chatbotlandingpage">
+              ChatBot
+            </Link>
+          </ListItem>
+          <ListItem>
+            <Link style={styles.menuItems} to="/blog">
+              Blog
+            </Link>
+          </ListItem>
+          <ListItem>
+            <a href="#/" style={styles.menuItems}>
+              About
+            </a>
+          </ListItem>
+        </List>
+        <Divider />
+
+        {isAuthenticated ? (
+          <List onClick={() => setdrawerOpen(false)}>
+            <ListItem >
+              <Stack pl={2} gap={2} direction="row" alignItems="center">
+                <Link style={styles.menuItems} to="/login">
+                  Login
+                </Link>
+                <Link
+                  style={{ ...styles.signUpBtn, ...styles.linkStyle }}
+                  to="/register"
+                >
+                  SignUp
+                </Link>
+              </Stack>
+            </ListItem>
+          </List>
+        ) : (<>
+          <List onClick={() => setdrawerOpen(false)}>
+            <ListItem style={styles.menuItems}>
+              <ListItemIcon>
+                <AccountCircle />
+              </ListItemIcon>
+              My Profile
+            </ListItem>
+            <ListItem style={styles.menuItems}>
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              Settings
+            </ListItem>
+          </List>
+        </>
+        )}
+
+      </SwipeableDrawer>
+
     </>
   );
 };
@@ -152,7 +197,7 @@ const styles = {
     fontSize: "18px",
     lineHeight: "24.25px",
     cursor: "pointer",
-    fontFamily:'Manrope'
+    fontFamily: 'Manrope'
   },
   logoText: {
     textDecoration: "none",
@@ -163,7 +208,7 @@ const styles = {
     marginRight: "2rem",
     fontSize: "28px",
     lineHeight: "24.25px",
-    fontFamily:'Manrope'
+    fontFamily: 'Manrope'
   },
   signUpBtn: {
     backgroundColor: "#FF4820",
@@ -176,8 +221,30 @@ const styles = {
     fontWeight: 500,
     fontSize: "17px",
     lineHeight: "24.25px",
-    fontFamily:'Manrope'
+    fontFamily: 'Manrope',
+    textDecoration: 'none'
   },
 };
+
+const menuInputProps = {
+  elevation: 0,
+  sx: {
+    overflow: "visible",
+    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+    mt: 1.5,
+    "&:before": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      top: 0,
+      right: 17,
+      width: 10,
+      height: 10,
+      bgcolor: "background.paper",
+      transform: "translateY(-50%) rotate(45deg)",
+      zIndex: 0,
+    },
+  },
+}
 
 export default Navbar;

@@ -63,10 +63,10 @@ function Login() {
   return (
     <div
       style={{
+        height:'100vh',
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "7em",
       }}
       className="registerForm"
     >
@@ -80,6 +80,7 @@ function Login() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           borderRadius: "5px",
+          marginTop: '3rem'
         }}
         className="registerBox"
       >

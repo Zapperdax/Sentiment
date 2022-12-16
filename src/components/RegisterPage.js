@@ -64,14 +64,10 @@ function RegisterPage() {
   return (
     <div
       style={{
-        // height: "100vh",
-        // backgroundImage: `url(${image})`,
-        // backgroundSize: "cover",
-        // backgroundRepeat: "no-repeat",
+        height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "5em",
       }}
       className="registerForm"
     >
@@ -85,6 +81,7 @@ function RegisterPage() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           borderRadius: "5px",
+          marginTop:'3rem'
         }}
         className="registerBox"
       >

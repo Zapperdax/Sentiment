@@ -54,9 +54,7 @@ function Login() {
     <div
       style={{
         height: "100vh",
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
+        alignSelf: "center",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -66,12 +64,14 @@ function Login() {
       <div
         style={{
           minHeight: "80%",
-          width: "70%",
+          width: "72%",
           display: "grid",
           gridTemplateColumns: "30% 70%",
           backgroundImage: `url(${innerBackground})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
+          borderRadius: "5px",
+          marginTop: "3rem",
         }}
         className="registerBox"
       >
@@ -114,6 +114,7 @@ function Login() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            borderRadius: "5px",
           }}
         >
           <div

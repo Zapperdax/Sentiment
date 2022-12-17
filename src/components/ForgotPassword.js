@@ -45,7 +45,7 @@ function ForgotPassword() {
     <div
       style={{
         height: "100vh",
-        alignSelf:'center',
+        alignSelf: "center",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -62,7 +62,7 @@ function ForgotPassword() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           borderRadius: "5px",
-          marginTop:'3rem'
+          marginTop: "3rem",
         }}
         className="registerBox"
       >

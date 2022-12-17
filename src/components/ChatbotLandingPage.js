@@ -30,15 +30,15 @@ const ChatbotLandingPage = () => {
         </div>
         <div className="phoneOnlyDoodle">
           <img
-            className="chatbotdoodle"
-            src="/images/chatbotdoodle.gif"
+            className="chatbotdoodle floating"
+            src="/images/chattybot.png"
             alt="doodle"
           />
         </div>
         <div className="chatRightSide">
           <img
-            className="webChatbotDoodle"
-            src="/images/chatbotdoodle.gif"
+            className="webChatbotDoodle floating"
+            src="/images/chattybot.png"
             alt="doodle"
           />
         </div>

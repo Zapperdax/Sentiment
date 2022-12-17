@@ -70,17 +70,19 @@ canvas{
 }
 .chatbotPage{
     height: 100vh;
-    background-color: #d3f2f5;
+    background-color: #040C18;
     box-sizing: border-box;
     display: flex;
     justify-content: center !important;
     align-items: center !important;
     flex-direction: column;
 }
-
+.chatLeftSide h1{
+    color: white;
+}
 .infoContainer{
     display: flex;
-    background-color: white;
+    background-color: #052d56;
     border-radius: 25px 25px 25px 25px;
     padding: 2rem 2rem 0.5rem 2rem;
     align-items: center;
@@ -121,8 +123,8 @@ canvas{
 	border-radius: 10px;
  }
  ​
-.chatButtonContainer> Button{
-    margin: 1rem 1rem 1rem 0;
+.chatButtonContainer{
+    margin: 1rem;
 }
 .phoneOnlyDoodle{
     text-align: center;

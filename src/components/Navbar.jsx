@@ -40,8 +40,12 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar color="transparent" elevation={0} position='fixed' sx={!isMobile ? { marginTop: '1em' } : { marginTop: '0.5em' }} >
-        <Toolbar style={styles.toolBar} >
+      <AppBar elevation={0} position='fixed' sx={{ background: '#040C18' }}>
+        <Toolbar style={styles.toolBar} disableGutters={true}
+          sx={{
+            p: isMobile ? '0.5rem 2rem' : '1rem 5rem' 
+          }}
+        >
           <Link style={styles.logoText} to='/'>Sentimento</Link>
           {!isMobile ? (
             <Box ml={2} style={styles.navbarLinks}>
@@ -182,48 +186,47 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: '0 3em'
   },
-  navbarLinks: {
-    flex: 1,
+navbarLinks: {
+  flex: 1,
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
+      justifyContent: "space-between",
+        alignItems: "center",
   },
-  linkStyle: {
-    textDecoration: "none",
+linkStyle: {
+  textDecoration: "none",
     color: "#fff",
-    fontWeight: 500,
-    fontSize: "18px",
-    lineHeight: "24.25px",
-    cursor: "pointer",
-    fontFamily: 'Manrope'
-  },
-  logoText: {
-    textDecoration: "none",
+      fontWeight: 500,
+        fontSize: "18px",
+          lineHeight: "24.25px",
+            cursor: "pointer",
+              fontFamily: 'Manrope'
+},
+logoText: {
+  textDecoration: "none",
     background: "-webkit-linear-gradient(45deg, #AE67FA 50%, #F49867 90%)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    fontWeight: 700,
-    marginRight: "2rem",
-    fontSize: "28px",
-    lineHeight: "24.25px",
-    fontFamily: 'Manrope'
-  },
-  signUpBtn: {
-    backgroundColor: "#FF4820",
+      WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+          fontWeight: 700,
+            marginRight: "2rem",
+              fontSize: "28px",
+                lineHeight: "24.25px",
+                  fontFamily: 'Manrope'
+},
+signUpBtn: {
+  backgroundColor: "#FF4820",
     padding: "0.5rem 1rem",
-    borderRadius: "5px",
+      borderRadius: "5px",
   },
-  avatar: { height: 35, width: 35 },
-  menuItems: {
-    color: "#0A1929",
+avatar: { height: 35, width: 35 },
+menuItems: {
+  color: "#0A1929",
     fontWeight: 500,
-    fontSize: "17px",
-    lineHeight: "24.25px",
-    fontFamily: 'Manrope',
-    textDecoration: 'none'
-  },
+      fontSize: "17px",
+        lineHeight: "24.25px",
+          fontFamily: 'Manrope',
+            textDecoration: 'none'
+},
 };
 
 const menuInputProps = {

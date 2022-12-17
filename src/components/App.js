@@ -14,7 +14,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <Box>
         <Routes>
           <Route path="/register" element={<RegisterPage />}></Route>
           <Route path="/login" element={<Login />}></Route>
@@ -29,7 +28,6 @@ function App() {
           ></Route>
           <Route path="/chatbot" element={<Chatbot />}></Route>
         </Routes>
-      </Box>
     </>
   );
 }

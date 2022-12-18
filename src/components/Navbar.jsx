@@ -13,7 +13,7 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
-  SwipeableDrawer,
+  Drawer,
   List
 } from "@mui/material";
 import { Settings, AccountCircle } from "@mui/icons-material";
@@ -25,7 +25,6 @@ const Navbar = () => {
   const [drawerOpen, setdrawerOpen] = useState(false);
   const open = Boolean(anchorElement);
   const isMobile = useMediaQuery("(max-width:700px)");
-  // const isTab = useMediaQuery("(max-width:900px)");
   const isAuthenticated = false;
 
   const handleClick = (event) => {
@@ -43,7 +42,7 @@ const Navbar = () => {
       <AppBar elevation={0} position='fixed' sx={{ background: '#040C18' }}>
         <Toolbar style={styles.toolBar} disableGutters={true}
           sx={{
-            p: isMobile ? '0.5rem 2rem' : '1rem 5rem' 
+            p: isMobile ? '0.5rem 2rem' : '1rem 5rem'
           }}
         >
           <Link style={styles.logoText} to='/'>Sentimento</Link>
@@ -101,39 +100,39 @@ const Navbar = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem style={styles.menuItems}>
-          <ListItemIcon>
+          <ListItemIcon sx={{color:"#FFF"}}>
             <AccountCircle />
           </ListItemIcon>
           My Profile
         </MenuItem>
         <MenuItem style={styles.menuItems}>
-          <ListItemIcon>
+          <ListItemIcon sx={{color:"#FFF"}} >
             <Settings />
           </ListItemIcon>
           Settings
         </MenuItem>
       </Menu>
 
-
+      {/* Menu Drawer color : #031B34 */}
       {/* Mobile Menu  */}
-      <SwipeableDrawer open={drawerOpen} anchor='right' PaperProps={{
+      <Drawer open={drawerOpen} anchor='right' PaperProps={{
         sx: {
-          mt: '4rem', mr: '4rem', height: '35vh', width: '25vh',
-          borderRadius: '3px'
+          mt: '4rem', mr: '3rem', height: '50vh', minWidth: '210px',
+          borderRadius: '3px', bgcolor: '#031B34', py: 2, px:2, elevation:10
         }
-      }} onOpen={() => setdrawerOpen(true)} onClose={() => setdrawerOpen(false)}>
-        <List mt={1} onClick={() => setdrawerOpen(false)}>
-          <ListItem >
+      }} onClose={() => setdrawerOpen(false)} >
+        <List onClick={() => setdrawerOpen(false)}>
+          <ListItem sx={{my:1}}>
             <Link style={styles.menuItems} to="/chatbotlandingpage">
               ChatBot
             </Link>
           </ListItem>
-          <ListItem>
+          <ListItem sx={{my:1}}>
             <Link style={styles.menuItems} to="/blog">
               Blog
             </Link>
           </ListItem>
-          <ListItem>
+          <ListItem sx={{my:1}}>
             <a href="#/" style={styles.menuItems}>
               About
             </a>
@@ -159,14 +158,14 @@ const Navbar = () => {
           </List>
         ) : (<>
           <List onClick={() => setdrawerOpen(false)}>
-            <ListItem style={styles.menuItems}>
-              <ListItemIcon>
+            <ListItem sx={{my:1 ,...styles.menuItems}}>
+              <ListItemIcon sx={{color:"#FFF"}}>
                 <AccountCircle />
               </ListItemIcon>
               My Profile
             </ListItem>
-            <ListItem style={styles.menuItems}>
-              <ListItemIcon>
+            <ListItem sx={{my:1 ,...styles.menuItems}}>
+              <ListItemIcon sx={{color:"#FFF"}}>
                 <Settings />
               </ListItemIcon>
               Settings
@@ -175,7 +174,7 @@ const Navbar = () => {
         </>
         )}
 
-      </SwipeableDrawer>
+      </Drawer>
 
     </>
   );
@@ -187,63 +186,65 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
   },
-navbarLinks: {
-  flex: 1,
+  navbarLinks: {
+    flex: 1,
     display: "flex",
-      justifyContent: "space-between",
-        alignItems: "center",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
-linkStyle: {
-  textDecoration: "none",
+  linkStyle: {
+    textDecoration: "none",
     color: "#fff",
-      fontWeight: 500,
-        fontSize: "18px",
-          lineHeight: "24.25px",
-            cursor: "pointer",
-              fontFamily: 'Manrope'
-},
-logoText: {
-  textDecoration: "none",
-    background: "-webkit-linear-gradient(45deg, #AE67FA 50%, #F49867 90%)",
-      WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-          fontWeight: 700,
-            marginRight: "2rem",
-              fontSize: "28px",
-                lineHeight: "24.25px",
-                  fontFamily: 'Manrope'
-},
-signUpBtn: {
-  backgroundColor: "#FF4820",
-    padding: "0.5rem 1rem",
-      borderRadius: "5px",
-  },
-avatar: { height: 35, width: 35 },
-menuItems: {
-  color: "#0A1929",
     fontWeight: 500,
-      fontSize: "17px",
-        lineHeight: "24.25px",
-          fontFamily: 'Manrope',
-            textDecoration: 'none'
-},
+    fontSize: "18px",
+    lineHeight: "24.25px",
+    cursor: "pointer",
+    fontFamily: 'Manrope'
+  },
+  logoText: {
+    textDecoration: "none",
+    background: "-webkit-linear-gradient(45deg, #AE67FA 50%, #F49867 90%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    fontWeight: 700,
+    marginRight: "2rem",
+    fontSize: "28px",
+    lineHeight: "24.25px",
+    fontFamily: 'Manrope'
+  },
+  signUpBtn: {
+    backgroundColor: "#FF4820",
+    padding: "0.5rem 1rem",
+    borderRadius: "5px",
+  },
+  avatar: { height: 35, width: 35 },
+  menuItems: {
+    color: "#ffffff",
+    fontWeight: 500,
+    fontSize: "17px",
+    lineHeight: "24.25px",
+    fontFamily: 'Manrope',
+    textDecoration: 'none'
+  },
 };
 
+// Account Menu 
 const menuInputProps = {
-  elevation: 0,
+  elevation: 10,
   sx: {
     overflow: "visible",
     filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
     mt: 1.5,
+    bgcolor: '#031B34',
     "&:before": {
       content: '""',
       display: "block",
       position: "absolute",
+      bgcolor:'#031b34',
       top: 0,
       right: 17,
       width: 10,
       height: 10,
-      bgcolor: "background.paper",
       transform: "translateY(-50%) rotate(45deg)",
       zIndex: 0,
     },

@@ -13,7 +13,6 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
-  Drawer,
   List
 } from "@mui/material";
 import { Settings, AccountCircle } from "@mui/icons-material";
@@ -22,8 +21,10 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
-  const [drawerOpen, setdrawerOpen] = useState(false);
+  const [menuAnchorEl, setAnchorEl] = useState(null);
+  const menuOpen = Boolean(menuAnchorEl);
   const open = Boolean(anchorElement);
+
   const isMobile = useMediaQuery("(max-width:700px)");
   const isAuthenticated = false;
 
@@ -32,10 +33,13 @@ const Navbar = () => {
   };
   const handleClose = () => {
     setAnchorElement(null);
+    setAnchorEl(null);
   };
-  const handleDrawer = () => {
-    setdrawerOpen(!drawerOpen);
-  }
+
+  const menuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
 
   return (
     <>
@@ -78,8 +82,8 @@ const Navbar = () => {
               )}
             </Box>
           ) : (
-            <IconButton onClick={handleDrawer}>
-              {!drawerOpen ? (
+            <IconButton onClick={menuClick}>
+              {!menuOpen ? (
                 <MenuIcon sx={{ color: "#fff" }} fontSize="large" />
               ) : (
                 <CloseIcon sx={{ color: "#fff" }} fontSize="large" />
@@ -115,34 +119,35 @@ const Navbar = () => {
 
       {/* Menu Drawer color : #031B34 */}
       {/* Mobile Menu  */}
-      <Drawer open={drawerOpen} anchor='right' PaperProps={{
-        sx: {
-          mt: '4rem', mr: '3rem', height: '50vh', minWidth: '210px',
-          borderRadius: '3px', bgcolor: '#031B34', py: 2, px:2, elevation:10
-        }
-      }} onClose={() => setdrawerOpen(false)} >
-        <List onClick={() => setdrawerOpen(false)}>
-          <ListItem sx={{my:1}}>
+      <Menu 
+      // open={Open}
+      open={menuOpen}
+      anchorEl={menuAnchorEl}
+      onClick={handleClose}
+      onClose={handleClose}
+      PaperProps={menuInputProps}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }} 
+      >
+          <MenuItem sx={{my:1}}>
             <Link style={styles.menuItems} to="/chatbotlandingpage">
               ChatBot
             </Link>
-          </ListItem>
-          <ListItem sx={{my:1}}>
+          </MenuItem>
+          <MenuItem sx={{my:1}}>
             <Link style={styles.menuItems} to="/blog">
               Blog
             </Link>
-          </ListItem>
-          <ListItem sx={{my:1}}>
+          </MenuItem>
+          <MenuItem sx={{my:1}}>
             <a href="#/" style={styles.menuItems}>
               About
             </a>
-          </ListItem>
-        </List>
+          </MenuItem>
         <Divider />
 
         {isAuthenticated ? (
-          <List onClick={() => setdrawerOpen(false)}>
-            <ListItem >
+            <MenuItem >
               <Stack pl={2} gap={2} direction="row" alignItems="center">
                 <Link style={styles.menuItems} to="/login">
                   Login
@@ -154,27 +159,24 @@ const Navbar = () => {
                   SignUp
                 </Link>
               </Stack>
-            </ListItem>
-          </List>
-        ) : (<>
-          <List onClick={() => setdrawerOpen(false)}>
-            <ListItem sx={{my:1 ,...styles.menuItems}}>
+            </MenuItem>
+        ) : (<List>
+            <MenuItem sx={{my:1 ,...styles.menuItems}}>
               <ListItemIcon sx={{color:"#FFF"}}>
                 <AccountCircle />
               </ListItemIcon>
               My Profile
-            </ListItem>
-            <ListItem sx={{my:1 ,...styles.menuItems}}>
+            </MenuItem>
+            <MenuItem sx={{my:1 ,...styles.menuItems}}>
               <ListItemIcon sx={{color:"#FFF"}}>
                 <Settings />
               </ListItemIcon>
               Settings
-            </ListItem>
-          </List>
-        </>
+            </MenuItem>
+        </List>
         )}
 
-      </Drawer>
+      </Menu>
 
     </>
   );

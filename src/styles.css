@@ -221,4 +221,8 @@ canvas{
     .chatbotMessage>p, .userMessage>p{
         font-size: 1.2rem;
     }
+    .chatRightSide{
+        display: flex;
+        align-items: center;
+    }
 }

@@ -17,13 +17,18 @@ const ChatbotLandingPage = () => {
             className="chatButtonContainer"
           >
             <Button variant="text">Learn More</Button>
-            <Button onClick={handleClick} variant="contained">
+            <Button sx={{
+              bgcolor: '#FF4820', ":hover": {
+                bgcolor: "#AE67FA",
+                bgOpacity: 0.6,
+                color: "#ffffff",
+              }
+            }} onClick={handleClick} variant="contained">
               Get Started
             </Button>
           </div>
           <p
             style={{
-              padding: "1rem",
               color: "white",
             }}
           >

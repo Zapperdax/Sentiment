@@ -11,7 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../utils/axios";
 
-function Login() {
+const Login = () => {
   const navigate = useNavigate();
 
   const image = "/images/background1.jpg";

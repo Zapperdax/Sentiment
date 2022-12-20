@@ -73,20 +73,23 @@ canvas{
     background-color: #040C18;
     box-sizing: border-box;
     display: flex;
-    height: 100vh;;
+    padding-top: 3rem;
+    /* height: 100vh; */
     justify-content: center !important;
     align-items: center !important;
     flex-direction: column;
 }
 .chatLeftSide h1{
     color: white;
-    padding: 1rem;
+    font-weight: 700;
+    background: -webkit-linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
 }
 .infoContainer{
     display: flex;
-    background-color: #052d56;
     border-radius: 25px 25px 25px 25px;
-    padding: 2rem 2rem 0.5rem 2rem;
 }
 .chatInfoContainer{
     background-color: white;

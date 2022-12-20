@@ -9,7 +9,7 @@ const Chatbot = () => {
     setChat((preValue) => [...preValue, text]);
   };
   return (
-    <div className="chatbotPage">
+    <div className="chatbotPage" style={{gap:"0.5rem"}}>
       <img
         className="floating chatbotPNG"
         src="/images/chattybot.png"

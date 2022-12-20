@@ -10,11 +10,6 @@ const Home = () => {
   return (
     <Stack
       direction={isTab ? "column" : "row"}
-      sx={{
-        px: is700 ? "2rem" : "5rem",
-        py: isTab ? "6rem" : "6rem",
-        gap: isTab ? "3rem" : "4rem",
-      }}
     >
       <Stack
         flex={1}
@@ -82,7 +77,7 @@ const Home = () => {
 const styles = {
   mainTypography: {
     textDecoration: "none",
-    background: "-webkit-linear-gradient(45deg, #AE67FA 20%, #F49867 90%)",
+    background: "-webkit-linear-gradient(20deg, #AE67FA 2%, #F49867 92%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     fontWeight: 900,

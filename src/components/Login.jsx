@@ -123,7 +123,7 @@ function Login() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: "5px",
+            // borderRadius: "5px",
           }}
         >
           <div

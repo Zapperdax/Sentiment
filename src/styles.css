@@ -4,6 +4,7 @@
 }
 body{
     background-color: #040c18;
+    font-family: 'Manrope';
 }
 .app{
     display: flex;

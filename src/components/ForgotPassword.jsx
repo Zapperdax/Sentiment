@@ -1,43 +1,17 @@
 import React from "react";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useLocation } from "react-router-dom";
-import { api } from "../utils/axios";
 import { useNavigate } from "react-router-dom";
+import { TextField } from "@mui/material";
+import { api } from "../utils/axios";
 
-function Login() {
-  const location = useLocation();
+function ForgotPassword() {
   const navigate = useNavigate();
   const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
-  const [pClicked, setPClicked] = React.useState(false);
-  const handlePClick = () => {
-    setPClicked((preValue) => !preValue);
-  };
-  const [CPClicked, setCPClicked] = React.useState(false);
-  const handleCPClick = () => {
-    setCPClicked((preValue) => !preValue);
-  };
 
   const [formData, setFormData] = React.useState({
-    password: "",
-    cPassword: "",
+    email: "",
   });
-
-  const handleClick = () => {
-    api
-      .patch("/user/changePassword", {
-        email: location.state.email,
-        password: formData.password,
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          navigate("/login");
-        }
-      });
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,8 +22,25 @@ function Login() {
       };
     });
   };
+
   console.log(formData);
-  console.log(location.state.email);
+
+  const handleClick = () => {
+    navigate("/enterOTP", { state: { id: 1, email: formData.email } });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    api
+      .post("/sendOtp", {
+        email: formData.email,
+      })
+      .then((response) => {
+        console.log(response.data);
+        handleClick();
+      });
+  };
+
   return (
     <div
       style={{
@@ -114,7 +105,7 @@ function Login() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: "5px",
+            // borderRadius: "5px",
           }}
         >
           <div
@@ -128,56 +119,26 @@ function Login() {
                 marginBottom: "1rem",
                 textAlign: "center",
               }}
-              className="login"
+              className="forgotPassword"
             >
-              Change Password
+              Forgot Password
             </div>
 
             <form className="form">
               <TextField
                 variant="standard"
-                label="Password"
+                label="Email Address"
                 fullWidth
                 size="normal"
                 margin="dense"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                name="password"
-                value={formData.password}
-                type={pClicked ? "text" : "password"}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end" onClick={handlePClick}>
-                      <IconButton>
-                        {pClicked ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                variant="standard"
-                label="Confirm Password"
-                fullWidth
-                size="normal"
-                margin="dense"
-                name="cPassword"
-                onChange={handleChange}
-                value={formData.cPassword}
-                type={CPClicked ? "text" : "password"}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end" onClick={handleCPClick}>
-                      <IconButton>
-                        {CPClicked ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
               />
             </form>
             <div style={{ margin: "2rem 0", textAlign: "center" }}>
-              <button onClick={handleClick} className="createAccountButton">
-                Continue
+              <button onClick={handleSubmit} className="createAccountButton">
+                Send OTP
               </button>
             </div>
           </div>
@@ -187,4 +148,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ForgotPassword;

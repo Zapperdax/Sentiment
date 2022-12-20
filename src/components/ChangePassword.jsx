@@ -1,22 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import {
-  TextField,
-  InputAdornment,
-  IconButton,
-  Alert,
-  AlertTitle,
-} from "@mui/material";
+import { TextField, InputAdornment, IconButton } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { useLocation } from "react-router-dom";
 import { api } from "../utils/axios";
+import { useNavigate } from "react-router-dom";
 
-function RegisterPage() {
+function Login() {
+  const location = useLocation();
+  const navigate = useNavigate();
   const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
-
-  const [error, setError] = React.useState(false);
   const [pClicked, setPClicked] = React.useState(false);
   const handlePClick = () => {
     setPClicked((preValue) => !preValue);
@@ -27,11 +22,22 @@ function RegisterPage() {
   };
 
   const [formData, setFormData] = React.useState({
-    userName: "",
-    email: "",
     password: "",
     cPassword: "",
   });
+
+  const handleClick = () => {
+    api
+      .patch("/user/changePassword", {
+        email: location.state.email,
+        password: formData.password,
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          navigate("/login");
+        }
+      });
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,28 +49,12 @@ function RegisterPage() {
     });
   };
   console.log(formData);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    api
-      .post("/newUser", {
-        name: formData.userName,
-        email: formData.email,
-        password: formData.password,
-      })
-      .then((response) => {
-        if (response.status === 201) {
-          const token = JSON.stringify(response.data.token);
-          localStorage.setItem("userToken", token);
-        }
-      })
-      .catch((err) => {
-        setError(true);
-      });
-  };
+  console.log(location.state.email);
   return (
     <div
       style={{
         height: "100vh",
+        alignSelf: "center",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -81,7 +71,7 @@ function RegisterPage() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           borderRadius: "5px",
-          marginTop:'3rem'
+          marginTop: "3rem",
         }}
         className="registerBox"
       >
@@ -124,53 +114,26 @@ function RegisterPage() {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            borderRadius: "5px",
+            // borderRadius: "5px",
           }}
         >
           <div
             style={{ margin: "3.5rem", width: "100%" }}
             className="signUpForm"
           >
-            {error && (
-              <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-                This is an error alert — <strong>check it out!</strong>
-              </Alert>
-            )}
             <div
               style={{
                 fontSize: "1.5rem",
                 fontFamily: "Bebas Neue",
-                margin: "1rem 0",
-
+                marginBottom: "1rem",
                 textAlign: "center",
               }}
-              className="createAccount"
+              className="login"
             >
-              Create Account
+              Change Password
             </div>
 
             <form className="form">
-              <TextField
-                variant="standard"
-                label="Full Name"
-                fullWidth
-                size="normal"
-                margin="dense"
-                onChange={handleChange}
-                name="userName"
-                value={formData.userName}
-              />
-              <TextField
-                variant="standard"
-                label="Email Address"
-                fullWidth
-                size="normal"
-                margin="dense"
-                onChange={handleChange}
-                name="email"
-                value={formData.email}
-              />
               <TextField
                 variant="standard"
                 label="Password"
@@ -197,8 +160,8 @@ function RegisterPage() {
                 fullWidth
                 size="normal"
                 margin="dense"
-                onChange={handleChange}
                 name="cPassword"
+                onChange={handleChange}
                 value={formData.cPassword}
                 type={CPClicked ? "text" : "password"}
                 InputProps={{
@@ -213,27 +176,9 @@ function RegisterPage() {
               />
             </form>
             <div style={{ margin: "2rem 0", textAlign: "center" }}>
-              <button onClick={handleSubmit} className="createAccountButton">
-                Create Account
+              <button onClick={handleClick} className="createAccountButton">
+                Continue
               </button>
-            </div>
-            <div className="haveAccount">
-              <p
-                style={{
-                  fontFamily: "Playfair Display",
-                  fontWeight: "bold",
-                  color: "#3B3B3B",
-                }}
-              >
-                Already Have An Account?
-                <Link
-                  style={{ textDecoration: "none", color: "#707070" }}
-                  to="/login"
-                >
-                  {" "}
-                  Log in
-                </Link>
-              </p>
             </div>
           </div>
         </div>
@@ -242,4 +187,4 @@ function RegisterPage() {
   );
 }
 
-export default RegisterPage;
+export default Login;

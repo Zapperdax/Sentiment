@@ -201,7 +201,6 @@ const styles = {
     fontSize: "18px",
     lineHeight: "24.25px",
     cursor: "pointer",
-    fontFamily: 'Manrope'
   },
   logoText: {
     textDecoration: "none",
@@ -212,7 +211,6 @@ const styles = {
     marginRight: "2rem",
     fontSize: "28px",
     lineHeight: "24.25px",
-    fontFamily: 'Manrope'
   },
   signUpBtn: {
     backgroundColor: "#FF4820",
@@ -225,7 +223,6 @@ const styles = {
     fontWeight: 500,
     fontSize: "17px",
     lineHeight: "24.25px",
-    fontFamily: 'Manrope',
     textDecoration: 'none'
   },
 };

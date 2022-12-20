@@ -1,15 +1,7 @@
 import React from "react";
-import { Box } from "@mui/material";
-import RegisterPage from "./RegisterPage";
 import { Routes, Route } from "react-router-dom";
-import Login from "./Login";
-import ForgotPassword from "./ForgotPassword";
-import EnterOTP from "./EnterOTP";
-import ChangePassword from "./ChangePassword";
-import Home from "./Home";
-import ChatbotLandingPage from "./ChatbotLandingPage";
-import Chatbot from "./Chatbot";
-import Navbar from "./Navbar";
+import {ChangePassword, Login, RegisterPage, Chatbot,
+  ChatbotLandingPage, EnterOTP, ForgotPassword, Home, Navbar} from './components'
 function App() {
   return (
     <>

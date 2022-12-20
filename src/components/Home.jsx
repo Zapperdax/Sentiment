@@ -14,7 +14,6 @@ const Home = () => {
         px: is700 ? "2rem" : "5rem",
         py: isTab ? "6rem" : "6rem",
         gap: isTab ? "3rem" : "4rem",
-        fontFamily: "Manrope",
       }}
     >
       <Stack
@@ -86,19 +85,16 @@ const styles = {
     background: "-webkit-linear-gradient(45deg, #AE67FA 20%, #F49867 90%)",
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
-    fontWeight: 800,
-    fontFamily: "Manrope",
+    fontWeight: 900,
     letterSpacing: "-0.04rem",
   },
   paraTypography: {
     fontWeight: 400,
-    fontFamily: "Manrope",
     color: "#81AFDD",
   },
   btnStackTypography: {
     flex: 2,
     fontWeight: 400,
-    fontFamily: "Manrope",
     color: "#3D6184",
     padding: "0 1rem",
   },
@@ -107,7 +103,6 @@ const styles = {
     backgroundColor: "#FF4820",
     color: "#fff",
     fontWeight: 400,
-    fontFamily: "Manrope",
     textTransform: "none",
     p: "0.8rem",
     width:'100%',

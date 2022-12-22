@@ -120,7 +120,6 @@ const Navbar = () => {
       {/* Menu Drawer color : #031B34 */}
       {/* Mobile Menu  */}
       <Menu 
-      // open={Open}
       open={menuOpen}
       anchorEl={menuAnchorEl}
       onClick={handleClose}

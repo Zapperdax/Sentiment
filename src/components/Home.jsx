@@ -1,21 +1,32 @@
 import React from "react";
 import { Button, Stack, Typography, useMediaQuery } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 import ai from "../assets/ai.png";
 
 const Home = () => {
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
+  const navigate = useNavigate();
+  const handleScan = () =>{
+    navigate('/facedetection');
+  }
+
   return (
     <Stack
       direction={isTab ? "column" : "row"}
+      sx={{
+        px: is700 ? "2rem" : "5rem",
+        py: isTab ? "6rem" : "6rem",
+        gap: isTab ? "3rem" : "4rem",
+      }}
     >
       <Stack
         flex={1}
         gap={isTab ? "2rem" : "1.3rem"}
         pt={isTab ? 7 : 10}
         justifyContent="center"
+        
       >
         <h1
           style={{
@@ -61,6 +72,7 @@ const Home = () => {
               lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
               ...styles.stackBtn,
             }}
+            onClick={handleScan}
           >
             {!isMobile ? 'Scan Emotion' : "Scan"}
           </Button>

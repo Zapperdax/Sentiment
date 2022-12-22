@@ -1,14 +1,21 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { Button, useMediaQuery, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const ChatbotLandingPage = () => {
+  const is700 = useMediaQuery("(max-width:700px)");
+  const isMobile = useMediaQuery("(max-width:530px)");
+  const isTab = useMediaQuery("(max-width:1050px)");
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/chatbot");
   };
   return (
-    <div className="chatbotPage">
+    <Box className="chatbotPage" sx={{
+      px: is700 ? "2rem" : "5rem",
+      py: isTab ? "6rem" : "6rem",
+      gap: isTab ? "3rem" : "4rem",
+    }}>
       <div className="infoContainer">
         <div className="chatLeftSide">
           <h1>Make it easy to express your feelings</h1>
@@ -58,7 +65,7 @@ const ChatbotLandingPage = () => {
           />
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 

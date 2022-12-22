@@ -142,6 +142,7 @@ export default function FaceDetection() {
 
   return (
     <div>
+      <p>This is face detection</p>
       <div style={{ textAlign: "center", padding: "10px" }}>
         {captureVideo && modelsLoaded ? (
           <button

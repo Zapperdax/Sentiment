@@ -1,17 +1,17 @@
 import React, {useCallback, useRef} from "react";
 import { Button, Stack, Typography, useMediaQuery } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import Webcam from 'react-webcam';
 import ai from "../assets/ai.png";
+import FaceDetection from './FaceDetection';
 
 const Home = () => {
+  
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
   const [isCameraOn, setIsCameraOn] = React.useState(false);
   const [img, setImg] = React.useState(null);
   const webcamRef = useRef(null);
-  const navigate = useNavigate();
 
   const videoConstraints = {
     width: { min: 1280 },
@@ -55,7 +55,8 @@ const Home = () => {
         :
         img === null ? null :
         <Stack sx={styles.webcamStyles}>
-        <img src={img} alt='emotion' />
+        <FaceDetection img={img} />
+
         <Button
           sx={{
             fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
@@ -129,6 +130,7 @@ const Home = () => {
       <Stack sx={styles.imageStack}>
         <img src={ai} style={{ width: "100%", height: "100%" }}></img>
       </Stack>
+
     </Stack>
   );
 };

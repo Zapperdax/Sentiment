@@ -19,7 +19,7 @@ function App() {
             element={<ChatbotLandingPage />}
           ></Route>
           <Route path="/chatbot" element={<Chatbot />}></Route>
-          {/* <Route path="/facedetection" element={<FaceDetection />}></Route> */}
+          <Route path="/facedetection" element={<FaceDetection />}></Route>
         </Routes>
     </>
   );

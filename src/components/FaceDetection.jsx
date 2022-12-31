@@ -5,6 +5,10 @@ export default function FaceDetection(props){
     const imgRef = useRef();
     const canvasRef = useRef();
 
+    const style = {
+        maxWidth: '100%'
+    }
+
     const handleImage = async() => {
         const detections = await faceapi.detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
         canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(imgRef.current);
@@ -41,8 +45,8 @@ export default function FaceDetection(props){
     }, [props.img])
     return(
         <div className='app'>
-            <img ref={imgRef} src={props.img} alt='happy.jpg' height={560} width={940} />
-            <canvas ref={canvasRef} width={940} height={560} />
+            <img ref={imgRef} src={props.img} alt='emotion' style={style} />
+            <canvas ref={canvasRef} style={style} />
         </div>
     )
 }

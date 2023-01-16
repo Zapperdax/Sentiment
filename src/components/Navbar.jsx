@@ -26,7 +26,7 @@ const Navbar = () => {
   const open = Boolean(anchorElement);
 
   const isMobile = useMediaQuery("(max-width:700px)");
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   const handleClick = (event) => {
     setAnchorElement(event.currentTarget);
@@ -104,13 +104,13 @@ const Navbar = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem style={styles.menuItems}>
-          <ListItemIcon sx={{color:"#FFF"}}>
+          <ListItemIcon sx={{ color: "#FFF" }}>
             <AccountCircle />
           </ListItemIcon>
           My Profile
         </MenuItem>
         <MenuItem style={styles.menuItems}>
-          <ListItemIcon sx={{color:"#FFF"}} >
+          <ListItemIcon sx={{ color: "#FFF" }} >
             <Settings />
           </ListItemIcon>
           Settings
@@ -119,59 +119,59 @@ const Navbar = () => {
 
       {/* Menu Drawer color : #031B34 */}
       {/* Mobile Menu  */}
-      <Menu 
-      open={menuOpen}
-      anchorEl={menuAnchorEl}
-      onClick={handleClose}
-      onClose={handleClose}
-      PaperProps={menuInputProps}
-      transformOrigin={{ horizontal: "right", vertical: "top" }}
-      anchorOrigin={{ horizontal: "right", vertical: "bottom" }} 
+      <Menu
+        open={menuOpen}
+        anchorEl={menuAnchorEl}
+        onClick={handleClose}
+        onClose={handleClose}
+        PaperProps={menuInputProps}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-          <MenuItem sx={{my:1}}>
-            <Link style={styles.menuItems} to="/chatbotlandingpage">
-              ChatBot
-            </Link>
-          </MenuItem>
-          <MenuItem sx={{my:1}}>
-            <Link style={styles.menuItems} to="/blog">
-              Blog
-            </Link>
-          </MenuItem>
-          <MenuItem sx={{my:1}}>
-            <a href="#/" style={styles.menuItems}>
-              About
-            </a>
-          </MenuItem>
+        <MenuItem sx={{ my: 1 }}>
+          <Link style={styles.menuItems} to="/chatbotlandingpage">
+            ChatBot
+          </Link>
+        </MenuItem>
+        <MenuItem sx={{ my: 1 }}>
+          <Link style={styles.menuItems} to="/blog">
+            Blog
+          </Link>
+        </MenuItem>
+        <MenuItem sx={{ my: 1 }}>
+          <a href="#/" style={styles.menuItems}>
+            About
+          </a>
+        </MenuItem>
         <Divider />
 
         {isAuthenticated ? (
-            <MenuItem >
-              <Stack pl={2} gap={2} direction="row" alignItems="center">
-                <Link style={styles.menuItems} to="/login">
-                  Login
-                </Link>
-                <Link
-                  style={{ ...styles.signUpBtn, ...styles.linkStyle }}
-                  to="/register"
-                >
-                  SignUp
-                </Link>
-              </Stack>
-            </MenuItem>
+          <MenuItem >
+            <Stack pl={2} gap={2} direction="row" alignItems="center">
+              <Link style={styles.menuItems} to="/login">
+                Login
+              </Link>
+              <Link
+                style={{ ...styles.signUpBtn, ...styles.linkStyle }}
+                to="/register"
+              >
+                SignUp
+              </Link>
+            </Stack>
+          </MenuItem>
         ) : (<List>
-            <MenuItem sx={{my:1 ,...styles.menuItems}}>
-              <ListItemIcon sx={{color:"#FFF"}}>
-                <AccountCircle />
-              </ListItemIcon>
-              My Profile
-            </MenuItem>
-            <MenuItem sx={{my:1 ,...styles.menuItems}}>
-              <ListItemIcon sx={{color:"#FFF"}}>
-                <Settings />
-              </ListItemIcon>
-              Settings
-            </MenuItem>
+          <MenuItem sx={{ my: 1, ...styles.menuItems }}>
+            <ListItemIcon sx={{ color: "#FFF" }}>
+              <AccountCircle />
+            </ListItemIcon>
+            My Profile
+          </MenuItem>
+          <MenuItem sx={{ my: 1, ...styles.menuItems }}>
+            <ListItemIcon sx={{ color: "#FFF" }}>
+              <Settings />
+            </ListItemIcon>
+            Settings
+          </MenuItem>
         </List>
         )}
 
@@ -238,7 +238,7 @@ const menuInputProps = {
       content: '""',
       display: "block",
       position: "absolute",
-      bgcolor:'#031b34',
+      bgcolor: '#031b34',
       top: 0,
       right: 17,
       width: 10,

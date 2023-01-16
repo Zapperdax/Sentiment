@@ -1,3 +1,5 @@
+/** @format */
+
 const generateOTP = async () => {
   var digits = "0123456789";
   let OTP = "";
@@ -8,4 +10,4 @@ const generateOTP = async () => {
   return OTP;
 };
 
-module.exports = generateOTP;
+export default generateOTP;

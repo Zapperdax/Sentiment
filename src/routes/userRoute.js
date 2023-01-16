@@ -1,7 +1,7 @@
 /** @format */
 
-const express = require("express");
-const {
+import { Router } from "express";
+import {
   userProfile,
   getAllUsers,
   createNewUser,
@@ -9,9 +9,9 @@ const {
   logout,
   logoutAll,
   updatePassword,
-} = require("../controllers/userControllers");
-const router = new express.Router();
-const auth = require("../middleware/auth");
+} from "../controllers/userControllers.js";
+import auth from "../middleware/auth.js";
+const router = new Router();
 
 //**********GET ROUTEs**********
 
@@ -36,4 +36,4 @@ router.post("/user/logoutAll", auth, logoutAll);
 //Route For Updating Password When User Has Forgotten Password
 router.patch("/user/changePassword", updatePassword);
 
-module.exports = router;
+export default router;

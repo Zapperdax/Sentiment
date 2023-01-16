@@ -1,6 +1,6 @@
 /** @format */
 
-const User = require("../models/userModel");
+import User from "../models/userModel.js";
 
 export const userProfile = async (req, res) => {
   try {

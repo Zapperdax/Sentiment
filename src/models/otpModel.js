@@ -1,4 +1,6 @@
-const mongoose = require("mongoose");
+/** @format */
+
+import mongoose from "mongoose";
 
 const otpSchema = new mongoose.Schema({
   userId: {
@@ -18,4 +20,4 @@ const otpSchema = new mongoose.Schema({
 
 const OTP = mongoose.model("OTP", otpSchema);
 
-module.exports = OTP;
+export default OTP;

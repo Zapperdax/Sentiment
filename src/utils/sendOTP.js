@@ -1,8 +1,11 @@
-const nodeMailer = require("nodemailer");
-require("dotenv").config();
+/** @format */
+
+import { createTransport } from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 const sendOTP = async (otp, email) => {
-  let transporter = nodeMailer.createTransport({
+  let transporter = createTransport({
     service: "gmail",
     auth: {
       user: process.env.EMAIL,
@@ -26,4 +29,4 @@ const sendOTP = async (otp, email) => {
   });
 };
 
-module.exports = sendOTP;
+export default sendOTP;

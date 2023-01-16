@@ -1,11 +1,11 @@
 /** @format */
 
-const express = require("express");
-const { sendOTP, getOTP } = require("../controllers/otpControllers");
-const router = new express.Router();
+import { Router } from "express";
+import { sendOtpController, getOTP } from "../controllers/otpControllers.js";
+const router = new Router();
 
-router.post("/sendOtp", sendOTP);
+router.post("/sendOtp", sendOtpController);
 
 router.post("/getOtp", getOTP);
 
-module.exports = router;
+export default router;

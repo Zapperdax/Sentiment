@@ -1,8 +1,9 @@
 import React, {useCallback, useRef} from "react";
-import { Button, Stack, Typography, useMediaQuery } from "@mui/material";
+import { Button, Stack, Typography, useMediaQuery, Icon } from "@mui/material";
 import Webcam from 'react-webcam';
 import ai from "../assets/ai.png";
 import FaceDetection from './FaceDetection';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Home = () => {
   
@@ -26,6 +27,11 @@ const Home = () => {
   
   const handleScan = () =>{
     setIsCameraOn(true);
+  }
+
+  const handleCameraClose = () => {
+    setIsCameraOn(false);
+    setImg(null);
   }
 
   console.log(img);
@@ -55,8 +61,10 @@ const Home = () => {
         :
         img === null ? null :
         <Stack sx={styles.webcamStyles}>
+          <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={()=> handleCameraClose()}>
+          <CloseIcon />
+        </Icon>
         <FaceDetection img={img} />
-
         <Button
           sx={{
             fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
@@ -66,16 +74,6 @@ const Home = () => {
           onClick={()=> setImg(null)}
         >
           {!isMobile ? 'Retake Photo' : "Retake"}
-        </Button>
-        <Button
-          sx={{
-            fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
-            lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
-            ...styles.stackBtn,
-          }}
-          onClick={()=> setImg(null)}
-        >
-          {!isMobile ? 'Close Camera' : "Close"}
         </Button>
       </Stack>}
         
@@ -192,6 +190,14 @@ const styles = {
    transform: 'translate(-50%, -50%)',
    maxWidth: '90%',
    zIndex: '1'
+  },
+  iconStyles:{
+    position: 'absolute',
+    right: 5,
+    zIndex: '1',
+    "&:hover": {
+      cursor: 'pointer'
+    }
   }
 };
 

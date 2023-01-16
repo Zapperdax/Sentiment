@@ -1,12 +1,12 @@
 /** @format */
 
-import User from "../models/userModel";
-const OTP = require("../models/otpModel");
+import User from "../models/userModel.js";
+import OTP from "../models/otpModel.js";
 
-const generateOTP = require("../utils/generateOTP");
-const sendOTP = require("../utils/sendOTP");
+import generateOTP from "../utils/generateOTP.js";
+import sendOTP from "../utils/sendOTP.js";
 
-export const sendOTP = async (req, res) => {
+export const sendOtpController = async (req, res) => {
   try {
     const email = req.body.email;
     const user = await User.findOne({ email });

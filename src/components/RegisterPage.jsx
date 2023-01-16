@@ -10,17 +10,21 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../utils/axios";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 function RegisterPage() {
-  const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
 
   const [error, setError] = React.useState(false);
   const [pClicked, setPClicked] = React.useState(false);
+
+  const { dispatch } = useAuthContext();
+
   const handlePClick = () => {
     setPClicked((preValue) => !preValue);
   };
+
   const [CPClicked, setCPClicked] = React.useState(false);
   const handleCPClick = () => {
     setCPClicked((preValue) => !preValue);
@@ -42,6 +46,7 @@ function RegisterPage() {
       };
     });
   };
+
   console.log(formData);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,13 +59,18 @@ function RegisterPage() {
       .then((response) => {
         if (response.status === 201) {
           const token = JSON.stringify(response.data.token);
-          localStorage.setItem("userToken", token);
+          const email = JSON.stringify(response.data.email);
+          localStorage.setItem("user", { token, email });
+
+          dispatch({ type: 'LOGIN', payload: { token, email } })
         }
       })
       .catch((err) => {
         setError(true);
       });
   };
+
+
   return (
     <div
       style={{
@@ -81,7 +91,7 @@ function RegisterPage() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           borderRadius: "5px",
-          marginTop:'3rem'
+          marginTop: '3rem'
         }}
         className="registerBox"
       >

@@ -67,6 +67,16 @@ const Home = () => {
         >
           {!isMobile ? 'Retake Photo' : "Retake"}
         </Button>
+        <Button
+          sx={{
+            fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
+            lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
+            ...styles.stackBtn,
+          }}
+          onClick={()=> setImg(null)}
+        >
+          {!isMobile ? 'Close Camera' : "Close"}
+        </Button>
       </Stack>}
         
       <Stack

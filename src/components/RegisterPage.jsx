@@ -47,7 +47,7 @@ function RegisterPage() {
     });
   };
 
-  console.log(formData);
+  // console.log(formData);
   const handleSubmit = (e) => {
     e.preventDefault();
     api
@@ -58,9 +58,12 @@ function RegisterPage() {
       })
       .then((response) => {
         if (response.status === 201) {
-          const token = JSON.stringify(response.data.token);
-          const email = JSON.stringify(response.data.email);
-          localStorage.setItem("user", { token, email });
+          const user = {
+            email: response.data.user.email,
+            token: response.data.token,
+          }
+          console.log(user);
+          localStorage.setItem("user", JSON.stringify(user));
 
           dispatch({ type: 'LOGIN', payload: { token, email } })
         }

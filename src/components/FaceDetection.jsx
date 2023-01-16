@@ -85,7 +85,7 @@ export default function FaceDetection(props){
 
     return(
     <div className='app'>
-        <img ref={imgRef} src='images/sad.jpg' alt='emotion' style={style} />
+        <img ref={imgRef} src={props.img} alt='emotion' style={style} />
         <canvas ref={canvasRef} style={style} />
     </div>
     )

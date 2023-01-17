@@ -65,7 +65,7 @@ function RegisterPage() {
           console.log(user);
           localStorage.setItem("user", JSON.stringify(user));
 
-          dispatch({ type: 'LOGIN', payload: { token, email } })
+          dispatch({ type: 'LOGIN', payload: user })
         }
       })
       .catch((err) => {

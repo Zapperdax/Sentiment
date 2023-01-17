@@ -10,9 +10,11 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../utils/axios";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
 
   const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
@@ -38,7 +40,6 @@ const Login = () => {
       };
     });
   };
-  console.log(formData);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,9 +51,17 @@ const Login = () => {
       .then((response) => {
         console.log(response.data);
         if (response.status === 200) {
-          const token = JSON.stringify(response.data.token);
-          localStorage.setItem("userToken", token);
-          navigate("/home");
+          const user = {
+            token: response.data.token,
+            email: response.data.user.email
+          }
+          localStorage.setItem("user", JSON.stringify(user));
+
+          dispatch({ type: 'LOGIN', payload: user })
+
+          console.log(`logged in ${user}`);
+          navigate("/");
+
         }
       })
       .catch(() => {
@@ -63,7 +72,7 @@ const Login = () => {
   return (
     <div
       style={{
-        height:'100vh',
+        height: '100vh',
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

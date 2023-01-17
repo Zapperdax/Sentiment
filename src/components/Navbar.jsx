@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Box,
   Toolbar,
-  ListItem,
   Stack,
   useMediaQuery,
   Divider,
@@ -18,15 +17,24 @@ import {
 import { Settings, AccountCircle } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
   const [menuAnchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const isMobile = useMediaQuery("(max-width:700px)");
+
   const menuOpen = Boolean(menuAnchorEl);
   const open = Boolean(anchorElement);
 
-  const isMobile = useMediaQuery("(max-width:700px)");
-  const isAuthenticated = true;
+  const handleLogout = () => {
+    logout();
+    navigate('/blog')
+  }
 
   const handleClick = (event) => {
     setAnchorElement(event.currentTarget);
@@ -63,7 +71,7 @@ const Navbar = () => {
                   About
                 </a>
               </Stack>
-              {isAuthenticated ? (
+              {!user ? (
                 <Stack gap={3} direction="row" alignItems="center">
                   <Link style={styles.linkStyle} to="/login">
                     Login
@@ -115,6 +123,12 @@ const Navbar = () => {
           </ListItemIcon>
           Settings
         </MenuItem>
+        <MenuItem style={styles.menuItems} onClick={handleLogout}>
+          <ListItemIcon sx={{ color: "#FFF" }} >
+            <Settings />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
       </Menu>
 
       {/* Menu Drawer color : #031B34 */}
@@ -145,7 +159,7 @@ const Navbar = () => {
         </MenuItem>
         <Divider />
 
-        {isAuthenticated ? (
+        {!user ? (
           <MenuItem >
             <Stack pl={2} gap={2} direction="row" alignItems="center">
               <Link style={styles.menuItems} to="/login">
@@ -171,6 +185,12 @@ const Navbar = () => {
               <Settings />
             </ListItemIcon>
             Settings
+          </MenuItem>
+          <MenuItem style={styles.menuItems} onClick={handleLogout}>
+            <ListItemIcon sx={{ color: "#FFF" }} >
+              <Settings />
+            </ListItemIcon>
+            Logout
           </MenuItem>
         </List>
         )}

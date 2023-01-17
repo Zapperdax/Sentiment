@@ -1,25 +1,30 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast from 'react-hot-toast';
 
 const ProtectRoutes = () => {
     const { user } = useAuthContext();
 
-    useEffect(() => {
-        if (!user) toast("Login tera aba kersi!");
-    }, [user])
-
     return (
         <>
-            user ? (<Outlet />) : (
-            <>
-                {/* {() => toast("Login tera aba kersi!")} */}
-                <ToastContainer />
-                <Navigate to='/' />
-            </>
+            {user ? (<Outlet />) : (
+                <>
+                    {toast('You must login first!',
+                        {
+                            icon: '⚠️',
+                            style: {
+                                borderRadius: '10px',
+                                background: '#031B34',
+                                color: '#fff',
+                            },
+                            position: "top-center"
+                        }
+                    )}
+                    <Navigate to='/' />
+                </>
             )
+            }
         </>)
 }
 

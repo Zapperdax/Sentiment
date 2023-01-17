@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const location = useLocation();
   const navigate = useNavigate();
-  const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
   const [pClicked, setPClicked] = React.useState(false);
@@ -34,6 +33,14 @@ function Login() {
       })
       .then((response) => {
         if (response.status === 200) {
+          toast.success('Password Change Successful!',
+            {
+              style: {
+                borderRadius: '10px',
+                background: '#031B34',
+                color: '#fff',
+              }
+            });
           navigate("/login");
         }
       });

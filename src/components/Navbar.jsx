@@ -19,6 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useLogout } from "../hooks/useLogout";
+import { toast } from "react-hot-toast";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
@@ -32,8 +33,15 @@ const Navbar = () => {
   const open = Boolean(anchorElement);
 
   const handleLogout = () => {
-    logout();
-    navigate('/blog')
+    toast.success('Logout Successful!',
+      {
+        style: {
+          borderRadius: '10px',
+          background: '#031B34',
+          color: '#fff',
+        }
+      }); logout();
+    navigate('/');
   }
 
   const handleClick = (event) => {

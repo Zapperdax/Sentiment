@@ -1,8 +1,13 @@
 import React from 'react'
+import { Container } from '@mui/material'
 
 const Blog = () => {
     return (
-        <div style={{ marginTop: "100px", color: 'white' }}>Blog</div>
+        <Container maxWidth='lg' style={{ marginTop: "100px", color: 'white' }}>
+            <p>
+                Blog
+            </p>
+        </Container>
     )
 }
 

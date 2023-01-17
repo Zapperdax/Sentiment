@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { api } from "../utils/axios";
+import { toast } from "react-hot-toast";
 
 function ForgotPassword() {
   const navigate = useNavigate();
@@ -26,6 +27,14 @@ function ForgotPassword() {
   console.log(formData);
 
   const handleClick = () => {
+    toast.success('OTP Sent!',
+      {
+        style: {
+          borderRadius: '10px',
+          background: '#031B34',
+          color: '#fff',
+        }
+      });
     navigate("/enterOTP", { state: { id: 1, email: formData.email } });
   };
 

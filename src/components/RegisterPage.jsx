@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from 'react-router-dom';
 import {
   TextField,
   InputAdornment,
@@ -16,8 +16,10 @@ function RegisterPage() {
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
 
+
   const [error, setError] = React.useState(false);
   const [pClicked, setPClicked] = React.useState(false);
+  const navigate = useNavigate();
 
   const { dispatch } = useAuthContext();
 
@@ -64,8 +66,8 @@ function RegisterPage() {
           }
           console.log(user);
           localStorage.setItem("user", JSON.stringify(user));
-
-          dispatch({ type: 'LOGIN', payload: user })
+          dispatch({ type: 'LOGIN', payload: user });
+          navigate("/");
         }
       })
       .catch((err) => {

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Box,
   Toolbar,
-  ListItem,
   Stack,
   useMediaQuery,
   Divider,
@@ -18,15 +17,24 @@ import {
 import { Settings, AccountCircle } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useLogout } from "../hooks/useLogout";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
   const [menuAnchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
+  const isMobile = useMediaQuery("(max-width:700px)");
+
   const menuOpen = Boolean(menuAnchorEl);
   const open = Boolean(anchorElement);
 
-  const isMobile = useMediaQuery("(max-width:700px)");
-  const isAuthenticated = false;
+  const handleLogout = () => {
+    logout();
+    navigate('/blog')
+  }
 
   const handleClick = (event) => {
     setAnchorElement(event.currentTarget);
@@ -63,7 +71,7 @@ const Navbar = () => {
                   About
                 </a>
               </Stack>
-              {isAuthenticated ? (
+              {!user ? (
                 <Stack gap={3} direction="row" alignItems="center">
                   <Link style={styles.linkStyle} to="/login">
                     Login
@@ -104,74 +112,86 @@ const Navbar = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem style={styles.menuItems}>
-          <ListItemIcon sx={{color:"#FFF"}}>
+          <ListItemIcon sx={{ color: "#FFF" }}>
             <AccountCircle />
           </ListItemIcon>
           My Profile
         </MenuItem>
         <MenuItem style={styles.menuItems}>
-          <ListItemIcon sx={{color:"#FFF"}} >
+          <ListItemIcon sx={{ color: "#FFF" }} >
             <Settings />
           </ListItemIcon>
           Settings
+        </MenuItem>
+        <MenuItem style={styles.menuItems} onClick={handleLogout}>
+          <ListItemIcon sx={{ color: "#FFF" }} >
+            <Settings />
+          </ListItemIcon>
+          Logout
         </MenuItem>
       </Menu>
 
       {/* Menu Drawer color : #031B34 */}
       {/* Mobile Menu  */}
-      <Menu 
-      open={menuOpen}
-      anchorEl={menuAnchorEl}
-      onClick={handleClose}
-      onClose={handleClose}
-      PaperProps={menuInputProps}
-      transformOrigin={{ horizontal: "right", vertical: "top" }}
-      anchorOrigin={{ horizontal: "right", vertical: "bottom" }} 
+      <Menu
+        open={menuOpen}
+        anchorEl={menuAnchorEl}
+        onClick={handleClose}
+        onClose={handleClose}
+        PaperProps={menuInputProps}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-          <MenuItem sx={{my:1}}>
-            <Link style={styles.menuItems} to="/chatbotlandingpage">
-              ChatBot
-            </Link>
-          </MenuItem>
-          <MenuItem sx={{my:1}}>
-            <Link style={styles.menuItems} to="/blog">
-              Blog
-            </Link>
-          </MenuItem>
-          <MenuItem sx={{my:1}}>
-            <a href="#/" style={styles.menuItems}>
-              About
-            </a>
-          </MenuItem>
+        <MenuItem sx={{ my: 1 }}>
+          <Link style={styles.menuItems} to="/chatbotlandingpage">
+            ChatBot
+          </Link>
+        </MenuItem>
+        <MenuItem sx={{ my: 1 }}>
+          <Link style={styles.menuItems} to="/blog">
+            Blog
+          </Link>
+        </MenuItem>
+        <MenuItem sx={{ my: 1 }}>
+          <a href="#/" style={styles.menuItems}>
+            About
+          </a>
+        </MenuItem>
         <Divider />
 
-        {isAuthenticated ? (
-            <MenuItem >
-              <Stack pl={2} gap={2} direction="row" alignItems="center">
-                <Link style={styles.menuItems} to="/login">
-                  Login
-                </Link>
-                <Link
-                  style={{ ...styles.signUpBtn, ...styles.linkStyle }}
-                  to="/register"
-                >
-                  SignUp
-                </Link>
-              </Stack>
-            </MenuItem>
+        {!user ? (
+          <MenuItem >
+            <Stack pl={2} gap={2} direction="row" alignItems="center">
+              <Link style={styles.menuItems} to="/login">
+                Login
+              </Link>
+              <Link
+                style={{ ...styles.signUpBtn, ...styles.linkStyle }}
+                to="/register"
+              >
+                SignUp
+              </Link>
+            </Stack>
+          </MenuItem>
         ) : (<List>
-            <MenuItem sx={{my:1 ,...styles.menuItems}}>
-              <ListItemIcon sx={{color:"#FFF"}}>
-                <AccountCircle />
-              </ListItemIcon>
-              My Profile
-            </MenuItem>
-            <MenuItem sx={{my:1 ,...styles.menuItems}}>
-              <ListItemIcon sx={{color:"#FFF"}}>
-                <Settings />
-              </ListItemIcon>
-              Settings
-            </MenuItem>
+          <MenuItem sx={{ my: 1, ...styles.menuItems }}>
+            <ListItemIcon sx={{ color: "#FFF" }}>
+              <AccountCircle />
+            </ListItemIcon>
+            My Profile
+          </MenuItem>
+          <MenuItem sx={{ my: 1, ...styles.menuItems }}>
+            <ListItemIcon sx={{ color: "#FFF" }}>
+              <Settings />
+            </ListItemIcon>
+            Settings
+          </MenuItem>
+          <MenuItem style={styles.menuItems} onClick={handleLogout}>
+            <ListItemIcon sx={{ color: "#FFF" }} >
+              <Settings />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
         </List>
         )}
 
@@ -238,7 +258,7 @@ const menuInputProps = {
       content: '""',
       display: "block",
       position: "absolute",
-      bgcolor:'#031b34',
+      bgcolor: '#031b34',
       top: 0,
       right: 17,
       width: 10,

@@ -1,13 +1,29 @@
-import ChangePassword from './ChangePassword'
-import Chatbot from './Chatbot'
-import ChatbotLandingPage from './ChatbotLandingPage'
-import EnterOTP from './EnterOTP'
-import FaceDetection from './FaceDetection'
-import ForgotPassword from './ForgotPassword'
-import Home from './Home'
-import Login from './Login'
-import Navbar from './Navbar'
-import RegisterPage from './RegisterPage'
+/** @format */
 
-export {ChangePassword, Login, RegisterPage, Chatbot,
-ChatbotLandingPage, EnterOTP, FaceDetection, ForgotPassword, Home, Navbar}
+import ChangePassword from "./ChangePassword";
+import Chatbot from "./Chatbot";
+import ChatbotLandingPage from "./ChatbotLandingPage";
+import EnterOTP from "./EnterOTP";
+import FaceDetection from "./FaceDetection";
+import ForgotPassword from "./ForgotPassword";
+import Home from "./Home";
+import Login from "./Login";
+import Navbar from "./Navbar";
+import RegisterPage from "./RegisterPage";
+import Blog from "./Blog";
+import ProtectRoutes from "./ProtectRoutes";
+
+export {
+  ChangePassword,
+  Login,
+  RegisterPage,
+  Chatbot,
+  ChatbotLandingPage,
+  EnterOTP,
+  FaceDetection,
+  ForgotPassword,
+  Home,
+  Navbar,
+  Blog,
+  ProtectRoutes,
+};

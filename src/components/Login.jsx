@@ -11,6 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../utils/axios";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -60,6 +61,14 @@ const Login = () => {
           dispatch({ type: 'LOGIN', payload: user })
 
           console.log(`logged in ${user}`);
+          toast.success('Welcome!',
+            {
+              style: {
+                borderRadius: '10px',
+                background: '#031B34',
+                color: '#fff',
+              }
+            });
           navigate("/");
 
         }

@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { TextField } from "@mui/material";
 import { api } from "../utils/axios";
+import { toast } from "react-hot-toast";
 
 function EnterOTP() {
   const location = useLocation();
@@ -22,8 +23,26 @@ function EnterOTP() {
       .then((response) => {
         console.log(response.data.otp);
         if (response.data.otp !== formData.otp) {
+
+          toast.error('Invalid OTP!',
+            {
+              style: {
+                borderRadius: '10px',
+                background: '#031B34',
+                color: '#fff',
+              }
+            });
+
           return console.log("Not Matched");
         }
+        toast.success('OTP Verified!',
+          {
+            style: {
+              borderRadius: '10px',
+              background: '#031B34',
+              color: '#fff',
+            }
+          });
         navigate("/changePassword", {
           state: { id: 1, email: location.state.email },
         });
@@ -133,7 +152,7 @@ function EnterOTP() {
                 color: "#707070",
               }}
             >
-              An OTP has been sent to your email address
+              Enter OTP code that was sent to your email address.
             </p>
 
             <form className="form">

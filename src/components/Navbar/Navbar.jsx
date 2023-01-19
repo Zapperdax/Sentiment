@@ -14,11 +14,11 @@ import {
   ListItemIcon,
   List
 } from "@mui/material";
-import { Settings, AccountCircle } from "@mui/icons-material";
+import { Settings, AccountCircle, Logout } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useAuthContext } from "../hooks/useAuthContext";
-import { useLogout } from "../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useLogout } from "../../hooks/useLogout";
 import { toast } from "react-hot-toast";
 
 const Navbar = () => {
@@ -133,7 +133,7 @@ const Navbar = () => {
         </MenuItem>
         <MenuItem style={styles.menuItems} onClick={handleLogout}>
           <ListItemIcon sx={{ color: "#FFF" }} >
-            <Settings />
+            <Logout />
           </ListItemIcon>
           Logout
         </MenuItem>
@@ -196,7 +196,7 @@ const Navbar = () => {
           </MenuItem>
           <MenuItem style={styles.menuItems} onClick={handleLogout}>
             <ListItemIcon sx={{ color: "#FFF" }} >
-              <Settings />
+              <Logout />
             </ListItemIcon>
             Logout
           </MenuItem>

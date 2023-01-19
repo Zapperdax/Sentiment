@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { api } from "../utils/axios";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { api } from "../../../src/utils/axios";
+import { useAuthContext } from "../../../src/hooks/useAuthContext";
 
 function RegisterPage() {
   const innerBackground = "/images/innerBackground3.jpg";

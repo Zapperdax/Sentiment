@@ -1,31 +1,31 @@
-import React, {useCallback, useRef} from "react";
-import { Button, Stack, Typography, useMediaQuery, Icon } from "@mui/material";
+import React, { useCallback, useRef, useState } from "react";
+import { Button, Stack, Typography, useMediaQuery, Icon, Backdrop } from "@mui/material";
 import Webcam from 'react-webcam';
-import ai from "../assets/ai.png";
-import FaceDetection from './FaceDetection';
+import ai from "../../assets/ai.png";
+import { FaceDetection } from '../index';
 import CloseIcon from '@mui/icons-material/Close';
 
 const Home = () => {
-  
+
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
   const [isCameraOn, setIsCameraOn] = React.useState(false);
-  const [img, setImg] = React.useState(null);
+  const [img, setImg] = useState(null);
   const webcamRef = useRef(null);
 
   const videoConstraints = {
-    width: { min: 1280 },
-    height: { min: 720 },
+    width: { min: 380 },
+    height: { min: 100 },
     facingMode: "user",
   };
 
-  const capture = useCallback(()=> {
+  const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImg(imageSrc);
   }, [webcamRef]);
-  
-  const handleScan = () =>{
+
+  const handleScan = () => {
     setIsCameraOn(true);
   }
 
@@ -45,48 +45,56 @@ const Home = () => {
       }}
     >
       {isCameraOn && img === null ?
-        <Stack sx={styles.webcamStyles}>
-          <Webcam ref={webcamRef} imageSmoothing={true} screenshotFormat='image/jpeg' mirrored={true} videoConstraints={videoConstraints} />
-          <Button
-            sx={{
-              fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
-              lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
-              ...styles.stackBtn,
-            }}
-            onClick={capture}
-          >
-            {!isMobile ? 'Capture Emotion' : "Capture"}
-          </Button>
-        </Stack>
+        <Backdrop open={true}>
+          <Stack sx={styles.webcamStyles}>
+            <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={() => handleCameraClose()}>
+              <CloseIcon />
+            </Icon>
+            <Webcam ref={webcamRef} imageSmoothing={true} screenshotFormat='image/jpeg' mirrored={true} videoConstraints={videoConstraints} />
+            <Button
+              sx={{
+                fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
+                lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
+                ...styles.stackBtn,
+              }}
+              onClick={capture}
+            >
+              {!isMobile ? 'Capture Emotion' : "Capture"}
+            </Button>
+          </Stack>
+        </Backdrop>
         :
         img === null ? null :
-        <Stack sx={styles.webcamStyles}>
-          <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={()=> handleCameraClose()}>
-          <CloseIcon />
-        </Icon>
-        <FaceDetection img={img} />
-        <Button
-          sx={{
-            fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
-            lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
-            ...styles.stackBtn,
-          }}
-          onClick={()=> setImg(null)}
-        >
-          {!isMobile ? 'Retake Photo' : "Retake"}
-        </Button>
-      </Stack>}
-        
+          <Backdrop open={true}>
+            <Stack sx={styles.webcamStyles}>
+              <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={() => handleCameraClose()}>
+                <CloseIcon />
+              </Icon>
+              <FaceDetection img={img} />
+              <Button
+                sx={{
+                  fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
+                  lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
+                  ...styles.stackBtn,
+                }}
+                onClick={() => setImg(null)}
+              >
+                {!isMobile ? 'Retake Photo' : "Retake"}
+              </Button>
+            </Stack>
+          </Backdrop>
+      }
+
       <Stack
         flex={1}
         gap={isTab ? "2rem" : "1.3rem"}
         pt={isTab ? 7 : 10}
         justifyContent="center"
-        
+
       >
         <h1
           style={{
-            fontSize: isMobile ? "36px" : is700 ? "48px" : '62px' ,
+            fontSize: isMobile ? "36px" : is700 ? "48px" : '62px',
             lineHeight: isMobile ? "48px" : is700 ? "60px" : '75px',
             ...styles.mainTypography,
           }}
@@ -96,7 +104,7 @@ const Home = () => {
 
         <Typography
           sx={{
-            fontSize: isMobile ? "14px" : is700 ? "16px" : '18px' ,
+            fontSize: isMobile ? "14px" : is700 ? "16px" : '18px',
             lineHeight: isMobile ? "24px" : is700 ? "24px" : '28px',
             ...styles.paraTypography,
           }}
@@ -115,7 +123,7 @@ const Home = () => {
         >
           <Typography
             sx={{
-              fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
+              fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
               lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
               ...styles.btnStackTypography,
             }}
@@ -124,7 +132,7 @@ const Home = () => {
           </Typography>
           <Button
             sx={{
-              fontSize: isMobile ? "12px" : is700 ? "16px" : '18px' ,
+              fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
               lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
               ...styles.stackBtn,
             }}
@@ -169,8 +177,8 @@ const styles = {
     fontWeight: 400,
     textTransform: "none",
     p: "0.8rem",
-    width:'100%',
-    minHeight:'50px',
+    width: '100%',
+    minHeight: '50px',
     ":hover": {
       bgcolor: "#AE67FA",
       bgOpacity: 0.6,
@@ -184,15 +192,16 @@ const styles = {
     alignItems: "center",
   },
   webcamStyles: {
-   position: 'absolute',
-   top: '50%',
-   left: '50%',
-   transform: 'translate(-50%, -50%)',
-   maxWidth: '90%',
-   zIndex: '1'
-  },
-  iconStyles:{
     position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    maxWidth: '90%',
+    zIndex: '1'
+  },
+  iconStyles: {
+    position: 'absolute',
+    top: 20,
     right: 5,
     zIndex: '1',
     "&:hover": {

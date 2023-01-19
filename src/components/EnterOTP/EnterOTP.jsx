@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { TextField } from "@mui/material";
-import { api } from "../utils/axios";
+import { api } from "../../utils/axios";
 import { toast } from "react-hot-toast";
 
 function EnterOTP() {

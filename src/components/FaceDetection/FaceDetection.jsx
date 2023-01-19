@@ -1,7 +1,7 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as faceapi from 'face-api.js'
 
-export default function FaceDetection(props){
+export default function FaceDetection(props) {
     const [emotionValues, setEmotionValues] = React.useState({
         neutral: -Infinity,
         happy: -Infinity,
@@ -19,24 +19,24 @@ export default function FaceDetection(props){
     const style = {
         maxWidth: '100%'
     }
-    
+
     const detectedEmotion = () => {
-        if(!loading){
-            if(!Object.values(emotionValues).every(x=> x === -Infinity)){
+        if (!loading) {
+            if (!Object.values(emotionValues).every(x => x === -Infinity)) {
                 let greatest = -Infinity;
                 let key;
-                for(let x in emotionValues){
-                    if(emotionValues[x] > greatest){
+                for (let x in emotionValues) {
+                    if (emotionValues[x] > greatest) {
                         key = x;
                         greatest = emotionValues[x]
                     }
                 }
                 console.log(key, greatest);
-                }
+            }
         }
     }
 
-    const handleImage = async() => {
+    const handleImage = async () => {
         const detections = await faceapi.detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
         canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(imgRef.current);
         faceapi.matchDimensions(canvasRef.current, {
@@ -63,7 +63,7 @@ export default function FaceDetection(props){
         setLoading(false);
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         const loadModels = () => {
             Promise.all([
                 faceapi.loadTinyFaceDetectorModel('/modals'),
@@ -71,23 +71,23 @@ export default function FaceDetection(props){
                 faceapi.loadFaceLandmarkTinyModel('/modals'),
                 faceapi.loadFaceRecognitionModel('/modals'),
                 faceapi.loadFaceExpressionModel('/modals')
-            ]).then(async()=>{
+            ]).then(async () => {
                 await handleImage();
                 detectedEmotion();
             })
-            .catch((e)=> {
-                console.log(e)
-            })
+                .catch((e) => {
+                    console.log(e)
+                })
         }
 
         imgRef.current && loadModels();
     }, [props.img, loading])
 
-    return(
-    <div className='app'>
-        <img ref={imgRef} src={props.img} alt='emotion' style={style} />
-        <canvas ref={canvasRef} style={style} />
-    </div>
+    return (
+        <div className='app'>
+            <img ref={imgRef} src={props.img} alt='emotion' style={style} />
+            <canvas ref={canvasRef} style={style} />
+        </div>
     )
 }
 

@@ -1,25 +1,27 @@
-*{
-    margin:0;
-    padding:0;
+/** @format */
+
+* {
+  margin: 0;
+  padding: 0;
 }
-body{
-    background-color: #040c18;
-    font-family: 'Manrope';
+body {
+  background-color: #040c18;
+  font-family: "Manrope";
 }
-.app{
-    display: flex;
+.app {
+  display: flex;
 }
-canvas{
-    position: absolute;
+canvas {
+  position: absolute;
 }
 
 .createAccountButton {
   appearance: none;
   background-color: transparent;
-  border: 2px solid #1A1A1A;
+  border: 2px solid #1a1a1a;
   border-radius: 15px;
   box-sizing: border-box;
-  color: #3B3B3B;
+  color: #3b3b3b;
   cursor: pointer;
   display: inline-block;
   font-family: "Playfair Display";
@@ -31,10 +33,10 @@ canvas{
   outline: none;
   text-align: center;
   text-decoration: none;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-  user-select: none;
-  padding: 8px 8px;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
   -webkit-user-select: none;
+  padding: 8px 8px;
+  user-select: none;
   touch-action: manipulation;
   width: 50%;
   will-change: transform;
@@ -46,188 +48,191 @@ canvas{
 
 .createAccountButton:hover {
   color: #fff;
-  background-color: #1A1A1A;
+  background-color: #1a1a1a;
   box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
   transform: translateY(-2px);
 }
 
-.floating { 
-    animation-name: floating;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    
+.floating {
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
 }
- 
+
 @keyframes floating {
-    0% { transform: translate(0,  0px); }
-    50%  { transform: translate(0, 15px); }
-    100%   { transform: translate(0, -0px); }   
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
 }
 
 .createAccountButton:active {
   box-shadow: none;
   transform: translateY(0);
 }
-.chatbotPage{
-    background-color: #040C18;
-    box-sizing: border-box;
-    display: flex;
-    padding-top: 3rem;
-    /* height: 100vh; */
-    justify-content: center !important;
-    align-items: center !important;
+.chatbotPage {
+  background-color: #040c18;
+  box-sizing: border-box;
+  display: flex;
+  padding-top: 3rem;
+  /* height: 100vh; */
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column;
+}
+.chatLeftSide h1 {
+  color: white;
+  font-weight: 700;
+  background: -webkit-linear-gradient(89.97deg, #ae67fa 1.84%, #f49867 102.67%);
+  -webkit-background-clip: text;
+  background-clip: "text";
+  -webkit-text-fill-color: transparent;
+}
+.infoContainer {
+  display: flex;
+  border-radius: 25px 25px 25px 25px;
+}
+.chatInfoContainer {
+  background-color: white;
+  border-radius: 25px 25px 25px 25px;
+  padding: 2rem 2rem 0.5rem 2rem;
+  align-items: center;
+  justify-content: center;
+}
+.chatbotInformation {
+  text-align: center;
+}
+.chatMain {
+  margin-top: 1rem;
+  max-height: 12rem;
+  overflow-y: scroll;
+  overflow-wrap: break-word;
+}
+.chatMessageSend {
+  margin-top: 1rem;
+  width: 18rem;
+}
+.chatMain::-webkit-scrollbar {
+  width: 5px;
+  background-color: #dfe6e9;
+}
+
+.chatMain::-webkit-scrollbar-track {
+  border: 5px solid white;
+  border-color: #cccccc;
+  background-color: #b2bec3;
+}
+
+.chatMain::-webkit-scrollbar-thumb {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+}
+
+.phoneOnlyDoodle {
+  text-align: center;
+}
+.chatbotdoodle {
+  width: 15rem;
+}
+.chatleftparagraphcontainer {
+  display: inline-block;
+  padding: 1rem;
+}
+.chatleftparagraph {
+  margin-right: 1rem;
+  color: white;
+  padding: 1rem;
+}
+
+.chatbotPNG {
+  width: 200px;
+  position: relative;
+  top: 1rem;
+}
+.chatbotMessage {
+  margin-left: 1rem;
+}
+.userMessage {
+  text-align: right;
+  margin-right: 1rem;
+}
+.chatbotMessage > p,
+.userMessage > p {
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  max-width: 50%;
+  border-radius: 12px;
+  padding: 0.5rem;
+  background-color: #d3f2f5;
+  color: #1a1a1a;
+  font-weight: 500;
+  text-align: justify;
+}
+
+@media screen and (max-width: 799px) {
+  .leftSide {
+    display: none;
+  }
+  .rightSide {
+    min-height: 100%;
+    border-radius: 0 !important;
+  }
+  .registerBox {
+    grid-template-columns: 1fr !important;
+  }
+  .chatRightSide {
+    display: none;
+  }
+  .infoContainer {
     flex-direction: column;
+  }
 }
-.chatLeftSide h1{
-    color: white;
-    font-weight: 700;
-    background: -webkit-linear-gradient(89.97deg, #AE67FA 1.84%, #F49867 102.67%);
-    background-clip:'text';
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 
-}
-.infoContainer{
+@media screen and (min-width: 800px) {
+  .phoneOnlyDoodle {
+    display: none;
+  }
+  .webChatbotDoodle {
+    width: 30rem;
+  }
+  .chatLeftSide h1 {
+    font-size: 3rem;
+  }
+  .chatLeftSide > p {
+    font-size: 2rem;
+  }
+  .chatleftparagraph {
+    font-size: 1.3rem !important;
+    margin-right: 1rem;
+  }
+  .chatButtonContainer > Button {
+    padding: 1rem 1.8rem;
+    font-size: 1.1rem;
+  }
+  .chatInfoContainer {
+    width: 75%;
+  }
+  .chatbotPNG {
+    width: 350px;
+  }
+  .chatMain {
+    max-width: 100%;
+  }
+  .chatMessageSend {
+    width: 100%;
+  }
+  .chatbotMessage > p,
+  .userMessage > p {
+    font-size: 1.2rem;
+  }
+  .chatRightSide {
     display: flex;
-    border-radius: 25px 25px 25px 25px;
-}
-.chatInfoContainer{
-    background-color: white;
-    border-radius: 25px 25px 25px 25px;
-    padding: 2rem 2rem 0.5rem 2rem;
     align-items: center;
-    justify-content: center;
-}
-.chatbotInformation{
-    text-align: center;
-}
-.chatMain{
-    margin-top: 1rem;
-    max-height: 12rem;
-    overflow-y: scroll;
-    overflow-wrap: break-word;
-}
-.chatMessageSend{
-    margin-top: 1rem;
-    width: 18rem;
-}
- .chatMain::-webkit-scrollbar {
-    width: 5px;
-	background-color: #dfe6e9;
- }
- 
- .chatMain::-webkit-scrollbar-track {
-    border: 5px solid white;
-	border-color: #cccccc; 
-	background-color: #b2bec3;
- }
- 
- .chatMain::-webkit-scrollbar-thumb {
-    background-color:#1A1A1A;
-	border-radius: 10px;
- }
-
-.phoneOnlyDoodle{
-    text-align: center;
-}
-.chatbotdoodle{
-    width: 15rem;
-}
-.chatleftparagraphcontainer{
-    display: inline-block;
-    padding: 1rem;
-}
-.chatleftparagraph{
-    margin-right: 1rem;
-    color: white;
-    padding: 1rem;
-}
-
-.chatbotPNG{
-    width: 200px;
-    position: relative;
-    top: 1rem;
-}
-.chatbotMessage{
-    margin-left: 1rem;
-}
-.userMessage{
-    text-align: right;
-    margin-right: 1rem;
-}
-.chatbotMessage>p, .userMessage>p{
-    margin-bottom: 0.5rem;
-    display: inline-block;
-    max-width: 50%;
-    border-radius: 12px;
-    padding: 0.5rem;
-    background-color: #d3f2f5;
-    color: #1A1A1A;
-    font-weight: 500;
-    text-align: justify;
-}
-
-
-@media screen and (max-width: 799px){
-    .leftSide{
-        display: none;
-    }
-    .rightSide{
-        min-height: 100%;
-        border-radius: 0 !important; ;
-    }
-    .registerBox{
-        grid-template-columns: 1fr !important;
-    }
-    .chatRightSide{
-        display: none;
-    }
-    .infoContainer{
-        flex-direction: column;
-    }
-
-    
-}
-
-@media screen and (min-width: 800px){
-    .phoneOnlyDoodle{
-        display: none;
-    }
-    .webChatbotDoodle{
-        width: 30rem;
-    }
-    .chatLeftSide h1{
-        font-size: 3rem;
-    }
-    .chatLeftSide > p {
-        font-size: 2rem;
-    }
-    .chatleftparagraph{
-        font-size: 1.3rem !important;
-        margin-right: 1rem;
-    }
-    .chatButtonContainer> Button{
-        padding: 1rem 1.8rem;
-        font-size: 1.1rem;
-    }
-    .chatInfoContainer{
-        width: 75%;
-    }
-    .chatbotPNG{
-        width: 350px;
-    }
-    .chatMain{
-        max-width: 100%;
-    }
-    .chatMessageSend{
-        width: 100%;
-    }
-    .chatbotMessage>p, .userMessage>p{
-        font-size: 1.2rem;
-    }
-    .chatRightSide{
-        display: flex;
-        align-items: center;
-    }
+  }
 }

@@ -11,7 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../utils/axios";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();

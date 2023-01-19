@@ -1,17 +1,17 @@
 /** @format */
 
-import ChangePassword from "./ChangePassword";
-import Chatbot from "./Chatbot";
-import ChatbotLandingPage from "./ChatbotLandingPage";
-import EnterOTP from "./EnterOTP";
-import FaceDetection from "./FaceDetection";
-import ForgotPassword from "./ForgotPassword";
-import Home from "./Home";
-import Login from "./Login";
-import Navbar from "./Navbar";
-import RegisterPage from "./RegisterPage";
-import Blog from "./Blog";
-import ProtectRoutes from "./ProtectRoutes";
+import ChangePassword from "./ChangePassword/ChangePassword";
+import Chatbot from "./Chatbot/Chatbot";
+import ChatbotLandingPage from "./ChatbotLandingPage/ChatbotLandingPage";
+import EnterOTP from "./EnterOTP/EnterOTP";
+import FaceDetection from "./FaceDetection/FaceDetection";
+import ForgotPassword from "./ForgotPassword/ForgotPassword";
+import Home from "./HomePage/Home";
+import Login from "./Login/Login";
+import Navbar from "./Navbar/Navbar";
+import RegisterPage from "./RegisterPage/RegisterPage";
+import Blog from "./Blog/Blog";
+import ProtectRoutes from "./ProtectedRoutes/ProtectRoutes";
 
 export {
   ChangePassword,

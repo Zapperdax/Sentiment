@@ -45,7 +45,7 @@ const Home = () => {
       }}
     >
       {isCameraOn && img === null ?
-        <Backdrop open={true}>
+        <Backdrop sx={{zIndex: '1'}} open={true}>
           <Stack sx={styles.webcamStyles}>
             <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={() => handleCameraClose()}>
               <CloseIcon />
@@ -65,7 +65,7 @@ const Home = () => {
         </Backdrop>
         :
         img === null ? null :
-          <Backdrop open={true}>
+          <Backdrop sx={{zIndex: '1'}} open={true}>
             <Stack sx={styles.webcamStyles}>
               <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={() => handleCameraClose()}>
                 <CloseIcon />

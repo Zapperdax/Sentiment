@@ -12,37 +12,40 @@ import {
   Menu,
   MenuItem,
   ListItemIcon,
-  List
+  List,
 } from "@mui/material";
 import { Settings, AccountCircle, Logout } from "@mui/icons-material";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useLogout } from "../../hooks/useLogout";
 import { toast } from "react-hot-toast";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../features/user/userSlice";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
   const [menuAnchorEl, setAnchorEl] = useState(null);
   const navigate = useNavigate();
-  const { logout } = useLogout();
-  const { user } = useAuthContext();
+  // const { logout } = useLogout();
+  // const { user } = useAuthContext();
+  const user = useSelector((state) => state.users.user);
+  const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width:700px)");
 
   const menuOpen = Boolean(menuAnchorEl);
   const open = Boolean(anchorElement);
 
   const handleLogout = () => {
-    toast.success('Logout Successful!',
-      {
-        style: {
-          borderRadius: '10px',
-          background: '#031B34',
-          color: '#fff',
-        }
-      }); logout();
-    navigate('/');
-  }
+    toast.success("Logout Successful!", {
+      style: {
+        borderRadius: "10px",
+        background: "#031B34",
+        color: "#fff",
+      },
+    });
+    localStorage.removeItem("user");
+    dispatch(logout());
+    navigate("/");
+  };
 
   const handleClick = (event) => {
     setAnchorElement(event.currentTarget);
@@ -56,16 +59,19 @@ const Navbar = () => {
     setAnchorEl(event.currentTarget);
   };
 
-
   return (
     <>
-      <AppBar elevation={0} position='fixed' sx={{ background: '#040C18' }}>
-        <Toolbar style={styles.toolBar} disableGutters={true}
+      <AppBar elevation={0} position="fixed" sx={{ background: "#040C18" }}>
+        <Toolbar
+          style={styles.toolBar}
+          disableGutters={true}
           sx={{
-            p: isMobile ? '0.5rem 2rem' : '1rem 5rem'
+            p: isMobile ? "0.5rem 2rem" : "1rem 5rem",
           }}
         >
-          <Link style={styles.logoText} to='/'>Sentimento</Link>
+          <Link style={styles.logoText} to="/">
+            Sentimento
+          </Link>
           {!isMobile ? (
             <Box ml={2} style={styles.navbarLinks}>
               <Stack direction="row" gap={4}>
@@ -126,13 +132,13 @@ const Navbar = () => {
           My Profile
         </MenuItem>
         <MenuItem style={styles.menuItems}>
-          <ListItemIcon sx={{ color: "#FFF" }} >
+          <ListItemIcon sx={{ color: "#FFF" }}>
             <Settings />
           </ListItemIcon>
           Settings
         </MenuItem>
         <MenuItem style={styles.menuItems} onClick={handleLogout}>
-          <ListItemIcon sx={{ color: "#FFF" }} >
+          <ListItemIcon sx={{ color: "#FFF" }}>
             <Logout />
           </ListItemIcon>
           Logout
@@ -168,7 +174,7 @@ const Navbar = () => {
         <Divider />
 
         {!user ? (
-          <MenuItem >
+          <MenuItem>
             <Stack pl={2} gap={2} direction="row" alignItems="center">
               <Link style={styles.menuItems} to="/login">
                 Login
@@ -181,30 +187,29 @@ const Navbar = () => {
               </Link>
             </Stack>
           </MenuItem>
-        ) : (<List>
-          <MenuItem sx={{ my: 1, ...styles.menuItems }}>
-            <ListItemIcon sx={{ color: "#FFF" }}>
-              <AccountCircle />
-            </ListItemIcon>
-            My Profile
-          </MenuItem>
-          <MenuItem sx={{ my: 1, ...styles.menuItems }}>
-            <ListItemIcon sx={{ color: "#FFF" }}>
-              <Settings />
-            </ListItemIcon>
-            Settings
-          </MenuItem>
-          <MenuItem style={styles.menuItems} onClick={handleLogout}>
-            <ListItemIcon sx={{ color: "#FFF" }} >
-              <Logout />
-            </ListItemIcon>
-            Logout
-          </MenuItem>
-        </List>
+        ) : (
+          <List>
+            <MenuItem sx={{ my: 1, ...styles.menuItems }}>
+              <ListItemIcon sx={{ color: "#FFF" }}>
+                <AccountCircle />
+              </ListItemIcon>
+              My Profile
+            </MenuItem>
+            <MenuItem sx={{ my: 1, ...styles.menuItems }}>
+              <ListItemIcon sx={{ color: "#FFF" }}>
+                <Settings />
+              </ListItemIcon>
+              Settings
+            </MenuItem>
+            <MenuItem style={styles.menuItems} onClick={handleLogout}>
+              <ListItemIcon sx={{ color: "#FFF" }}>
+                <Logout />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </List>
         )}
-
       </Menu>
-
     </>
   );
 };
@@ -250,23 +255,23 @@ const styles = {
     fontWeight: 500,
     fontSize: "17px",
     lineHeight: "24.25px",
-    textDecoration: 'none'
+    textDecoration: "none",
   },
 };
 
-// Account Menu 
+// Account Menu
 const menuInputProps = {
   elevation: 10,
   sx: {
     overflow: "visible",
     filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
     mt: 1.5,
-    bgcolor: '#031B34',
+    bgcolor: "#031B34",
     "&:before": {
       content: '""',
       display: "block",
       position: "absolute",
-      bgcolor: '#031b34',
+      bgcolor: "#031b34",
       top: 0,
       right: 17,
       width: 10,
@@ -275,6 +280,6 @@ const menuInputProps = {
       zIndex: 0,
     },
   },
-}
+};
 
 export default Navbar;

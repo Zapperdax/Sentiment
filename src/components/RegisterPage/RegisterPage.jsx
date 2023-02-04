@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 import {
   TextField,
   InputAdornment,
@@ -10,18 +10,18 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../../../src/utils/axios";
-import { useAuthContext } from "../../../src/hooks/useAuthContext";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/user/userSlice";
 
 function RegisterPage() {
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
 
-
   const [error, setError] = React.useState(false);
   const [pClicked, setPClicked] = React.useState(false);
   const navigate = useNavigate();
 
-  const { dispatch } = useAuthContext();
+  const dispatch = useDispatch();
 
   const handlePClick = () => {
     setPClicked((preValue) => !preValue);
@@ -63,10 +63,10 @@ function RegisterPage() {
           const user = {
             email: response.data.user.email,
             token: response.data.token,
-          }
+          };
           console.log(user);
           localStorage.setItem("user", JSON.stringify(user));
-          dispatch({ type: 'LOGIN', payload: user });
+          dispatch(login(user));
           navigate("/");
         }
       })
@@ -74,7 +74,6 @@ function RegisterPage() {
         setError(true);
       });
   };
-
 
   return (
     <div
@@ -96,7 +95,7 @@ function RegisterPage() {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           borderRadius: "5px",
-          marginTop: '3rem'
+          marginTop: "3rem",
         }}
         className="registerBox"
       >

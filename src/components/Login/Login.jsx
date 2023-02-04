@@ -10,12 +10,14 @@ import {
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { api } from "../../utils/axios";
-import { useAuthContext } from "../../hooks/useAuthContext";
-// import { toast } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/user/userSlice";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { dispatch } = useAuthContext();
+  // const { dispatch } = useAuthContext();
+  const dispatch = useDispatch();
 
   const image = "/images/background1.jpg";
   const innerBackground = "/images/innerBackground3.jpg";
@@ -54,23 +56,21 @@ const Login = () => {
         if (response.status === 200) {
           const user = {
             token: response.data.token,
-            email: response.data.user.email
-          }
+            email: response.data.user.email,
+          };
           localStorage.setItem("user", JSON.stringify(user));
 
-          dispatch({ type: 'LOGIN', payload: user })
+          dispatch(login(user));
 
-          console.log(`logged in ${user}`);
-          toast.success('Welcome!',
-            {
-              style: {
-                borderRadius: '10px',
-                background: '#031B34',
-                color: '#fff',
-              }
-            });
+          console.log(`logged in ${JSON.stringify(user)}`);
+          toast.success("Welcome!", {
+            style: {
+              borderRadius: "10px",
+              background: "#031B34",
+              color: "#fff",
+            },
+          });
           navigate("/");
-
         }
       })
       .catch(() => {
@@ -81,7 +81,7 @@ const Login = () => {
   return (
     <div
       style={{
-        height: '100vh',
+        height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -98,7 +98,7 @@ const Login = () => {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           borderRadius: "5px",
-          marginTop: '3rem'
+          marginTop: "3rem",
         }}
         className="registerBox"
       >
@@ -242,6 +242,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

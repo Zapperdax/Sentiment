@@ -5,6 +5,7 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useLocation } from "react-router-dom";
 import { api } from "../../utils/axios";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Login() {
   const location = useLocation();
@@ -33,14 +34,13 @@ function Login() {
       })
       .then((response) => {
         if (response.status === 200) {
-          toast.success('Password Change Successful!',
-            {
-              style: {
-                borderRadius: '10px',
-                background: '#031B34',
-                color: '#fff',
-              }
-            });
+          toast.success("Password Change Successful!", {
+            style: {
+              borderRadius: "10px",
+              background: "#031B34",
+              color: "#fff",
+            },
+          });
           navigate("/login");
         }
       });

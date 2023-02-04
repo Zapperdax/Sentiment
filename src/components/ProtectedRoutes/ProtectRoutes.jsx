@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 const ProtectRoutes = () => {
-  // const { user } = useAuthContext();
   const user = useSelector((state) => state.users.user);
 
   return (

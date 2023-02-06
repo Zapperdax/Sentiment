@@ -77,16 +77,29 @@ canvas {
   transform: translateY(0);
 }
 .chatbotPage {
-  background-color: #040c18;
-  box-sizing: border-box;
-  display: flex;
+  /* background-color: #040c18; */
+  /* box-sizing: border-box; */
   padding-top: 3rem;
   /* height: 100vh; */
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column;
+  /* justify-content: center !important; */
+  /* align-items: center !important; */
+  /* flex-direction: column; */
 }
-.chatLeftSide h1 {
+.chatRightSide{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.chatRightSide h1{
+  text-align: right;
+}
+
+.webChatbotDoodle {
+  width: 28rem !important;
+}
+
+.chatRightSide h1, .chatRightSide p {
   color: white;
   font-weight: 700;
   background: -webkit-linear-gradient(89.97deg, #ae67fa 1.84%, #f49867 102.67%);
@@ -95,8 +108,9 @@ canvas {
   -webkit-text-fill-color: transparent;
 }
 .infoContainer {
+  min-width: 100%;
   display: flex;
-  border-radius: 25px 25px 25px 25px;
+  justify-content: space-evenly;
 }
 .chatInfoContainer {
   background-color: white;
@@ -186,7 +200,7 @@ canvas {
   .registerBox {
     grid-template-columns: 1fr !important;
   }
-  .chatRightSide {
+  .chatLeftSide {
     display: none;
   }
   .infoContainer {
@@ -198,13 +212,10 @@ canvas {
   .phoneOnlyDoodle {
     display: none;
   }
-  .webChatbotDoodle {
-    width: 30rem;
-  }
-  .chatLeftSide h1 {
+  .chatRightSide h1 {
     font-size: 3rem;
   }
-  .chatLeftSide > p {
+  .chatRightSide > p {
     font-size: 2rem;
   }
   .chatleftparagraph {
@@ -214,9 +225,6 @@ canvas {
   .chatButtonContainer > Button {
     padding: 1rem 1.8rem;
     font-size: 1.1rem;
-  }
-  .chatInfoContainer {
-    width: 75%;
   }
   .chatbotPNG {
     width: 350px;
@@ -231,8 +239,15 @@ canvas {
   .userMessage > p {
     font-size: 1.2rem;
   }
-  .chatRightSide {
+  .chatLeftSide {
     display: flex;
     align-items: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1400px){
+  .webChatbotDoodle {
+    min-width: 38rem;
   }
 }

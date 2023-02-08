@@ -24,15 +24,8 @@ const ChatbotLandingPage = () => {
             alt="doodle"
           />
         </div>
-        {/* <div className="phoneOnlyDoodle">
-          <img
-            className="chatbotdoodle floating"
-            src="/images/chattybot.png"
-            alt="doodle"
-          />
-        </div> */}
         <div className="chatRightSide">
-        <h1>Make it easy to express your feelings</h1>
+        <h1>Your Personal Mood Companion</h1>
           <div
             style={{ margin: "1rem 0 1rem" }}
             className="chatButtonContainer"
@@ -53,7 +46,7 @@ const ChatbotLandingPage = () => {
               color: "white",
             }}
           >
-            Your Personal Mood Companion
+            Make it easy to express your feelings
           </p>
           {/* <div className="chatleftparagraphcontainer">
             <p className="chatleftparagraph">Insert Links</p>

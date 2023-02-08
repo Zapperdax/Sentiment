@@ -75,7 +75,7 @@ const Navbar = () => {
           {!isMobile ? (
             <Box ml={2} style={styles.navbarLinks}>
               <Stack direction="row" gap={4}>
-                <Link style={styles.linkStyle} to="/chatbotlandingpage">
+                <Link style={styles.linkStyle} to="/chatbot">
                   ChatBot
                 </Link>
                 <Link style={styles.linkStyle} to="/blog">

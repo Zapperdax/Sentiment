@@ -151,9 +151,7 @@ const Home = () => {
     </Stack>
     
     <Stack>
-      <Stack>
           <ChatbotLandingPage />
-        </Stack>
     </Stack>
     </>
   );

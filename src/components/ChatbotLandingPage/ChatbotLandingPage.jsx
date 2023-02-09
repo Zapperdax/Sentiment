@@ -13,14 +13,21 @@ const ChatbotLandingPage = () => {
   return (
     <Box className="chatbotPage" sx={{
       px: is700 ? "2rem" : "5rem",
-      py: isTab ? "6rem" : "6rem",
+      // py: isTab ? "6rem" : "6rem",
       gap: isTab ? "3rem" : "4rem",
     }}>
       <div className="infoContainer">
         <div className="chatLeftSide">
-          <h1>Make it easy to express your feelings</h1>
+        <img
+            className="webChatbotDoodle floating"
+            src="/images/chattybot.png"
+            alt="doodle"
+          />
+        </div>
+        <div className="chatRightSide">
+        <h1>Your Personal Mood Companion</h1>
           <div
-            style={{ margin: "1rem 0 2rem" }}
+            style={{ margin: "1rem 0 1rem" }}
             className="chatButtonContainer"
           >
             <Button variant="text">Learn More</Button>
@@ -39,30 +46,16 @@ const ChatbotLandingPage = () => {
               color: "white",
             }}
           >
-            Your Personal Mood Companion
+            Make it easy to express your feelings
           </p>
-          <div className="chatleftparagraphcontainer">
+          {/* <div className="chatleftparagraphcontainer">
             <p className="chatleftparagraph">Insert Links</p>
             <p className="chatleftparagraph">Insert Links</p>
           </div>
           <div className="chatleftparagraphcontainer">
             <p className="chatleftparagraph">Insert Links</p>
             <p className="chatleftparagraph">Insert Links</p>
-          </div>
-        </div>
-        <div className="phoneOnlyDoodle">
-          <img
-            className="chatbotdoodle floating"
-            src="/images/chattybot.png"
-            alt="doodle"
-          />
-        </div>
-        <div className="chatRightSide">
-          <img
-            className="webChatbotDoodle floating"
-            src="/images/chattybot.png"
-            alt="doodle"
-          />
+          </div> */}
         </div>
       </div>
     </Box>
@@ -70,3 +63,4 @@ const ChatbotLandingPage = () => {
 };
 
 export default ChatbotLandingPage;
+

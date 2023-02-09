@@ -77,16 +77,14 @@ canvas {
   transform: translateY(0);
 }
 .chatbotPage {
-  background-color: #040c18;
-  box-sizing: border-box;
-  display: flex;
-  padding-top: 3rem;
-  /* height: 100vh; */
-  justify-content: center !important;
-  align-items: center !important;
-  flex-direction: column;
+  text-align: center;
 }
-.chatLeftSide h1 {
+
+.webChatbotDoodle {
+  width: 28rem !important;
+}
+
+.chatRightSide h1, .chatRightSide p {
   color: white;
   font-weight: 700;
   background: -webkit-linear-gradient(89.97deg, #ae67fa 1.84%, #f49867 102.67%);
@@ -95,8 +93,9 @@ canvas {
   -webkit-text-fill-color: transparent;
 }
 .infoContainer {
+  min-width: 100%;
   display: flex;
-  border-radius: 25px 25px 25px 25px;
+  justify-content: space-evenly;
 }
 .chatInfoContainer {
   background-color: white;
@@ -116,7 +115,6 @@ canvas {
 }
 .chatMessageSend {
   margin-top: 1rem;
-  width: 18rem;
 }
 .chatMain::-webkit-scrollbar {
   width: 5px;
@@ -134,9 +132,6 @@ canvas {
   border-radius: 10px;
 }
 
-.phoneOnlyDoodle {
-  text-align: center;
-}
 .chatbotdoodle {
   width: 15rem;
 }
@@ -175,7 +170,7 @@ canvas {
   text-align: justify;
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 820px) {
   .leftSide {
     display: none;
   }
@@ -186,26 +181,27 @@ canvas {
   .registerBox {
     grid-template-columns: 1fr !important;
   }
-  .chatRightSide {
+  .chatLeftSide {
     display: none;
   }
   .infoContainer {
     flex-direction: column;
   }
+  .chatRightSide h1 {
+    font-size: 1.75rem;
+  }
+  .chatRightSide > p {
+    font-size: 1.1rem;
+  }
 }
 
-@media screen and (min-width: 800px) {
-  .phoneOnlyDoodle {
-    display: none;
+@media screen and (min-width: 821px) {
+  
+  .chatRightSide h1 {
+    font-size: 3.875rem;
   }
-  .webChatbotDoodle {
-    width: 30rem;
-  }
-  .chatLeftSide h1 {
-    font-size: 3rem;
-  }
-  .chatLeftSide > p {
-    font-size: 2rem;
+  .chatRightSide > p {
+    font-size: 2.375rem;
   }
   .chatleftparagraph {
     font-size: 1.3rem !important;
@@ -214,9 +210,6 @@ canvas {
   .chatButtonContainer > Button {
     padding: 1rem 1.8rem;
     font-size: 1.1rem;
-  }
-  .chatInfoContainer {
-    width: 75%;
   }
   .chatbotPNG {
     width: 350px;
@@ -231,8 +224,24 @@ canvas {
   .userMessage > p {
     font-size: 1.2rem;
   }
-  .chatRightSide {
+  .chatLeftSide {
     display: flex;
     align-items: center;
+    justify-content: center;
+  }
+  .chatRightSide{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .chatRightSide > *{
+    text-align: right;
+  }
+}
+
+@media screen and (min-width: 1400px){
+  .webChatbotDoodle {
+    min-width: 38rem;
   }
 }

@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { Button, Stack, Typography, useMediaQuery, Icon, Backdrop } from "@mui/material";
 import Webcam from 'react-webcam';
 import ai from "../../assets/ai.png";
-import { FaceDetection } from '../index';
+import { FaceDetection, ChatbotLandingPage } from '../index';
 import CloseIcon from '@mui/icons-material/Close';
 
 const Home = () => {
@@ -36,11 +36,12 @@ const Home = () => {
 
   console.log(img);
   return (
+    <>
     <Stack
       direction={isTab ? "column" : "row"}
       sx={{
         px: is700 ? "2rem" : "5rem",
-        py: isTab ? "6rem" : "6rem",
+        pt: isTab ? "6rem" : "6rem",
         gap: isTab ? "3rem" : "4rem",
       }}
     >
@@ -148,6 +149,11 @@ const Home = () => {
       </Stack>
 
     </Stack>
+    
+    <Stack>
+          <ChatbotLandingPage />
+    </Stack>
+    </>
   );
 };
 

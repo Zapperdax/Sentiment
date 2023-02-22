@@ -4,7 +4,6 @@ import { useMediaQuery, Box } from "@mui/material";
 import { Configuration, OpenAIApi } from "openai";
 const Chatbot = () => {
   const is700 = useMediaQuery("(max-width:700px)");
-  const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
 
   const [text, setText] = React.useState("");
@@ -25,7 +24,7 @@ const Chatbot = () => {
       presence_penalty: 0.6,
       stop: [" Human:", " AI:"],
     });
-    setChat((preValue) => [...preValue, response.data.choices[0].text]);
+    setChat((preValue) => [...preValue, response.data.choices[0].text.trim()]);
     console.log(response);
   };
 

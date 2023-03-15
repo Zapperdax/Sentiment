@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState, useEffect } from "react";
 import {
   Button,
   Stack,
@@ -11,14 +11,36 @@ import Webcam from "react-webcam";
 import ai from "../../assets/ai.png";
 import { FaceDetection, ChatbotLandingPage } from "../index";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies, allMovies } from "../../features/movie/movieSlice";
+import { fetchQuotes, allQuotes } from "../../features/quote/quoteSlice";
+import { fetchSongs, allSongs } from "../../features/song/songSlice";
+import { fetchVideos, allVideos } from "../../features/video/videoSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  const movies = useSelector(allMovies);
+  const quotes = useSelector(allQuotes);
+  const songs = useSelector(allSongs);
+  const videos = useSelector(allVideos);
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
-  const [isCameraOn, setIsCameraOn] = React.useState(false);
+  const [isCameraOn, setIsCameraOn] = useState(false);
   const [img, setImg] = useState(null);
+  const [category, setCategory] = useState("neutral");
   const webcamRef = useRef(null);
+
+  useEffect(() => {
+    dispatch(fetchMovies(category));
+    dispatch(fetchQuotes(category));
+    dispatch(fetchSongs(category));
+    dispatch(fetchVideos(category));
+  }, [dispatch]);
+  console.log(movies);
+  console.log(quotes);
+  console.log(songs);
+  console.log(videos);
 
   const videoConstraints = {
     width: { min: 380 },

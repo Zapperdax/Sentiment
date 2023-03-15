@@ -1,19 +1,26 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
-  ChangePassword, Login, RegisterPage, Chatbot,
-  ChatbotLandingPage, EnterOTP, ForgotPassword, Home, Navbar, FaceDetection, Blog, ProtectRoutes
-} from './components'
+  ChangePassword,
+  Login,
+  RegisterPage,
+  Chatbot,
+  ChatbotLandingPage,
+  EnterOTP,
+  ForgotPassword,
+  Home,
+  Navbar,
+  FaceDetection,
+  Blog,
+  ProtectRoutes,
+} from "./components";
 import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Toaster
-        position="bottom-right"
-        reverseOrder={false}
-      />
+      <Toaster position="bottom-right" reverseOrder={false} />
       <Routes>
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/login" element={<Login />}></Route>

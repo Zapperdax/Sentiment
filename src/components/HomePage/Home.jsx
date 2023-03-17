@@ -1,18 +1,46 @@
-import React, { useCallback, useRef, useState } from "react";
-import { Button, Stack, Typography, useMediaQuery, Icon, Backdrop } from "@mui/material";
-import Webcam from 'react-webcam';
+import React, { useCallback, useRef, useState, useEffect } from "react";
+import {
+  Button,
+  Stack,
+  Typography,
+  useMediaQuery,
+  Icon,
+  Backdrop,
+} from "@mui/material";
+import Webcam from "react-webcam";
 import ai from "../../assets/ai.png";
-import { FaceDetection, ChatbotLandingPage } from '../index';
-import CloseIcon from '@mui/icons-material/Close';
+import { FaceDetection, ChatbotLandingPage } from "../index";
+import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchMovies, allMovies } from "../../features/movie/movieSlice";
+import { fetchQuotes, allQuotes } from "../../features/quote/quoteSlice";
+import { fetchSongs, allSongs } from "../../features/song/songSlice";
+import { fetchVideos, allVideos } from "../../features/video/videoSlice";
 
 const Home = () => {
-
+  const dispatch = useDispatch();
+  const movies = useSelector(allMovies);
+  const quotes = useSelector(allQuotes);
+  const songs = useSelector(allSongs);
+  const videos = useSelector(allVideos);
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
-  const [isCameraOn, setIsCameraOn] = React.useState(false);
+  const [isCameraOn, setIsCameraOn] = useState(false);
   const [img, setImg] = useState(null);
+  const [category, setCategory] = useState("neutral");
   const webcamRef = useRef(null);
+
+  useEffect(() => {
+    dispatch(fetchMovies(category));
+    dispatch(fetchQuotes(category));
+    dispatch(fetchSongs(category));
+    dispatch(fetchVideos(category));
+  }, [dispatch]);
+  console.log(movies);
+  console.log(quotes);
+  console.log(songs);
+  console.log(videos);
 
   const videoConstraints = {
     width: { min: 380 },
@@ -27,132 +55,192 @@ const Home = () => {
 
   const handleScan = () => {
     setIsCameraOn(true);
-  }
+  };
 
   const handleCameraClose = () => {
     setIsCameraOn(false);
     setImg(null);
-  }
+  };
 
-  console.log(img);
   return (
     <>
-    <Stack
-      direction={isTab ? "column" : "row"}
-      sx={{
-        px: is700 ? "2rem" : "5rem",
-        pt: isTab ? "6rem" : "6rem",
-        gap: isTab ? "3rem" : "4rem",
-      }}
-    >
-      {isCameraOn && img === null ?
-        <Backdrop sx={{zIndex: '1'}} open={true}>
-          <Stack sx={styles.webcamStyles}>
-            <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={() => handleCameraClose()}>
-              <CloseIcon />
-            </Icon>
-            <Webcam ref={webcamRef} imageSmoothing={true} screenshotFormat='image/jpeg' mirrored={true} videoConstraints={videoConstraints} />
-            <Button
-              sx={{
-                fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
-                lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
-                ...styles.stackBtn,
-              }}
-              onClick={capture}
-            >
-              {!isMobile ? 'Capture Emotion' : "Capture"}
-            </Button>
-          </Stack>
-        </Backdrop>
-        :
-        img === null ? null :
-          <Backdrop sx={{zIndex: '1'}} open={true}>
+      <Stack
+        direction={isTab ? "column" : "row"}
+        sx={{
+          px: is700 ? "2rem" : "5rem",
+          pt: isTab ? "6rem" : "6rem",
+          gap: isTab ? "3rem" : "4rem",
+          mb: 2,
+        }}
+      >
+        {isCameraOn && img === null ? (
+          <Backdrop sx={{ zIndex: "1" }} open={true}>
             <Stack sx={styles.webcamStyles}>
-              <Icon sx={styles.iconStyles} fontSize="large" color="warning" onClick={() => handleCameraClose()}>
+              <Icon
+                sx={styles.iconStyles}
+                fontSize="large"
+                color="warning"
+                onClick={() => handleCameraClose()}
+              >
+                <CloseIcon />
+              </Icon>
+              <Webcam
+                ref={webcamRef}
+                imageSmoothing={true}
+                screenshotFormat="image/jpeg"
+                mirrored={true}
+                videoConstraints={videoConstraints}
+              />
+              <Button
+                sx={{
+                  fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
+                  lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
+                  ...styles.stackBtn,
+                }}
+                onClick={capture}
+              >
+                {!isMobile ? "Capture Emotion" : "Capture"}
+              </Button>
+            </Stack>
+          </Backdrop>
+        ) : img === null ? null : (
+          <Backdrop sx={{ zIndex: "1" }} open={true}>
+            <Stack sx={styles.webcamStyles}>
+              <Icon
+                sx={styles.iconStyles}
+                fontSize="large"
+                color="warning"
+                onClick={() => handleCameraClose()}
+              >
                 <CloseIcon />
               </Icon>
               <FaceDetection img={img} />
               <Button
                 sx={{
-                  fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
-                  lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
+                  fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
+                  lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
                   ...styles.stackBtn,
                 }}
                 onClick={() => setImg(null)}
               >
-                {!isMobile ? 'Retake Photo' : "Retake"}
+                {!isMobile ? "Retake Photo" : "Retake"}
               </Button>
             </Stack>
           </Backdrop>
-      }
-
-      <Stack
-        flex={1}
-        gap={isTab ? "2rem" : "1.3rem"}
-        pt={isTab ? 7 : 10}
-        justifyContent="center"
-
-      >
-        <h1
-          style={{
-            fontSize: isMobile ? "36px" : is700 ? "48px" : '62px',
-            lineHeight: isMobile ? "48px" : is700 ? "60px" : '75px',
-            ...styles.mainTypography,
-          }}
-        >
-          Sentiment Analyst and Mood Companion by Muhasim
-        </h1>
-
-        <Typography
-          sx={{
-            fontSize: isMobile ? "14px" : is700 ? "16px" : '18px',
-            lineHeight: isMobile ? "24px" : is700 ? "24px" : '28px',
-            ...styles.paraTypography,
-          }}
-        >
-          Yet bed any for travelling assistance indulgence unpleasing. Not
-          thoughts all exercise blessing. Indulgence way everything joy
-          alteration boisterous the attachment. Party we years to order allow
-          asked of.
-        </Typography>
+        )}
 
         <Stack
-          direction="row"
-          alignItems="center"
-          bgcolor="#052D56"
-          borderRadius={1}
+          flex={1}
+          gap={isTab ? "2rem" : "1.3rem"}
+          pt={isTab ? 7 : 10}
+          justifyContent="center"
         >
+          <h1
+            style={{
+              fontSize: isMobile ? "36px" : is700 ? "48px" : "62px",
+              lineHeight: isMobile ? "48px" : is700 ? "60px" : "75px",
+              ...styles.mainTypography,
+            }}
+          >
+            Sentiment Analyst and Mood Companion by Muhasim
+          </h1>
+
           <Typography
             sx={{
-              fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
-              lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
-              ...styles.btnStackTypography,
+              fontSize: isMobile ? "14px" : is700 ? "16px" : "18px",
+              lineHeight: isMobile ? "24px" : is700 ? "24px" : "28px",
+              ...styles.paraTypography,
             }}
           >
-            We can change the moods of people!
+            Yet bed any for travelling assistance indulgence unpleasing. Not
+            thoughts all exercise blessing. Indulgence way everything joy
+            alteration boisterous the attachment. Party we years to order allow
+            asked of.
           </Typography>
-          <Button
-            sx={{
-              fontSize: isMobile ? "12px" : is700 ? "16px" : '18px',
-              lineHeight: isMobile ? "22px" : is700 ? "24px" : '28px',
-              ...styles.stackBtn,
-            }}
-            onClick={handleScan}
+
+          <Stack
+            direction="row"
+            alignItems="center"
+            bgcolor="#052D56"
+            borderRadius={1}
           >
-            {!isMobile ? 'Scan Emotion' : "Scan"}
-          </Button>
+            <Typography
+              sx={{
+                fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
+                lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
+                ...styles.btnStackTypography,
+              }}
+            >
+              We can change the moods of people!
+            </Typography>
+            <Button
+              sx={{
+                fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
+                lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
+                ...styles.stackBtn,
+              }}
+              onClick={handleScan}
+            >
+              {!isMobile ? "Scan Emotion" : "Scan"}
+            </Button>
+          </Stack>
+        </Stack>
+
+        <Stack sx={styles.imageStack}>
+          <img src={ai} style={{ width: "100%", height: "100%" }}></img>
         </Stack>
       </Stack>
 
-      <Stack sx={styles.imageStack}>
-        <img src={ai} style={{ width: "100%", height: "100%" }}></img>
+      <Stack
+        sx={{
+          px: is700 ? "2rem" : "5rem",
+          mb: 2,
+          ...styles.mainTypography,
+        }}
+      >
+        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+          Movies
+        </h1>
+      </Stack>
+      <Stack
+        sx={{
+          px: is700 ? "2rem" : "5rem",
+          mb: 2,
+          ...styles.mainTypography,
+        }}
+      >
+        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+          Quotes
+        </h1>
+      </Stack>
+      <Stack
+        sx={{
+          px: is700 ? "2rem" : "5rem",
+          mb: 2,
+          ...styles.mainTypography,
+        }}
+      >
+        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+          Songs
+        </h1>
+      </Stack>
+      <Stack
+        sx={{
+          px: is700 ? "2rem" : "5rem",
+          mb: 2,
+          ...styles.mainTypography,
+        }}
+      >
+        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+          Videos
+        </h1>
       </Stack>
 
-    </Stack>
-    
-    <Stack>
-          <ChatbotLandingPage />
-    </Stack>
+      <Stack sx={{ mb: 10 }}>
+        <ChatbotLandingPage />
+      </Stack>
+
+      <Stack style={{ background: "#031B34" }}>Hi</Stack>
     </>
   );
 };
@@ -183,8 +271,8 @@ const styles = {
     fontWeight: 400,
     textTransform: "none",
     p: "0.8rem",
-    width: '100%',
-    minHeight: '50px',
+    width: "100%",
+    minHeight: "50px",
     ":hover": {
       bgcolor: "#AE67FA",
       bgOpacity: 0.6,
@@ -198,22 +286,22 @@ const styles = {
     alignItems: "center",
   },
   webcamStyles: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '90%',
-    zIndex: '1'
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    maxWidth: "90%",
+    zIndex: "1",
   },
   iconStyles: {
-    position: 'absolute',
+    position: "absolute",
     top: 20,
     right: 5,
-    zIndex: '1',
+    zIndex: "1",
     "&:hover": {
-      cursor: 'pointer'
-    }
-  }
+      cursor: "pointer",
+    },
+  },
 };
 
 export default Home;

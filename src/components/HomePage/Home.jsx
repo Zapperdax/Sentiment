@@ -6,10 +6,15 @@ import {
   useMediaQuery,
   Icon,
   Backdrop,
+  CircularProgress,
+  Box,
+  LinearProgress,
+  Card,
+  CardMedia,
 } from "@mui/material";
 import Webcam from "react-webcam";
 import ai from "../../assets/ai.png";
-import { FaceDetection, ChatbotLandingPage } from "../index";
+import { FaceDetection, ChatbotLandingPage, MoviesLayout, SongsLayout, VideoLayout } from "../index";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, allMovies } from "../../features/movie/movieSlice";
@@ -28,7 +33,7 @@ const Home = () => {
   const isTab = useMediaQuery("(max-width:1050px)");
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [img, setImg] = useState(null);
-  const [category, setCategory] = useState("neutral");
+  const [category, setCategory] = useState("happy");
   const webcamRef = useRef(null);
 
   useEffect(() => {
@@ -37,8 +42,8 @@ const Home = () => {
     dispatch(fetchSongs(category));
     dispatch(fetchVideos(category));
   }, [dispatch]);
-  console.log(movies);
-  console.log(quotes);
+  // console.log(movies);
+  console.log(`Quotes: ${quotes}`);
   console.log(songs);
   console.log(videos);
 
@@ -68,7 +73,7 @@ const Home = () => {
         direction={isTab ? "column" : "row"}
         sx={{
           px: is700 ? "2rem" : "5rem",
-          pt: isTab ? "6rem" : "6rem",
+          pt: isTab ? "1rem" : "2rem",
           gap: isTab ? "3rem" : "4rem",
           mb: 2,
         }}
@@ -187,7 +192,7 @@ const Home = () => {
         </Stack>
 
         <Stack sx={styles.imageStack}>
-          <img src={ai} style={{ width: "100%", height: "100%" }}></img>
+          <img src={ai} style={{ width: "100%", height: "100%" }} />
         </Stack>
       </Stack>
 
@@ -201,6 +206,15 @@ const Home = () => {
         <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
           Movies
         </h1>
+        {
+          movies.length === 0 ? (
+            <Stack sx={{ width: '100%', color: 'grey.500', my: 10, display: 'flex', justifyContent: 'center' }} spacing={2}>
+              <LinearProgress color="secondary" />
+            </Stack>
+          ) : (
+            <MoviesLayout movies={movies} />
+          )
+        }
       </Stack>
       <Stack
         sx={{
@@ -223,6 +237,16 @@ const Home = () => {
         <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
           Songs
         </h1>
+        {
+          songs.length === 0 ? (
+            <Stack sx={{ width: '100%', color: 'grey.500', my: 10, display: 'flex', justifyContent: 'center' }} spacing={2}>
+              <LinearProgress color="secondary" />
+            </Stack>
+          ) : (
+            <SongsLayout
+              songs={songs} />
+          )
+        }
       </Stack>
       <Stack
         sx={{
@@ -234,6 +258,21 @@ const Home = () => {
         <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
           Videos
         </h1>
+        {
+          videos.length === 0 ? (
+            <Stack sx={{ width: '100%', color: 'grey.500', my: 10, display: 'flex', justifyContent: 'center' }} spacing={2}>
+              <LinearProgress color="secondary" />
+            </Stack>
+          ) : (
+            // videos.slice(0, 2).map((video, item) => {
+            <>
+              <VideoLayout videos={videos} />
+            </>
+            // })
+          )
+        }
+        <>
+        </>
       </Stack>
 
       <Stack sx={{ mb: 10 }}>

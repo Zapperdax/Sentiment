@@ -264,11 +264,7 @@ const Home = () => {
               <LinearProgress color="secondary" />
             </Stack>
           ) : (
-            // videos.slice(0, 2).map((video, item) => {
-            <>
-              <VideoLayout videos={videos} />
-            </>
-            // })
+            <VideoLayout videos={videos} />
           )
         }
         <>

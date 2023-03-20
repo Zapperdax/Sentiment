@@ -12,7 +12,7 @@ const VideoLayout = ({ videos }) => {
             alignItems: 'center',
         }}>
             {
-                videos.slice(0, 12).map((item, index) => (
+                videos?.slice(0, 12).map((item, index) => (
                     <VideoCard video={item} key={index} i={index} />
                 ))
             }

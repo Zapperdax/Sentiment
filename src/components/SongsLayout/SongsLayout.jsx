@@ -12,7 +12,7 @@ const SongsLayout = ({ songs }) => {
             alignItems: 'center',
         }}>
             {
-                songs.slice(0, 12).map((item, index) => (
+                songs?.slice(0, 12).map((item, index) => (
                     <SongsCard song={item} key={index} i={index} />
                 ))
             }

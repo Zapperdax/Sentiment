@@ -1,29 +1,18 @@
 /** @format */
 
-import ChangePassword from "./ChangePassword/ChangePassword";
-import Chatbot from "./Chatbot/Chatbot";
-import ChatbotLandingPage from "./ChatbotLandingPage/ChatbotLandingPage";
-import EnterOTP from "./EnterOTP/EnterOTP";
-import FaceDetection from "./FaceDetection/FaceDetection";
-import ForgotPassword from "./ForgotPassword/ForgotPassword";
-import Home from "./HomePage/Home";
-import Login from "./Login/Login";
-import Navbar from "./Navbar/Navbar";
-import RegisterPage from "./RegisterPage/RegisterPage";
-import Blog from "./Blog/Blog";
-import ProtectRoutes from "./ProtectedRoutes/ProtectRoutes";
-
-export {
-  ChangePassword,
-  Login,
-  RegisterPage,
-  Chatbot,
-  ChatbotLandingPage,
-  EnterOTP,
-  FaceDetection,
-  ForgotPassword,
-  Home,
-  Navbar,
-  Blog,
-  ProtectRoutes,
-};
+export { default as ChangePassword } from "./ChangePassword/ChangePassword";
+export { default as Chatbot } from "./Chatbot/Chatbot";
+export { default as ChatbotLandingPage } from "./ChatbotLandingPage/ChatbotLandingPage";
+export { default as EnterOTP } from "./EnterOTP/EnterOTP";
+export { default as FaceDetection } from "./FaceDetection/FaceDetection";
+export { default as ForgotPassword } from "./ForgotPassword/ForgotPassword";
+export { default as Home } from "./HomePage/Home";
+export { default as Login } from "./Login/Login";
+export { default as Navbar } from "./Navbar/Navbar";
+export { default as RegisterPage } from "./RegisterPage/RegisterPage";
+export { default as Blog } from "./Blog/Blog";
+export { default as ProtectRoutes } from "./ProtectedRoutes/ProtectRoutes";
+export { default as MoviesLayout } from "./MoviesLayout/MoviesLayout";
+export { default as MoviesCard } from "./MoviesCard/MoviesCard";
+export { default as SongsLayout } from "./SongsLayout/SongsLayout";
+export { default as VideoLayout } from "./VideoLayout/VideoLayout";

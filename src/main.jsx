@@ -10,7 +10,9 @@ const root = ReactDOM.createRoot(document.querySelector("#root"));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <div className="gradient__bg">
+        <App />
+      </div>
     </BrowserRouter>
   </Provider>
 );

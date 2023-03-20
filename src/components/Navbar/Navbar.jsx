@@ -61,12 +61,12 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar elevation={0} position="fixed" sx={{ background: "#040C18" }}>
+      <AppBar elevation={0} sx={{ background: "transparent" }} position='static'>
         <Toolbar
-          style={styles.toolBar}
           disableGutters={true}
           sx={{
-            p: isMobile ? "0.5rem 2rem" : "1rem 5rem",
+            ...styles.toolBar,
+            p: isMobile ? "0.5rem 2rem" : "0rem 5rem",
           }}
         >
           <Link style={styles.logoText} to="/">
@@ -219,6 +219,7 @@ const styles = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    padding: 1,
   },
   navbarLinks: {
     flex: 1,

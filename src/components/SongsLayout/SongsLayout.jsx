@@ -1,6 +1,5 @@
 import { Box, Card, CardMedia, Grid, Grow, Typography } from '@mui/material';
 import React from 'react';
-import test from '../../../public/images/test.jpg';
 
 const SongsLayout = ({ songs }) => {
     return (
@@ -12,7 +11,7 @@ const SongsLayout = ({ songs }) => {
             alignItems: 'center',
         }}>
             {
-                songs.slice(0, 12).map((item, index) => (
+                songs?.slice(0, 12).map((item, index) => (
                     <SongsCard song={item} key={index} i={index} />
                 ))
             }

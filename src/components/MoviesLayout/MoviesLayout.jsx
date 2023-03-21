@@ -13,7 +13,7 @@ const MoviesLayout = ({ movies }) => {
         }}>
             {/* <MoviesCard movie={movies} /> */}
             {
-                movies.slice(0, 12).map((item, index) => (
+                movies?.slice(0, 12).map((item, index) => (
                     <MoviesCard key={index} movie={item} i={index} />
                 ))
             }

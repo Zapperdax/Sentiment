@@ -12,7 +12,7 @@ const VideoLayout = ({ videos }) => {
             alignItems: 'center',
         }}>
             {
-                videos.slice(0, 12).map((item, index) => (
+                videos?.slice(0, 12).map((item, index) => (
                     <VideoCard video={item} key={index} i={index} />
                 ))
             }
@@ -31,6 +31,7 @@ function VideoCard({ video, i }) {
                         height: '150px', width: '100%', borderRadius: '10px',
 
                     }}
+                    muted='muted'
                     onMouseOver={event => event.target.play()
                     }
                     onMouseOut={event => event.target.pause()}

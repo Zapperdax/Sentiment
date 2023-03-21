@@ -268,18 +268,18 @@ const menuInputProps = {
     filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
     mt: 1.5,
     bgcolor: "#031B34",
-    "&:before": {
-      content: '""',
-      display: "block",
-      position: "absolute",
-      bgcolor: "#031b34",
-      top: 0,
-      right: 17,
-      width: 10,
-      height: 10,
-      transform: "translateY(-50%) rotate(45deg)",
-      zIndex: 0,
-    },
+
+  }, "&:before": {
+    content: '""',
+    display: "block",
+    position: "absolute",
+    bgcolor: "#031b34",
+    top: 0,
+    right: 17,
+    width: 10,
+    height: 10,
+    transform: "translateY(-50%) rotate(45deg)",
+    zIndex: 0,
   },
 };
 

@@ -1,6 +1,5 @@
 import { Box, Card, CardMedia, Grid, Grow, Typography } from '@mui/material';
 import React from 'react';
-import test from '../../../public/images/test.jpg';
 
 const SongsLayout = ({ songs }) => {
     return (

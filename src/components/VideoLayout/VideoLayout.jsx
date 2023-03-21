@@ -31,6 +31,7 @@ function VideoCard({ video, i }) {
                         height: '150px', width: '100%', borderRadius: '10px',
 
                     }}
+                    muted='muted'
                     onMouseOver={event => event.target.play()
                     }
                     onMouseOut={event => event.target.pause()}

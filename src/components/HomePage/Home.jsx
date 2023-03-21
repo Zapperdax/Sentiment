@@ -43,9 +43,9 @@ const Home = () => {
     dispatch(fetchVideos(category));
   }, [dispatch]);
   // console.log(movies);
-  console.log(`Quotes: ${quotes}`);
-  console.log(songs);
-  console.log(videos);
+  console.log(quotes);
+  // console.log(songs);
+  // console.log(videos);
 
   const videoConstraints = {
     width: { min: 380 },

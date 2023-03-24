@@ -1,94 +1,98 @@
-import React, { useEffect, useRef } from 'react';
-import * as faceapi from 'face-api.js'
+import React, { useEffect, useRef, useState } from "react";
+import * as faceapi from "face-api.js";
 
 export default function FaceDetection(props) {
-    const [emotionValues, setEmotionValues] = React.useState({
-        neutral: -Infinity,
-        happy: -Infinity,
-        sad: -Infinity,
-        angry: -Infinity,
-        fearful: -Infinity,
-        disgusted: -Infinity,
-        surprised: -Infinity
+  const [emotionValues, setEmotionValues] = React.useState({
+    neutral: -Infinity,
+    happy: -Infinity,
+    sad: -Infinity,
+    angry: -Infinity,
+    fearful: -Infinity,
+    disgusted: -Infinity,
+    surprising: -Infinity,
+  });
+  const [loading, setLoading] = useState(true);
+
+  const imgRef = useRef();
+  const canvasRef = useRef();
+
+  const style = {
+    maxWidth: "100%",
+  };
+
+  const detectedEmotion = () => {
+    if (!loading) {
+      if (!Object.values(emotionValues).every((x) => x === -Infinity)) {
+        let greatest = -Infinity;
+        let key;
+        for (let x in emotionValues) {
+          if (emotionValues[x] > greatest) {
+            key = x;
+            greatest = emotionValues[x];
+          }
+        }
+        props.setCategory(key);
+      }
+    }
+  };
+
+  const handleImage = async () => {
+    const detections = await faceapi
+      .detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions())
+      .withFaceLandmarks()
+      .withFaceExpressions();
+    canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(imgRef.current);
+    faceapi.matchDimensions(canvasRef.current, {
+      width: 940,
+      height: 560,
     });
-    const [loading, setLoading] = React.useState(true);
+    const resized = faceapi.resizeResults(detections, {
+      width: 940,
+      height: 560,
+    });
+    faceapi.draw.drawDetections(canvasRef.current, resized);
+    faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
+    faceapi.draw.drawFaceLandmarks(canvasRef.current, resized);
 
-    const imgRef = useRef();
-    const canvasRef = useRef();
+    setEmotionValues({
+      neutral: detections[0].expressions.neutral,
+      happy: detections[0].expressions.happy,
+      sad: detections[0].expressions.sad,
+      angry: detections[0].expressions.angry,
+      fearful: detections[0].expressions.fearful,
+      disgusted: detections[0].expressions.disgusted,
+      surprising: detections[0].expressions.surprised,
+    });
+    setLoading(false);
+  };
 
-    const style = {
-        maxWidth: '100%'
-    }
-
-    const detectedEmotion = () => {
-        if (!loading) {
-            if (!Object.values(emotionValues).every(x => x === -Infinity)) {
-                let greatest = -Infinity;
-                let key;
-                for (let x in emotionValues) {
-                    if (emotionValues[x] > greatest) {
-                        key = x;
-                        greatest = emotionValues[x]
-                    }
-                }
-                console.log(key, greatest);
-            }
-        }
-    }
-
-    const handleImage = async () => {
-        const detections = await faceapi.detectAllFaces(imgRef.current, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
-        canvasRef.current.innerHTML = faceapi.createCanvasFromMedia(imgRef.current);
-        faceapi.matchDimensions(canvasRef.current, {
-            width: 940,
-            height: 560
+  useEffect(() => {
+    const loadModels = () => {
+      Promise.all([
+        faceapi.loadTinyFaceDetectorModel("/modals"),
+        faceapi.loadFaceLandmarkModel("/modals"),
+        faceapi.loadFaceLandmarkTinyModel("/modals"),
+        faceapi.loadFaceRecognitionModel("/modals"),
+        faceapi.loadFaceExpressionModel("/modals"),
+      ])
+        .then(async () => {
+          await handleImage();
+          detectedEmotion();
         })
-        const resized = faceapi.resizeResults(detections, {
-            width: 940,
-            height: 560
-        })
-        faceapi.draw.drawDetections(canvasRef.current, resized);
-        faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
-        faceapi.draw.drawFaceLandmarks(canvasRef.current, resized);
+        .catch((e) => {
+          console.log(e);
+        });
+    };
 
-        setEmotionValues({
-            neutral: detections[0].expressions.neutral,
-            happy: detections[0].expressions.happy,
-            sad: detections[0].expressions.sad,
-            angry: detections[0].expressions.angry,
-            fearful: detections[0].expressions.fearful,
-            disgusted: detections[0].expressions.disgusted,
-            surprised: detections[0].expressions.surprised
-        })
-        setLoading(false);
-    }
+    imgRef.current && loadModels();
+  }, [props.img, loading]);
 
-    useEffect(() => {
-        const loadModels = () => {
-            Promise.all([
-                faceapi.loadTinyFaceDetectorModel('/modals'),
-                faceapi.loadFaceLandmarkModel('/modals'),
-                faceapi.loadFaceLandmarkTinyModel('/modals'),
-                faceapi.loadFaceRecognitionModel('/modals'),
-                faceapi.loadFaceExpressionModel('/modals')
-            ]).then(async () => {
-                await handleImage();
-                detectedEmotion();
-            })
-                .catch((e) => {
-                    console.log(e)
-                })
-        }
-
-        imgRef.current && loadModels();
-    }, [props.img, loading])
-
-    return (
-        <div className='app'>
-            <img ref={imgRef} src={props.img} alt='emotion' style={style} />
-            <canvas ref={canvasRef} style={style} />
-        </div>
-    )
+  return (
+    <div className="app">
+      <img ref={imgRef} src={props.img} alt="emotion" style={style} />
+      <canvas ref={canvasRef} style={style} />
+    </div>
+  );
 }
 
 // import * as faceapi from "face-api.js";

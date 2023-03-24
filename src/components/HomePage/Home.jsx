@@ -14,7 +14,13 @@ import {
 } from "@mui/material";
 import Webcam from "react-webcam";
 import ai from "../../assets/ai.png";
-import { FaceDetection, ChatbotLandingPage, MoviesLayout, SongsLayout, VideoLayout } from "../index";
+import {
+  FaceDetection,
+  ChatbotLandingPage,
+  MoviesLayout,
+  SongsLayout,
+  VideoLayout,
+} from "../index";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, allMovies } from "../../features/movie/movieSlice";
@@ -33,7 +39,7 @@ const Home = () => {
   const isTab = useMediaQuery("(max-width:1050px)");
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [img, setImg] = useState(null);
-  const [category, setCategory] = useState("happy");
+  const [category, setCategory] = useState("neutral");
   const webcamRef = useRef(null);
 
   useEffect(() => {
@@ -41,11 +47,9 @@ const Home = () => {
     dispatch(fetchQuotes(category));
     dispatch(fetchSongs(category));
     dispatch(fetchVideos(category));
-  }, [dispatch]);
-  // console.log(movies);
-  console.log(quotes);
-  // console.log(songs);
-  // console.log(videos);
+  }, [dispatch, category]);
+
+  console.log(category);
 
   const videoConstraints = {
     width: { min: 380 },
@@ -119,7 +123,7 @@ const Home = () => {
               >
                 <CloseIcon />
               </Icon>
-              <FaceDetection img={img} />
+              <FaceDetection img={img} setCategory={setCategory} />
               <Button
                 sx={{
                   fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
@@ -206,15 +210,22 @@ const Home = () => {
         <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
           Movies
         </h1>
-        {
-          movies.length === 0 ? (
-            <Stack sx={{ width: '100%', color: 'grey.500', my: 10, display: 'flex', justifyContent: 'center' }} spacing={2}>
-              <LinearProgress color="secondary" />
-            </Stack>
-          ) : (
-            <MoviesLayout movies={movies} />
-          )
-        }
+        {movies.length === 0 ? (
+          <Stack
+            sx={{
+              width: "100%",
+              color: "grey.500",
+              my: 10,
+              display: "flex",
+              justifyContent: "center",
+            }}
+            spacing={2}
+          >
+            <LinearProgress color="secondary" />
+          </Stack>
+        ) : (
+          <MoviesLayout movies={movies} />
+        )}
       </Stack>
       <Stack
         sx={{
@@ -237,16 +248,22 @@ const Home = () => {
         <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
           Songs
         </h1>
-        {
-          songs.length === 0 ? (
-            <Stack sx={{ width: '100%', color: 'grey.500', my: 10, display: 'flex', justifyContent: 'center' }} spacing={2}>
-              <LinearProgress color="secondary" />
-            </Stack>
-          ) : (
-            <SongsLayout
-              songs={songs} />
-          )
-        }
+        {songs.length === 0 ? (
+          <Stack
+            sx={{
+              width: "100%",
+              color: "grey.500",
+              my: 10,
+              display: "flex",
+              justifyContent: "center",
+            }}
+            spacing={2}
+          >
+            <LinearProgress color="secondary" />
+          </Stack>
+        ) : (
+          <SongsLayout songs={songs} />
+        )}
       </Stack>
       <Stack
         sx={{
@@ -258,17 +275,23 @@ const Home = () => {
         <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
           Videos
         </h1>
-        {
-          videos.length === 0 ? (
-            <Stack sx={{ width: '100%', color: 'grey.500', my: 10, display: 'flex', justifyContent: 'center' }} spacing={2}>
-              <LinearProgress color="secondary" />
-            </Stack>
-          ) : (
-            <VideoLayout videos={videos} />
-          )
-        }
-        <>
-        </>
+        {videos.length === 0 ? (
+          <Stack
+            sx={{
+              width: "100%",
+              color: "grey.500",
+              my: 10,
+              display: "flex",
+              justifyContent: "center",
+            }}
+            spacing={2}
+          >
+            <LinearProgress color="secondary" />
+          </Stack>
+        ) : (
+          <VideoLayout videos={videos} />
+        )}
+        <></>
       </Stack>
 
       <Stack sx={{ mb: 10 }}>

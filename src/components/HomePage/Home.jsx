@@ -49,6 +49,7 @@ const Home = () => {
     dispatch(fetchVideos(category));
   }, [dispatch, category]);
 
+  console.log(quotes);
   console.log(category);
 
   const videoConstraints = {

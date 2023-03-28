@@ -9,13 +9,7 @@ export const fetchQuotes = createAsyncThunk(
   "quotes/fetchQuotes",
   async (category) => {
     try {
-      const response = await api.get(`quote/${category}`, {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      });
+      const response = await api.get(`quote/${category}`);
       return response.data;
     } catch (err) {
       return err.message;

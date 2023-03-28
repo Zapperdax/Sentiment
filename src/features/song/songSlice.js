@@ -7,13 +7,7 @@ export const fetchSongs = createAsyncThunk(
   "songs/fetchSongs",
   async (category) => {
     try {
-      const response = await api.get(`song/${category}`, {
-        headers: {
-          Authorization: `Bearer ${
-            JSON.parse(localStorage.getItem("user")).token
-          }`,
-        },
-      });
+      const response = await api.get(`song/${category}`);
       return response.data;
     } catch (err) {
       return err.message;

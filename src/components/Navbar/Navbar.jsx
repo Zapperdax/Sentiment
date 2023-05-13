@@ -20,6 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { toast } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/user/userSlice";
+import { ROUTES } from "../../constants/navigation";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
@@ -44,7 +45,7 @@ const Navbar = () => {
     });
     localStorage.removeItem("user");
     dispatch(logout());
-    navigate("/");
+    navigate(ROUTES.HOME);
   };
 
   const handleClick = (event) => {
@@ -61,7 +62,11 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar elevation={0} sx={{ background: "transparent" }} position='static'>
+      <AppBar
+        elevation={0}
+        sx={{ background: "transparent" }}
+        position="static"
+      >
         <Toolbar
           disableGutters={true}
           sx={{
@@ -69,16 +74,16 @@ const Navbar = () => {
             p: isMobile ? "0.5rem 2rem" : "0rem 5rem",
           }}
         >
-          <Link style={styles.logoText} to="/">
+          <Link style={styles.logoText} to={ROUTES.HOME}>
             Sentimento
           </Link>
           {!isMobile ? (
             <Box ml={2} style={styles.navbarLinks}>
               <Stack direction="row" gap={4}>
-                <Link style={styles.linkStyle} to="/chatbot">
+                <Link style={styles.linkStyle} to={ROUTES.CHATBOT}>
                   ChatBot
                 </Link>
-                <Link style={styles.linkStyle} to="/blog">
+                <Link style={styles.linkStyle} to={ROUTES.BLOG}>
                   Blog
                 </Link>
                 <a href="#/" style={styles.linkStyle}>
@@ -87,12 +92,12 @@ const Navbar = () => {
               </Stack>
               {!user ? (
                 <Stack gap={3} direction="row" alignItems="center">
-                  <Link style={styles.linkStyle} to="/login">
+                  <Link style={styles.linkStyle} to={ROUTES.LOGIN}>
                     Login
                   </Link>
                   <Link
                     style={{ ...styles.signUpBtn, ...styles.linkStyle }}
-                    to="/register"
+                    to={ROUTES.REGISTER}
                   >
                     SignUp
                   </Link>
@@ -157,12 +162,12 @@ const Navbar = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem sx={{ my: 1 }}>
-          <Link style={styles.menuItems} to="/chatbotlandingpage">
+          <Link style={styles.menuItems} to={ROUTES.CHATBOT}>
             ChatBot
           </Link>
         </MenuItem>
         <MenuItem sx={{ my: 1 }}>
-          <Link style={styles.menuItems} to="/blog">
+          <Link style={styles.menuItems} to={ROUTES.BLOG}>
             Blog
           </Link>
         </MenuItem>
@@ -176,12 +181,12 @@ const Navbar = () => {
         {!user ? (
           <MenuItem>
             <Stack pl={2} gap={2} direction="row" alignItems="center">
-              <Link style={styles.menuItems} to="/login">
+              <Link style={styles.menuItems} to={ROUTES.LOGIN}>
                 Login
               </Link>
               <Link
                 style={{ ...styles.signUpBtn, ...styles.linkStyle }}
-                to="/register"
+                to={ROUTES.REGISTER}
               >
                 SignUp
               </Link>
@@ -268,8 +273,8 @@ const menuInputProps = {
     filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
     mt: 1.5,
     bgcolor: "#031B34",
-
-  }, "&:before": {
+  },
+  "&:before": {
     content: '""',
     display: "block",
     position: "absolute",

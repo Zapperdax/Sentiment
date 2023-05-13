@@ -1,0 +1,15 @@
+export const ROUTES = {
+    HOME: '/',
+    REGISTER: '/register',
+    LOGIN: '/login',
+    FORGOT_PASSWORD: '/forgot-password',
+    ENTER_OTP: '/enter-otp',
+    CHANGE_PASSWORD: '/change-password',
+    NOTIFICATIONS: '/notifications',
+    CHATBOT: '/chatbot',
+    BLOG: '/blog',
+    // PROFILE: '/profile',
+    FACE_DETECTION: '/face-detection',
+    CHATBOT_LANDING_PAGE: '/chatbot-landing-page',
+  };
+  

@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ROUTES } from "../../../constants/navigation";
 
-const PostDescription = ({ description, postId = "", details = false }) => {
+const PostDescription = ({
+  description,
+  postId = "",
+  details = false,
+  quote = false,
+}) => {
   const [showFull, setShowFull] = useState(false);
 
   const styles = {
@@ -14,6 +19,10 @@ const PostDescription = ({ description, postId = "", details = false }) => {
     whiteSpace: "pre-line",
     fontFamily: "Manrope",
   };
+  if (quote === true) {
+    styles.fontSize = { sm: "12px", md: "16px" };
+    styles.lineHeight = { sm: "16px", md: "22px" };
+  }
 
   const truncatedDescription =
     !details && description?.length > 500

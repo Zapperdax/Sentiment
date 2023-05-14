@@ -1,37 +1,70 @@
-import React from "react";
-import { Box, Drawer, Stack, useMediaQuery } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import {
+  Box,
+  Container,
+  Drawer,
+  LinearProgress,
+  Stack,
+  useMediaQuery,
+} from "@mui/material";
 import Post from "../../components/Blog/Post";
+import BlogSidebar from "../../components/Blog/BlogSidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { allPosts, fetchBlogPosts } from "../../features/blog/blogSlice";
 
 const Blog = () => {
+  const { token } = useSelector((state) => state.users.user);
+  const dispatch = useDispatch();
+  const blogPosts = useSelector(allPosts);
+  const [loading, setLoading] = useState(false);
+
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
+
+  const fetchPosts = () => {
+    setLoading(true);
+    dispatch(fetchBlogPosts(token)).finally(() => {
+      setLoading(false);
+    });
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
   return (
-    <Stack
+    <Box
       sx={{
-        px: is700 ? "2rem" : "5rem",
-        pt: isTab ? "6rem" : "6rem",
-        gap: "2rem",
         color: "white",
+        position: "relative",
+        px: is700 ? "2rem" : "6rem",
+        pt: "3rem",
       }}
     >
-      <Drawer
+      <BlogSidebar />
+      <Box
         sx={{
-          width: "100px",
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: "100px",
-            boxSizing: "border-box",
-            backgroundColor: "inherit",
-          },
+          marginLeft: { lg: "65px" },
+          display: "flex",
+          flexDirection: "column",
+          gap: "50px",
         }}
-        variant="permanent"
-        anchor="left"
-      />
-      <Box sx={{ marginLeft: { xs: "0px", lg: "65px" } }}>
-        <Post />
+      >
+        {loading ? (
+          <LinearProgress color="secondary" />
+        ) : (
+          blogPosts.length > 0 &&
+          blogPosts?.map((post) => {
+            return <Post key={post._id} data={post} />;
+          })
+        )}
       </Box>
-    </Stack>
+    </Box>
   );
 };
 

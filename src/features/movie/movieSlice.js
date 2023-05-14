@@ -10,6 +10,7 @@ export const fetchMovies = createAsyncThunk(
       const response = await api.get(`movie/${category}`);
       return response.data;
     } catch (err) {
+      console.log(err);
       return err.message;
     }
   }

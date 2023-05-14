@@ -5,6 +5,7 @@ const UserName = ({ userName }) => {
   const styles = {
     fontSize: "16px",
     fontWeight: "300",
+    fontFamily: "Manrope",
     color: "#fff",
     lineHeight: "20px",
     transform: { xs: "none", md: "rotate(-90deg)" },

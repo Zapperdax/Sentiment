@@ -11,3 +11,6 @@ export { default as MoviesLayout } from "./MoviesLayout/MoviesLayout";
 export { default as MoviesCard } from "./MoviesCard/MoviesCard";
 export { default as SongsLayout } from "./SongsLayout/SongsLayout";
 export { default as VideoLayout } from "./VideoLayout/VideoLayout";
+export { default as Loading } from "./Loading/";
+export { default as Quote } from "./Quote/";
+export { default as QuotesLayout } from "./QuotesLayout/";

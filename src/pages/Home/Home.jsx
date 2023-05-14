@@ -16,7 +16,10 @@ import Webcam from "react-webcam";
 import ai from "../../assets/ai.png";
 import {
   FaceDetection,
+  Loading,
   MoviesLayout,
+  Quote,
+  QuotesLayout,
   SongsLayout,
   VideoLayout,
 } from "../../components/index";
@@ -205,10 +208,14 @@ const Home = () => {
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            ...styles.mainTypography,
+          }}
+        >
           Movies
         </h1>
         {movies.length === 0 ? (
@@ -232,67 +239,50 @@ const Home = () => {
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            marginBottom: "2rem",
+            ...styles.mainTypography,
+          }}
+        >
           Quotes
         </h1>
+        {quotes.length === 0 ? <Loading /> : <QuotesLayout quotes={quotes} />}
       </Stack>
       <Stack
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            ...styles.mainTypography,
+          }}
+        >
           Songs
         </h1>
-        {songs.length === 0 ? (
-          <Stack
-            sx={{
-              width: "100%",
-              color: "grey.500",
-              my: 10,
-              display: "flex",
-              justifyContent: "center",
-            }}
-            spacing={2}
-          >
-            <LinearProgress color="secondary" />
-          </Stack>
-        ) : (
-          <SongsLayout songs={songs} />
-        )}
+        {songs.length === 0 ? <Loading /> : <SongsLayout songs={songs} />}
       </Stack>
       <Stack
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            ...styles.mainTypography,
+          }}
+        >
           Videos
         </h1>
-        {videos.length === 0 ? (
-          <Stack
-            sx={{
-              width: "100%",
-              color: "grey.500",
-              my: 10,
-              display: "flex",
-              justifyContent: "center",
-            }}
-            spacing={2}
-          >
-            <LinearProgress color="secondary" />
-          </Stack>
-        ) : (
-          <VideoLayout videos={videos} />
-        )}
-        <></>
+        {videos.length === 0 ? <Loading /> : <VideoLayout videos={videos} />}
       </Stack>
 
       <Stack sx={{ mb: 10 }}>

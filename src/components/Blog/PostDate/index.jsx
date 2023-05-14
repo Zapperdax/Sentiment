@@ -10,7 +10,7 @@ const PostDate = ({ date }) => {
     textAlign: "right",
     height: { xs: "100%", md: "74px" },
   };
-  const [day, month] = date.split(" ");
+  const [month, day] = date.split(" ");
   return (
     <Typography sx={styles}>
       <Hidden mdUp>

@@ -4,6 +4,7 @@ import movieReducer from "../features/movie/movieSlice";
 import quoteReducer from "../features/quote/quoteSlice";
 import songReducer from "../features/song/songSlice";
 import videoReducer from "../features/video/videoSlice";
+import blogReducer from "../features/blog/blogSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,5 +13,6 @@ export const store = configureStore({
     quotes: quoteReducer,
     songs: songReducer,
     videos: videoReducer,
+    blog: blogReducer,
   },
 });

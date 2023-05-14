@@ -10,12 +10,12 @@ import {
   ProtectRoutes,
 } from "./components";
 import { Toaster } from "react-hot-toast";
-import { Blog, Login, Register, Home, ChatbotLanding } from "./pages";
+import { Blog, Login, Register, Home, ChatbotLanding, BlogPost } from "./pages";
 import { ROUTES } from "./constants/navigation";
 
 function App() {
   const location = useLocation();
-  const navbarHidden = location.pathname === ROUTES.BLOG;
+  const navbarHidden = location.pathname.includes(ROUTES.BLOG);
 
   return (
     <>
@@ -41,6 +41,7 @@ function App() {
         <Route element={<ProtectRoutes />}>
           <Route path={ROUTES.CHATBOT} element={<Chatbot />}></Route>
           <Route path={ROUTES.BLOG} element={<Blog />}></Route>
+          <Route path={ROUTES.BLOG_POST} element={<BlogPost />}></Route>
           <Route
             path={ROUTES.FACE_DETECTION}
             element={<FaceDetection />}

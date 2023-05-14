@@ -1,18 +1,38 @@
 /** @format */
 .gradient__bg {
-  background:-moz-radial-gradient(circle at 0% 5%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
+  background: -moz-radial-gradient(
+    circle at 0% 5%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
 
   /* safari 5.1+,chrome 10+ */
-  background:-webkit-radial-gradient(circle at 1% 5%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
+  background: -webkit-radial-gradient(
+    circle at 1% 5%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
 
   /* opera 11.10+ */
-  background:-o-radial-gradient(circle at 1% 5%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
+  background: -o-radial-gradient(
+    circle at 1% 5%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
 
   /* ie 10+ */
-  background:-ms-radial-gradient(circle at 1% 5%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
+  background: -ms-radial-gradient(
+    circle at 1% 5%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
 
   /* global 92%+ browsers support */
-  background:radial-gradient(circle at 1% 5%, rgba(0, 40, 83, 1) 0%, rgba(4, 12, 24, 1) 25%);
+  background: radial-gradient(
+    circle at 1% 5%,
+    rgba(0, 40, 83, 1) 0%,
+    rgba(4, 12, 24, 1) 25%
+  );
 }
 * {
   margin: 0;
@@ -98,7 +118,8 @@ canvas {
   width: 28rem !important;
 }
 
-.chatRightSide h1, .chatRightSide p {
+.chatRightSide h1,
+.chatRightSide p {
   color: white;
   font-weight: 700;
   background: -webkit-linear-gradient(89.97deg, #ae67fa 1.84%, #f49867 102.67%);
@@ -210,7 +231,6 @@ canvas {
 }
 
 @media screen and (min-width: 821px) {
-  
   .chatRightSide h1 {
     font-size: 3.875rem;
   }
@@ -243,18 +263,18 @@ canvas {
     align-items: center;
     justify-content: center;
   }
-  .chatRightSide{
+  .chatRightSide {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
   }
-  .chatRightSide > *{
+  .chatRightSide > * {
     text-align: right;
   }
 }
 
-@media screen and (min-width: 1400px){
+@media screen and (min-width: 1400px) {
   .webChatbotDoodle {
     min-width: 38rem;
   }

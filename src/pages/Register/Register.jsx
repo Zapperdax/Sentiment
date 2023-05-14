@@ -9,11 +9,11 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { api } from "../../../src/utils/axios";
+import { api } from "../../utils/axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/user/userSlice";
 
-function RegisterPage() {
+const Register = () => {
   const innerBackground = "/images/innerBackground3.jpg";
   const logo = "/images/logo.png";
 
@@ -254,6 +254,6 @@ function RegisterPage() {
       </div>
     </div>
   );
-}
+};
 
-export default RegisterPage;
+export default Register;

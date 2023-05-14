@@ -6,49 +6,52 @@ import PostDate from "../PostDate";
 import UserName from "../UserName";
 import PostTags from "../PostTags";
 
-const Post = () => {
+const Post = ({ data }) => {
   const styles = {
     wrapper: {
-      height: { xs: "440px", md: "260px" },
-      //   width: { xs: "342px", md: "966px" },
+      gap: "15px",
     },
     content: {
       display: "flex",
       width: "100%",
-      gap: "17px",
+      gap: "20px",
       flexDirection: { xs: "column", sm: "column", md: "row", lg: "row" },
     },
     postText: {
-      //   width: { xs: "342px", md: "876px" },
-      height: { xs: "440px", md: "217px" },
       flex: 1,
-      gap: "19px",
+      gap: "10px",
     },
     postDetails: {
       padding: 0,
       display: "flex",
       flexDirection: { xs: "row", md: "column" },
       justifyContent: { xs: "space-between", md: "flex-start" },
-      //   alignItems: "flex-start",
-      //   width: { xs: "100%", md: "73px" },
       gap: "60px",
       order: { xs: 2, md: 0 },
     },
+    tagContainer: {
+      display: "flex",
+      gap: "20px",
+      paddingLeft: { sm: "0px", md: "105px" },
+    },
   };
+  console.log(data._id);
   return (
     <Stack sx={styles.wrapper}>
       <Box sx={styles.content}>
         <Box sx={styles.postDetails}>
-          <PostDate date="12 May" />
-          <UserName userName="@someUser" />
+          <PostDate date={data.createdAt} />
+          <UserName userName={data.userName} />
         </Box>
         <Stack sx={styles.postText}>
-          <PostTitle title="15 Disadvantages Of Freedom And How You Can Workaround It." />
-          <PostDescription description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum ...read more" />
+          <PostTitle title={data.title} />
+          <PostDescription description={data.blogBody} postId={data._id} />
         </Stack>
       </Box>
-      <Box>
-        <PostTags tag="tag" />
+      <Box sx={styles.tagContainer}>
+        {data.tags.map((tag) => (
+          <PostTags key={tag} tag={tag} />
+        ))}
       </Box>
     </Stack>
   );

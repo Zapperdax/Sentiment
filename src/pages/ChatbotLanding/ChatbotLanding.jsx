@@ -2,7 +2,7 @@ import React from "react";
 import { Button, useMediaQuery, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-const ChatbotLandingPage = () => {
+const ChatbotLanding = () => {
   const is700 = useMediaQuery("(max-width:700px)");
   const isTab = useMediaQuery("(max-width:1050px)");
   const navigate = useNavigate();
@@ -67,4 +67,4 @@ const ChatbotLandingPage = () => {
   );
 };
 
-export default ChatbotLandingPage;
+export default ChatbotLanding;

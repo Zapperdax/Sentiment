@@ -1,44 +1,54 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import {
   ChangePassword,
-  Login,
-  RegisterPage,
   Chatbot,
-  ChatbotLandingPage,
   EnterOTP,
   ForgotPassword,
-  Home,
   Navbar,
   FaceDetection,
-  Blog,
   ProtectRoutes,
 } from "./components";
 import { Toaster } from "react-hot-toast";
+import { Blog, Login, Register, Home, ChatbotLanding, BlogPost } from "./pages";
+import { ROUTES } from "./constants/navigation";
 
 function App() {
+  const location = useLocation();
+  const navbarHidden = location.pathname.includes(ROUTES.BLOG);
+
   return (
     <>
-      <Navbar />
+      {!navbarHidden && <Navbar />}
       <Toaster position="bottom-right" reverseOrder={false} />
       <Routes>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/forgotPassword" element={<ForgotPassword />}></Route>
-        <Route path="/enterOTP" element={<EnterOTP />}></Route>
-        <Route path="/changePassword" element={<ChangePassword />}></Route>
+        <Route path={ROUTES.REGISTER} element={<Register />}></Route>
+        <Route path={ROUTES.LOGIN} element={<Login />}></Route>
+        <Route
+          path={ROUTES.FORGOT_PASSWORD}
+          element={<ForgotPassword />}
+        ></Route>
+        <Route path={ROUTES.ENTER_OTP} element={<EnterOTP />}></Route>
+        <Route
+          path={ROUTES.CHANGE_PASSWORD}
+          element={<ChangePassword />}
+        ></Route>
 
-        <Route path="/" element={<Home />}>
-          <Route path="/home" element={<Home />}></Route>
+        <Route path={ROUTES.HOME} element={<Home />}>
+          <Route path={ROUTES.HOME} element={<Home />}></Route>
         </Route>
 
         <Route element={<ProtectRoutes />}>
-          <Route path="/chatbot" element={<Chatbot />}></Route>
-          <Route path="/blog" element={<Blog />}></Route>
-          <Route path="/facedetection" element={<FaceDetection />}></Route>
+          <Route path={ROUTES.CHATBOT} element={<Chatbot />}></Route>
+          <Route path={ROUTES.BLOG} element={<Blog />}></Route>
+          <Route path={ROUTES.BLOG_POST} element={<BlogPost />}></Route>
           <Route
-            path="/chatbotlandingpage"
-            element={<ChatbotLandingPage />}
+            path={ROUTES.FACE_DETECTION}
+            element={<FaceDetection />}
+          ></Route>
+          <Route
+            path={ROUTES.CHATBOT_LANDING_PAGE}
+            element={<ChatbotLanding />}
           ></Route>
         </Route>
       </Routes>

@@ -16,17 +16,20 @@ import Webcam from "react-webcam";
 import ai from "../../assets/ai.png";
 import {
   FaceDetection,
-  ChatbotLandingPage,
+  Loading,
   MoviesLayout,
+  Quote,
+  QuotesLayout,
   SongsLayout,
   VideoLayout,
-} from "../index";
+} from "../../components/index";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, allMovies } from "../../features/movie/movieSlice";
 import { fetchQuotes, allQuotes } from "../../features/quote/quoteSlice";
 import { fetchSongs, allSongs } from "../../features/song/songSlice";
 import { fetchVideos, allVideos } from "../../features/video/videoSlice";
+import ChatbotLanding from "../ChatbotLanding/ChatbotLanding";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -205,10 +208,14 @@ const Home = () => {
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            ...styles.mainTypography,
+          }}
+        >
           Movies
         </h1>
         {movies.length === 0 ? (
@@ -232,74 +239,57 @@ const Home = () => {
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            marginBottom: "2rem",
+            ...styles.mainTypography,
+          }}
+        >
           Quotes
         </h1>
+        {quotes.length === 0 ? <Loading /> : <QuotesLayout quotes={quotes} />}
       </Stack>
       <Stack
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            ...styles.mainTypography,
+          }}
+        >
           Songs
         </h1>
-        {songs.length === 0 ? (
-          <Stack
-            sx={{
-              width: "100%",
-              color: "grey.500",
-              my: 10,
-              display: "flex",
-              justifyContent: "center",
-            }}
-            spacing={2}
-          >
-            <LinearProgress color="secondary" />
-          </Stack>
-        ) : (
-          <SongsLayout songs={songs} />
-        )}
+        {songs.length === 0 ? <Loading /> : <SongsLayout songs={songs} />}
       </Stack>
       <Stack
         sx={{
           px: is700 ? "2rem" : "5rem",
           mb: 2,
-          ...styles.mainTypography,
         }}
       >
-        <h1 style={{ fontSize: isMobile ? "18px" : is700 ? "24px" : "32px" }}>
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            ...styles.mainTypography,
+          }}
+        >
           Videos
         </h1>
-        {videos.length === 0 ? (
-          <Stack
-            sx={{
-              width: "100%",
-              color: "grey.500",
-              my: 10,
-              display: "flex",
-              justifyContent: "center",
-            }}
-            spacing={2}
-          >
-            <LinearProgress color="secondary" />
-          </Stack>
-        ) : (
-          <VideoLayout videos={videos} />
-        )}
-        <></>
+        {videos.length === 0 ? <Loading /> : <VideoLayout videos={videos} />}
       </Stack>
 
       <Stack sx={{ mb: 10 }}>
-        <ChatbotLandingPage />
+        <ChatbotLanding />
       </Stack>
 
-      <Stack style={{ background: "#031B34" }}>Hi</Stack>
+      {/* <Stack style={{ background: "#031B34" }}>Hi</Stack> */}
     </>
   );
 };

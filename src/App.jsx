@@ -10,7 +10,15 @@ import {
   ProtectRoutes,
 } from "./components";
 import { Toaster } from "react-hot-toast";
-import { Blog, Login, Register, Home, ChatbotLanding, BlogPost } from "./pages";
+import {
+  Blog,
+  Login,
+  Register,
+  Home,
+  ChatbotLanding,
+  BlogPost,
+  MainPage,
+} from "./pages";
 import { ROUTES } from "./constants/navigation";
 
 function App() {
@@ -42,6 +50,7 @@ function App() {
           <Route path={ROUTES.CHATBOT} element={<Chatbot />}></Route>
           <Route path={ROUTES.BLOG} element={<Blog />}></Route>
           <Route path={ROUTES.BLOG_POST} element={<BlogPost />}></Route>
+          <Route path={ROUTES.MAIN_PAGE} element={<MainPage />}></Route>
           <Route
             path={ROUTES.FACE_DETECTION}
             element={<FaceDetection />}

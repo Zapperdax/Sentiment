@@ -163,8 +163,8 @@ canvas {
   margin-left: 1rem;
 }
 .userMessage {
-  text-align: right;
-  margin-right: 1rem;
+  text-align: left;
+  margin-left: 1rem;
 }
 .chatbotMessage > p,
 .userMessage > p {

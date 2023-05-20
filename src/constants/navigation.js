@@ -12,4 +12,5 @@ export const ROUTES = {
   // PROFILE: '/profile',
   FACE_DETECTION: "/face-detection",
   CHATBOT_LANDING_PAGE: "/chatbot-landing-page",
+  MAIN_PAGE: "/suggestions",
 };

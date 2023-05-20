@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState, useEffect } from "react";
+import React from "react";
 import {
   Button,
   Stack,
@@ -6,11 +6,7 @@ import {
   useMediaQuery,
   Icon,
   Backdrop,
-  CircularProgress,
-  Box,
   LinearProgress,
-  Card,
-  CardMedia,
 } from "@mui/material";
 import Webcam from "react-webcam";
 import ai from "../../assets/ai.png";
@@ -24,36 +20,14 @@ import {
   VideoLayout,
 } from "../../components/index";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies, allMovies } from "../../features/movie/movieSlice";
-import { fetchQuotes, allQuotes } from "../../features/quote/quoteSlice";
-import { fetchSongs, allSongs } from "../../features/song/songSlice";
-import { fetchVideos, allVideos } from "../../features/video/videoSlice";
 import ChatbotLanding from "../ChatbotLanding/ChatbotLanding";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const movies = useSelector(allMovies);
-  const quotes = useSelector(allQuotes);
-  const songs = useSelector(allSongs);
-  const videos = useSelector(allVideos);
+  const navigate = useNavigate();
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
-  const [isCameraOn, setIsCameraOn] = useState(false);
-  const [img, setImg] = useState(null);
-  const [category, setCategory] = useState("sad");
-  const webcamRef = useRef(null);
-
-  useEffect(() => {
-    dispatch(fetchMovies(category));
-    dispatch(fetchQuotes(category));
-    dispatch(fetchSongs(category));
-    dispatch(fetchVideos(category));
-  }, [dispatch, category]);
-
-  console.log(quotes);
-  console.log(category);
 
   const videoConstraints = {
     width: { min: 380 },
@@ -61,18 +35,8 @@ const Home = () => {
     facingMode: "user",
   };
 
-  const capture = useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImg(imageSrc);
-  }, [webcamRef]);
-
   const handleScan = () => {
-    setIsCameraOn(true);
-  };
-
-  const handleCameraClose = () => {
-    setIsCameraOn(false);
-    setImg(null);
+    navigate("/suggestions");
   };
 
   return (
@@ -86,62 +50,6 @@ const Home = () => {
           mb: 2,
         }}
       >
-        {isCameraOn && img === null ? (
-          <Backdrop sx={{ zIndex: "1" }} open={true}>
-            <Stack sx={styles.webcamStyles}>
-              <Icon
-                sx={styles.iconStyles}
-                fontSize="large"
-                color="warning"
-                onClick={() => handleCameraClose()}
-              >
-                <CloseIcon />
-              </Icon>
-              <Webcam
-                ref={webcamRef}
-                imageSmoothing={true}
-                screenshotFormat="image/jpeg"
-                mirrored={true}
-                videoConstraints={videoConstraints}
-              />
-              <Button
-                sx={{
-                  fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
-                  lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
-                  ...styles.stackBtn,
-                }}
-                onClick={capture}
-              >
-                {!isMobile ? "Capture Emotion" : "Capture"}
-              </Button>
-            </Stack>
-          </Backdrop>
-        ) : img === null ? null : (
-          <Backdrop sx={{ zIndex: "1" }} open={true}>
-            <Stack sx={styles.webcamStyles}>
-              <Icon
-                sx={styles.iconStyles}
-                fontSize="large"
-                color="warning"
-                onClick={() => handleCameraClose()}
-              >
-                <CloseIcon />
-              </Icon>
-              <FaceDetection img={img} setCategory={setCategory} />
-              <Button
-                sx={{
-                  fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
-                  lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
-                  ...styles.stackBtn,
-                }}
-                onClick={() => setImg(null)}
-              >
-                {!isMobile ? "Retake Photo" : "Retake"}
-              </Button>
-            </Stack>
-          </Backdrop>
-        )}
-
         <Stack
           flex={1}
           gap={isTab ? "2rem" : "1.3rem"}
@@ -194,7 +102,7 @@ const Home = () => {
               }}
               onClick={handleScan}
             >
-              {!isMobile ? "Scan Emotion" : "Scan"}
+              Explore
             </Button>
           </Stack>
         </Stack>
@@ -202,87 +110,6 @@ const Home = () => {
         <Stack sx={styles.imageStack}>
           <img src={ai} style={{ width: "100%", height: "100%" }} />
         </Stack>
-      </Stack>
-
-      <Stack
-        sx={{
-          px: is700 ? "2rem" : "5rem",
-          mb: 2,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
-            ...styles.mainTypography,
-          }}
-        >
-          Movies
-        </h1>
-        {movies.length === 0 ? (
-          <Stack
-            sx={{
-              width: "100%",
-              color: "grey.500",
-              my: 10,
-              display: "flex",
-              justifyContent: "center",
-            }}
-            spacing={2}
-          >
-            <LinearProgress color="secondary" />
-          </Stack>
-        ) : (
-          <MoviesLayout movies={movies} />
-        )}
-      </Stack>
-      <Stack
-        sx={{
-          px: is700 ? "2rem" : "5rem",
-          mb: 2,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
-            marginBottom: "2rem",
-            ...styles.mainTypography,
-          }}
-        >
-          Quotes
-        </h1>
-        {quotes.length === 0 ? <Loading /> : <QuotesLayout quotes={quotes} />}
-      </Stack>
-      <Stack
-        sx={{
-          px: is700 ? "2rem" : "5rem",
-          mb: 2,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
-            ...styles.mainTypography,
-          }}
-        >
-          Songs
-        </h1>
-        {songs.length === 0 ? <Loading /> : <SongsLayout songs={songs} />}
-      </Stack>
-      <Stack
-        sx={{
-          px: is700 ? "2rem" : "5rem",
-          mb: 2,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
-            ...styles.mainTypography,
-          }}
-        >
-          Videos
-        </h1>
-        {videos.length === 0 ? <Loading /> : <VideoLayout videos={videos} />}
       </Stack>
 
       <Stack sx={{ mb: 10 }}>

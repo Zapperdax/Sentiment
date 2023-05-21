@@ -11,16 +11,16 @@ import Post from "../../components/Blog/Post";
 import BlogSidebar from "../../components/Blog/BlogSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { allPosts, fetchBlogPosts } from "../../features/blog/blogSlice";
+import PostSkeleton from "../../components/PostSkeleton/PostSkeleton";
 
 const Blog = () => {
   const { token } = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
   const blogPosts = useSelector(allPosts);
   const [loading, setLoading] = useState(false);
+  const ar = [1, 2, 3, 4, 5, 6];
 
   const is700 = useMediaQuery("(max-width:700px)");
-  const isMobile = useMediaQuery("(max-width:530px)");
-  const isTab = useMediaQuery("(max-width:1050px)");
 
   const fetchPosts = () => {
     setLoading(true);
@@ -28,10 +28,6 @@ const Blog = () => {
       setLoading(false);
     });
   };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   useEffect(() => {
     fetchPosts();
@@ -55,14 +51,12 @@ const Blog = () => {
           gap: "50px",
         }}
       >
-        {loading ? (
-          <LinearProgress color="secondary" />
-        ) : (
-          blogPosts.length > 0 &&
-          blogPosts?.map((post) => {
-            return <Post key={post._id} data={post} />;
-          })
-        )}
+        {loading
+          ? ar.map((item) => <PostSkeleton />)
+          : blogPosts.length > 0 &&
+            blogPosts?.map((post) => {
+              return <Post key={post._id} data={post} />;
+            })}
       </Box>
     </Box>
   );

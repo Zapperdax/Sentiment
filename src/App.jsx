@@ -1,4 +1,7 @@
 import React from "react";
+import { lazy, Suspense } from "react";
+
+// const MarkdownPreview = lazy(() => import('./MarkdownPreview.js'));
 import { Routes, Route, useLocation } from "react-router-dom";
 import {
   ChangePassword,
@@ -11,7 +14,6 @@ import {
 } from "./components";
 import { Toaster } from "react-hot-toast";
 import {
-  Blog,
   Login,
   Register,
   Home,
@@ -20,6 +22,9 @@ import {
   MainPage,
 } from "./pages";
 import { ROUTES } from "./constants/navigation";
+const Blog = lazy(() => import("./pages/Blog/Blog"));
+// const
+//  = lazy(() => import("./pages/Register/Register"));
 
 function App() {
   const location = useLocation();
@@ -48,7 +53,14 @@ function App() {
 
         <Route element={<ProtectRoutes />}>
           <Route path={ROUTES.CHATBOT} element={<Chatbot />}></Route>
-          <Route path={ROUTES.BLOG} element={<Blog />}></Route>
+          <Route
+            path={ROUTES.BLOG}
+            element={
+              <Suspense fallback={<p>Loading...</p>}>
+                <Blog />
+              </Suspense>
+            }
+          ></Route>
           <Route path={ROUTES.BLOG_POST} element={<BlogPost />}></Route>
           <Route path={ROUTES.MAIN_PAGE} element={<MainPage />}></Route>
           <Route

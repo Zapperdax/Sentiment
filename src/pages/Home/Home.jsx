@@ -1,39 +1,16 @@
 import React from "react";
-import {
-  Button,
-  Stack,
-  Typography,
-  useMediaQuery,
-  Icon,
-  Backdrop,
-  LinearProgress,
-} from "@mui/material";
-import Webcam from "react-webcam";
+import { Button, Stack, Typography, useMediaQuery } from "@mui/material";
 import ai from "../../assets/ai.png";
-import {
-  FaceDetection,
-  Loading,
-  MoviesLayout,
-  Quote,
-  QuotesLayout,
-  SongsLayout,
-  VideoLayout,
-} from "../../components/index";
-import CloseIcon from "@mui/icons-material/Close";
+
 import ChatbotLanding from "../ChatbotLanding/ChatbotLanding";
 import { useNavigate } from "react-router-dom";
+import FaceScan from "../../animatedComponents/FaceScan/FaceScan";
 
 const Home = () => {
   const navigate = useNavigate();
   const is700 = useMediaQuery("(max-width:700px)");
   const isMobile = useMediaQuery("(max-width:530px)");
   const isTab = useMediaQuery("(max-width:1050px)");
-
-  const videoConstraints = {
-    width: { min: 380 },
-    height: { min: 100 },
-    facingMode: "user",
-  };
 
   const handleScan = () => {
     navigate("/suggestions");
@@ -45,15 +22,14 @@ const Home = () => {
         direction={isTab ? "column" : "row"}
         sx={{
           px: is700 ? "2rem" : "5rem",
-          pt: isTab ? "1rem" : "2rem",
-          gap: isTab ? "3rem" : "4rem",
+          // pt: isTab ? "-5rem" : "-5rem",
           mb: 2,
         }}
       >
         <Stack
           flex={1}
           gap={isTab ? "2rem" : "1.3rem"}
-          pt={isTab ? 7 : 10}
+          pt={2}
           justifyContent="center"
         >
           <h1
@@ -108,15 +84,13 @@ const Home = () => {
         </Stack>
 
         <Stack sx={styles.imageStack}>
-          <img src={ai} style={{ width: "100%", height: "100%" }} />
+          <FaceScan />
         </Stack>
       </Stack>
 
-      <Stack sx={{ mb: 10 }}>
+      <Stack sx={{ my: 10 }}>
         <ChatbotLanding />
       </Stack>
-
-      {/* <Stack style={{ background: "#031B34" }}>Hi</Stack> */}
     </>
   );
 };
@@ -160,6 +134,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    marginTop: "-100px",
   },
   webcamStyles: {
     position: "absolute",

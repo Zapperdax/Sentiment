@@ -225,6 +225,7 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
     padding: 1,
+    zIndex: 20,
   },
   navbarLinks: {
     flex: 1,
@@ -246,6 +247,7 @@ const styles = {
     WebkitBackgroundClip: "text",
     WebkitTextFillColor: "transparent",
     fontWeight: 700,
+    color: "white",
     marginRight: "2rem",
     fontSize: "28px",
     lineHeight: "24.25px",

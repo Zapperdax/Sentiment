@@ -74,6 +74,7 @@ const Home = () => {
               sx={{
                 fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
                 lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
+                zIndex: 10,
                 ...styles.stackBtn,
               }}
               onClick={handleScan}
@@ -83,7 +84,9 @@ const Home = () => {
           </Stack>
         </Stack>
 
-        <Stack sx={styles.imageStack}>
+        <Stack
+          sx={{ ...styles.imageStack, marginTop: isTab ? "5px" : "-100px" }}
+        >
           <FaceScan />
         </Stack>
       </Stack>
@@ -134,7 +137,6 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "-100px",
   },
   webcamStyles: {
     position: "absolute",

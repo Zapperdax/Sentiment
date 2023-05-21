@@ -20,11 +20,6 @@ const ChatbotLanding = () => {
     >
       <div className="infoContainer">
         <div className="chatLeftSide">
-          {/* <img
-            className="webChatbotDoodle floating"
-            src="/images/chattybot.png"
-            alt="doodle"
-          /> */}
           <ChatbotAnimation />
         </div>
         <div className="chatRightSide">

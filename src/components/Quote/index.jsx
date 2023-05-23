@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grow, Typography } from "@mui/material";
 import React from "react";
 import PostDescription from "../Blog/PostDescription";
 import QuoteSvg from "../../assets/quote.svg";
@@ -36,21 +36,23 @@ const styles = {
   },
 };
 
-const Quote = ({ data }) => {
+const Quote = ({ data, i }) => {
   return (
-    <Box sx={styles.quoteBox}>
-      <Box component="img" src={QuoteSvg} sx={styles.image}></Box>
-      <PostDescription
-        quote={true}
-        details={true}
-        description={data.quote}
-        sx={styles.description}
-      />
-      <Typography variant="h6" sx={styles.author}>
-        <Box component="img" src={AuthorSvg} sx={{ width: "12px" }} />{" "}
-        {data.author}
-      </Typography>
-    </Box>
+    <Grow in key={i} timeout={(i + 1) * 250}>
+      <Box sx={styles.quoteBox}>
+        <Box component="img" src={QuoteSvg} sx={styles.image}></Box>
+        <PostDescription
+          quote={true}
+          details={true}
+          description={data.quote}
+          sx={styles.description}
+        />
+        <Typography variant="h6" sx={styles.author}>
+          <Box component="img" src={AuthorSvg} sx={{ width: "12px" }} />{" "}
+          {data.author}
+        </Typography>
+      </Box>
+    </Grow>
   );
 };
 

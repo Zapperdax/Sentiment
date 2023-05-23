@@ -137,7 +137,6 @@ const MainPage = () => {
           </Backdrop>
         )}
       </Stack>
-
       <Stack alignItems="center">
         <Box pt={isTab ? 7 : 10}>
           <Button
@@ -151,6 +150,23 @@ const MainPage = () => {
             {!isMobile ? "Scan Emotion" : "Scan"}
           </Button>
         </Box>
+      </Stack>
+      <Stack
+        sx={{
+          px: is700 ? "2rem" : "5rem",
+          mb: 2,
+        }}
+      >
+        <h1
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            marginBottom: "2rem",
+            ...styles.mainTypography,
+          }}
+        >
+          Quotes
+        </h1>
+        {quotes.length === 0 ? <Loading /> : <QuotesLayout quotes={quotes} />}
       </Stack>
 
       <Stack
@@ -193,23 +209,6 @@ const MainPage = () => {
         <h1
           style={{
             fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
-            marginBottom: "2rem",
-            ...styles.mainTypography,
-          }}
-        >
-          Quotes
-        </h1>
-        {quotes.length === 0 ? <Loading /> : <QuotesLayout quotes={quotes} />}
-      </Stack>
-      <Stack
-        sx={{
-          px: is700 ? "2rem" : "5rem",
-          mb: 2,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
             ...styles.mainTypography,
           }}
         >
@@ -233,8 +232,6 @@ const MainPage = () => {
         </h1>
         {videos.length === 0 ? <Loading /> : <VideoLayout videos={videos} />}
       </Stack>
-
-      {/* <Stack style={{ background: "#031B34" }}>Hi</Stack> */}
     </>
   );
 };

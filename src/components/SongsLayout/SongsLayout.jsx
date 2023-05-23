@@ -1,26 +1,48 @@
 import { Box, Card, CardMedia, Grid, Grow, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { Pagination } from "..";
 
 const SongsLayout = ({ songs }) => {
+  const itemsPerPage = 12;
+  const [currentPage, setCurrentPage] = useState(1);
+
   if (!Array.isArray(songs)) {
-    // videos array not yet available, return null or a loading indicator
     return null;
   }
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedSongs = songs.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const totalPages = Math.ceil(songs.length / itemsPerPage);
   return (
-    <Grid
-      container
-      sx={{
-        py: "30px",
-        display: "flex",
-        justifyContent: "center",
-        alignContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {songs?.slice(0, 12).map((item, index) => (
-        <SongsCard song={item} key={index} i={index} />
-      ))}
-    </Grid>
+    <>
+      <Grid
+        container
+        sx={{
+          py: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {displayedSongs.map((item, index) => (
+          <SongsCard song={item} key={index} i={index} />
+        ))}
+      </Grid>
+      <Box>
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </Box>
+    </>
   );
 };
 

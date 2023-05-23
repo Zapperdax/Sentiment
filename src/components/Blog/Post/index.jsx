@@ -1,10 +1,11 @@
-import { Box, Stack } from "@mui/material";
+import { Box, Skeleton, Stack } from "@mui/material";
 import React from "react";
 import PostDescription from "../PostDescription";
 import PostTitle from "../PostTitle";
 import PostDate from "../PostDate";
 import UserName from "../UserName";
 import PostTags from "../PostTags";
+import PostSkeleton from "../../PostSkeleton/PostSkeleton";
 
 const Post = ({ data }) => {
   const styles = {

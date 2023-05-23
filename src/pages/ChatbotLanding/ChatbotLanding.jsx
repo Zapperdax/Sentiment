@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, useMediaQuery, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { ChatbotAnimation } from "../../animatedComponents";
 
 const ChatbotLanding = () => {
   const is700 = useMediaQuery("(max-width:700px)");
@@ -19,11 +20,7 @@ const ChatbotLanding = () => {
     >
       <div className="infoContainer">
         <div className="chatLeftSide">
-          <img
-            className="webChatbotDoodle floating"
-            src="/images/chattybot.png"
-            alt="doodle"
-          />
+          <ChatbotAnimation />
         </div>
         <div className="chatRightSide">
           <h1>Your Personal Mood Companion</h1>

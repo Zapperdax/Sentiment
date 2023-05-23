@@ -1,4 +1,6 @@
 import React from "react";
+import { lazy, Suspense } from "react";
+
 import { Routes, Route, useLocation } from "react-router-dom";
 import {
   ChangePassword,
@@ -8,10 +10,10 @@ import {
   Navbar,
   FaceDetection,
   ProtectRoutes,
+  PostSkeleton,
 } from "./components";
 import { Toaster } from "react-hot-toast";
 import {
-  Blog,
   Login,
   Register,
   Home,
@@ -20,10 +22,12 @@ import {
   MainPage,
 } from "./pages";
 import { ROUTES } from "./constants/navigation";
+const Blog = lazy(() => import("./pages/Blog/Blog"));
 
 function App() {
   const location = useLocation();
   const navbarHidden = location.pathname.includes(ROUTES.BLOG);
+  const ar = [1, 2, 3, 4, 5, 6];
 
   return (
     <>
@@ -48,7 +52,18 @@ function App() {
 
         <Route element={<ProtectRoutes />}>
           <Route path={ROUTES.CHATBOT} element={<Chatbot />}></Route>
-          <Route path={ROUTES.BLOG} element={<Blog />}></Route>
+          <Route
+            path={ROUTES.BLOG}
+            element={
+              <Suspense
+                fallback={ar.map((item) => (
+                  <PostSkeleton />
+                ))}
+              >
+                <Blog />
+              </Suspense>
+            }
+          ></Route>
           <Route path={ROUTES.BLOG_POST} element={<BlogPost />}></Route>
           <Route path={ROUTES.MAIN_PAGE} element={<MainPage />}></Route>
           <Route

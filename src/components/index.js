@@ -14,3 +14,5 @@ export { default as VideoLayout } from "./VideoLayout/VideoLayout";
 export { default as Loading } from "./Loading/";
 export { default as Quote } from "./Quote/";
 export { default as QuotesLayout } from "./QuotesLayout/";
+export { default as PostSkeleton } from "./PostSkeleton/PostSkeleton";
+export { default as Pagination } from "./Pagination/";

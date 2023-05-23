@@ -1,28 +1,47 @@
-import { Grid, Stack } from "@mui/material";
-import React from "react";
-import { MoviesCard } from "..";
+import React, { useState } from "react";
+import { Grid, Stack, Button, Typography } from "@mui/material";
+import { MoviesCard, Pagination } from "..";
 
 const MoviesLayout = ({ movies }) => {
+  const itemsPerPage = 12;
+  const [currentPage, setCurrentPage] = useState(1);
+
   if (!Array.isArray(movies)) {
-    // videos array not yet available, return null or a loading indicator
     return null;
   }
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const displayedMovies = movies.slice(startIndex, endIndex);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const totalPages = Math.ceil(movies.length / itemsPerPage);
+
   return (
-    <Grid
-      container
-      sx={{
-        py: "30px",
-        display: "flex",
-        justifyContent: "center",
-        alignContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {/* <MoviesCard movie={movies} /> */}
-      {movies?.slice(0, 12).map((item, index) => (
-        <MoviesCard key={index} movie={item} i={index} />
-      ))}
-    </Grid>
+    <>
+      <Grid
+        container
+        sx={{
+          py: "30px",
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {displayedMovies.map((item, index) => (
+          <MoviesCard key={index} movie={item} i={index} />
+        ))}
+      </Grid>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
+    </>
   );
 };
 

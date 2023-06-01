@@ -49,14 +49,14 @@ const Chatbot = () => {
         alt="chatbot"
       />
       <div className="chatInfoContainer">
-        <div className="chatbotInformation">
-          <h1>Welcome, User</h1>
-          <h4>How May I Assist You</h4>
-        </div>
         <div className="chatMain">
           {chat.map((message, i) => {
+            const isUserMessage = i % 2 === 0; // Check if it's a user message
+            const messageClass = isUserMessage
+              ? "userMessage"
+              : "responseMessage";
             return (
-              <div key={i} className="userMessage">
+              <div key={i} className={messageClass}>
                 <p>{message}</p>
               </div>
             );

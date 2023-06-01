@@ -164,11 +164,16 @@ canvas {
   margin-left: 1rem;
 }
 .userMessage {
+  text-align: right;
+  margin-right: 1rem;
+}
+.responseMessage {
   text-align: left;
   margin-left: 1rem;
 }
 .chatbotMessage > p,
-.userMessage > p {
+.userMessage > p,
+.responseMessage > p {
   margin-bottom: 0.5rem;
   display: inline-block;
   max-width: 50%;
@@ -234,8 +239,9 @@ canvas {
     width: 100%;
   }
   .chatbotMessage > p,
-  .userMessage > p {
-    font-size: 1.2rem;
+  .userMessage > p,
+  .responseMessage > p {
+    font-size: 1rem;
   }
   .chatLeftSide {
     display: flex;

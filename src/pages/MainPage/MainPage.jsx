@@ -42,6 +42,7 @@ const MainPage = () => {
   const [img, setImg] = useState(null);
   const [category, setCategory] = useState("sad");
   const webcamRef = useRef(null);
+  const [processing, setProcessing] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMovies(category));
@@ -59,6 +60,7 @@ const MainPage = () => {
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImg(imageSrc);
+    setProcessing(true);
   }, [webcamRef]);
 
   const handleScan = () => {
@@ -69,7 +71,6 @@ const MainPage = () => {
     setIsCameraOn(false);
     setImg(null);
   };
-
   return (
     <>
       <Stack
@@ -114,6 +115,17 @@ const MainPage = () => {
         ) : img === null ? null : (
           <Backdrop sx={{ zIndex: "1" }} open={true}>
             <Stack sx={styles.webcamStyles}>
+              {processing ? (
+                <CircularProgress
+                  sx={{
+                    top: isMobile ? "40%" : "45%",
+                    left: isMobile ? "40%" : "45%",
+                    fontWeight: "bold",
+                    color: "#040c18",
+                    ...styles.circularStyles,
+                  }}
+                />
+              ) : null}
               <Icon
                 sx={styles.iconStyles}
                 fontSize="large"
@@ -122,8 +134,14 @@ const MainPage = () => {
               >
                 <CloseIcon />
               </Icon>
-              <FaceDetection img={img} setCategory={setCategory} />
+              <FaceDetection
+                img={img}
+                setCategory={setCategory}
+                setProcessing={setProcessing}
+                handleCameraClose={handleCameraClose}
+              />
               <Button
+                disabled={processing}
                 sx={{
                   fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
                   lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
@@ -138,6 +156,15 @@ const MainPage = () => {
         )}
       </Stack>
       <Stack alignItems="center">
+        <Typography
+          style={{
+            fontSize: isMobile ? "18px" : is700 ? "24px" : "32px",
+            ...styles.mainTypography,
+          }}
+        >
+          Current Emotion: {category}
+        </Typography>
+
         <Box pt={isTab ? 7 : 10}>
           <Button
             sx={{
@@ -283,6 +310,12 @@ const styles = {
     transform: "translate(-50%, -50%)",
     maxWidth: "90%",
     zIndex: "1",
+  },
+  circularStyles: {
+    position: "absolute",
+    transform: "translate(-50%, -50%)",
+    // maxWidth: '100%',
+    zIndex: "1000",
   },
   iconStyles: {
     position: "absolute",

@@ -49,6 +49,8 @@ const Chatbot = () => {
         alt="chatbot"
       />
       <div className="chatInfoContainer">
+        <h1>Welcome, User</h1>
+        <h4>How May I Assist You</h4>
         <div className="chatMain">
           {chat.map((message, i) => {
             const isUserMessage = i % 2 === 0; // Check if it's a user message

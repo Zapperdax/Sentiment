@@ -40,7 +40,7 @@ const MainPage = () => {
   const isTab = useMediaQuery("(max-width:1050px)");
   const [isCameraOn, setIsCameraOn] = useState(false);
   const [img, setImg] = useState(null);
-  const [category, setCategory] = useState("sad");
+  const [category, setCategory] = useState("neutral");
   const webcamRef = useRef(null);
   const [processing, setProcessing] = useState(false);
 

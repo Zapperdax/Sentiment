@@ -49,10 +49,9 @@ const Home = () => {
               ...styles.paraTypography,
             }}
           >
-            Yet bed any for travelling assistance indulgence unpleasing. Not
-            thoughts all exercise blessing. Indulgence way everything joy
-            alteration boisterous the attachment. Party we years to order allow
-            asked of.
+            Unlock the Power of Emotions: Discover Your Perfect Playlist,
+            Inspiring Quotes, Mood-Boosting Movies and Astonishing Videos with
+            our App!
           </Typography>
 
           <Stack

@@ -32,6 +32,10 @@ export default function FaceDetection(props) {
           }
         }
         props.setCategory(key);
+        props.setProcessing(false);
+        setTimeout(() => {
+          props.handleCameraClose();
+        }, 3000);
       }
     }
   };
@@ -80,6 +84,7 @@ export default function FaceDetection(props) {
           detectedEmotion();
         })
         .catch((e) => {
+          props.setProcessing(false);
           console.log(e);
         });
     };

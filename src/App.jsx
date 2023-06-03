@@ -26,7 +26,10 @@ const Blog = lazy(() => import("./pages/Blog/Blog"));
 
 function App() {
   const location = useLocation();
-  const navbarHidden = location.pathname.includes(ROUTES.BLOG);
+  const navbarHidden =
+    location.pathname.includes(ROUTES.BLOG) ||
+    location.pathname.includes(ROUTES.LOGIN) ||
+    location.pathname.includes(ROUTES.REGISTER);
   const ar = [1, 2, 3, 4, 5, 6];
 
   return (

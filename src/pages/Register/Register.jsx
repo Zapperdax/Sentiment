@@ -148,7 +148,7 @@ const Register = () => {
             {error && (
               <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
-                This is an error alert — <strong>check it out!</strong>
+                Try Again — <strong>Something Went Wrong</strong>
               </Alert>
             )}
             <div

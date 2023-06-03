@@ -151,7 +151,7 @@ const Login = () => {
             {error && (
               <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
-                This is an error alert — <strong>check it out!</strong>
+                Wrong Credentials — <strong>Email or Password</strong>
               </Alert>
             )}
             <div

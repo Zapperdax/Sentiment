@@ -29,7 +29,10 @@ function App() {
   const navbarHidden =
     location.pathname.includes(ROUTES.BLOG) ||
     location.pathname.includes(ROUTES.LOGIN) ||
-    location.pathname.includes(ROUTES.REGISTER);
+    location.pathname.includes(ROUTES.REGISTER) ||
+    location.pathname.includes(ROUTES.FORGOT_PASSWORD) ||
+    location.pathname.includes(ROUTES.CHANGE_PASSWORD) ||
+    location.pathname.includes(ROUTES.ENTER_OTP);
   const ar = [1, 2, 3, 4, 5, 6];
 
   return (

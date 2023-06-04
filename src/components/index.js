@@ -16,3 +16,5 @@ export { default as Quote } from "./Quote/";
 export { default as QuotesLayout } from "./QuotesLayout/";
 export { default as PostSkeleton } from "./PostSkeleton/PostSkeleton";
 export { default as Pagination } from "./Pagination/";
+export { default as SentimentLogo } from "./SentimentLogo/SentimentLogo";
+export { default as FormContainer } from "./AuthForm/FormContainer/FormContainer.jsx";

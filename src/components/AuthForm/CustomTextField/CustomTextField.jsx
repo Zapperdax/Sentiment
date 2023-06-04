@@ -3,6 +3,7 @@ import { Box, IconButton, TextField, Typography } from "@mui/material";
 import React from "react";
 
 const CustomTextField = ({
+  multiline = false,
   name,
   label,
   type = "text",
@@ -20,11 +21,16 @@ const CustomTextField = ({
       outline: "none",
       margin: 0,
       fontFamily: "Manrope",
+      color: "white",
       input: {
         color: "white",
         fontSize: "1rem",
         fontWeight: "400",
         fontFamily: "Manrope",
+        placeholder: {
+          color: "white",
+        },
+        outline: "none",
       },
     },
     errorText: {
@@ -42,6 +48,8 @@ const CustomTextField = ({
       <TextField
         hiddenLabel
         name={name}
+        multiline={multiline}
+        rows={multiline ? 7 : 1}
         fullWidth
         type={password && showPassword ? "text" : type}
         value={value}
@@ -50,12 +58,11 @@ const CustomTextField = ({
         sx={styles.inputField}
         InputProps={{
           endAdornment: password && (
-            <IconButton onClick={handleClickShowPassword} sx={{color:'#39DCF3'}}>
-              {showPassword ? (
-                <VisibilityOff  />
-              ) : (
-                <Visibility  />
-              )}
+            <IconButton
+              onClick={handleClickShowPassword}
+              sx={{ color: "#39DCF3" }}
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
             </IconButton>
           ),
         }}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import logo from "../../assets/sentimento.svg";
 import {
   AppBar,
   Box,
@@ -21,6 +22,7 @@ import { toast } from "react-hot-toast";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/user/userSlice";
 import { ROUTES } from "../../constants/navigation";
+import SentimentLogo from "../SentimentLogo/SentimentLogo";
 
 const Navbar = () => {
   const [anchorElement, setAnchorElement] = useState(null);
@@ -71,11 +73,13 @@ const Navbar = () => {
           disableGutters={true}
           sx={{
             ...styles.toolBar,
-            p: isMobile ? "0.5rem 2rem" : "0rem 5rem",
+            p: isMobile ? "0.5rem 2rem" : "0.2rem 5rem",
           }}
         >
           <Link style={styles.logoText} to={ROUTES.HOME}>
-            Sentimento
+            {/* <img src={logo} alt="logo" style={{ width: "200px" }} /> */}
+            {/* Sentimento */}
+            <SentimentLogo type="small" />
           </Link>
           {!isMobile ? (
             <Box ml={2} style={styles.navbarLinks}>
@@ -130,7 +134,7 @@ const Navbar = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem style={styles.menuItems}>
+        {/* <MenuItem style={styles.menuItems}>
           <ListItemIcon sx={{ color: "#FFF" }}>
             <AccountCircle />
           </ListItemIcon>
@@ -141,7 +145,7 @@ const Navbar = () => {
             <Settings />
           </ListItemIcon>
           Settings
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem style={styles.menuItems} onClick={handleLogout}>
           <ListItemIcon sx={{ color: "#FFF" }}>
             <Logout />

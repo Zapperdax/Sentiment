@@ -2,9 +2,9 @@ import React from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser, login } from "../../features/user/userSlice";
-import FormContainer from "./FormContainer";
 import { registerValidations } from "../../utils/validations/validations";
 import { ROUTES } from "../../constants/navigation";
+import { FormContainer } from "../../components";
 const initialValues = {
   fullName: "",
   email: "",
@@ -18,7 +18,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
     try {
-     const res = await dispatch(
+      const res = await dispatch(
         createUser({
           name: values.fullName,
           email: values.email,
@@ -35,7 +35,7 @@ const Register = () => {
     } catch (error) {
       console.log(error);
     }
-    console.log(error)
+    console.log(error);
   };
 
   return (
@@ -51,36 +51,34 @@ const Register = () => {
 
 export default Register;
 
-
-
- //   const res = await api.post("/newUser", {
-    //     name: values.fullName,
-    //     email: values.email,
-    //     password: values.password,
-    //   });
-    //   const user = {
-    //     email: res.data.user.email,
-    //     token: res.data.token,
-    //   };
-    //   localStorage.setItem("user", JSON.stringify(user));
-    //   await dispatch(login(user)).finally(() => {
-    //     navigate("/");
-    //   });
-    // } catch (error) {
-    //   console.log(error);
-    //   if (error.response) {
-    //     const { status } = error.response;
-    //     if (status === 400) {
-    //       alert("User already exists");
-    //     } else if (status === 401 || status === 403) {
-    //       alert("You are not authorized to perform this action. Please login or contact support for assistance.");
-    //     } else {
-    //       alert("An unexpected server error occurred. Please try again later.");
-    //     }
-    //   } else {
-    //     alert("Network error occurred. Please check your internet connection.");
-    //   }
-    // }
+//   const res = await api.post("/newUser", {
+//     name: values.fullName,
+//     email: values.email,
+//     password: values.password,
+//   });
+//   const user = {
+//     email: res.data.user.email,
+//     token: res.data.token,
+//   };
+//   localStorage.setItem("user", JSON.stringify(user));
+//   await dispatch(login(user)).finally(() => {
+//     navigate("/");
+//   });
+// } catch (error) {
+//   console.log(error);
+//   if (error.response) {
+//     const { status } = error.response;
+//     if (status === 400) {
+//       alert("User already exists");
+//     } else if (status === 401 || status === 403) {
+//       alert("You are not authorized to perform this action. Please login or contact support for assistance.");
+//     } else {
+//       alert("An unexpected server error occurred. Please try again later.");
+//     }
+//   } else {
+//     alert("Network error occurred. Please check your internet connection.");
+//   }
+// }
 {
   /* <div
     style={{

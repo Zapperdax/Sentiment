@@ -16,6 +16,13 @@ const emailValidations = (requiredMessage = "Email is required.") => {
 const nameValidations = (requiredMessage = "Name is required.") => {
   return string().required(requiredMessage);
 };
+
+export const forgotPasswordValidation = object().shape({
+  email: emailValidations(),
+});
+export const enterOtpValidation = object().shape({
+  otp: string().required("OTP is required."),
+});
 export const registerValidations = object().shape({
   fullName: nameValidations(),
   email: emailValidations(),
@@ -25,6 +32,15 @@ export const registerValidations = object().shape({
     "Password must match."
   ),
 });
+export const resetPasswordValidations = object().shape({
+  password: passwordValidations(),
+  confirmPassword: passwordValidations().oneOf(
+    [ref("password")],
+    "Password must match."
+  ),
+});
+
+// export const postValidations =
 
 export const loginValidations = object().shape({
   email: emailValidations(),

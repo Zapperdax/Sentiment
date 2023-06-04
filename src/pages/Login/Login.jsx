@@ -1,11 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { login, userLogin } from "../../features/user/userSlice";
-import FormContainer from "../Register/FormContainer";
 import { loginValidations } from "../../utils/validations/validations";
 import useToast from "../../hooks/useToast";
+import { FormContainer } from "../../components";
 
 const initialValues = {
   email: "",
@@ -16,7 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.users);
   const dispatch = useDispatch();
-  const showToast = useToast()
+  const showToast = useToast();
 
   const handleSubmit = async (values) => {
     try {
@@ -28,24 +27,24 @@ const Login = () => {
         email: res.payload.data.user.email,
       };
       localStorage.setItem("user", JSON.stringify(user));
-     await dispatch(login(user));
-      showToast("success", "Welcome", "Have fun exploring!")
+      await dispatch(login(user));
+      showToast("success", "Welcome", "Have fun exploring!");
       navigate("/");
     } catch (err) {
       console.log(err);
       console.log(error);
-      error && showToast("error", "Failed", error)
+      error && showToast("error", "Failed", error);
     }
   };
 
   return (
-      <FormContainer
-        loading={loading}
-        type="login"
-        onSubmit={handleSubmit}
-        initialValues={initialValues}
-        validationSchema={loginValidations}
-      />
+    <FormContainer
+      loading={loading}
+      type="login"
+      onSubmit={handleSubmit}
+      initialValues={initialValues}
+      validationSchema={loginValidations}
+    />
   );
 };
 

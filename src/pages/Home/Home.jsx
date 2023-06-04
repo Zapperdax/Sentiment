@@ -55,12 +55,7 @@ const Home = () => {
             asked of.
           </Typography>
 
-          <Stack
-            direction="row"
-            alignItems="center"
-            bgcolor="#052D56"
-            borderRadius={1}
-          >
+          <Stack direction="row" alignItems="center" bgcolor="#052D56">
             <Typography
               sx={{
                 fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
@@ -75,6 +70,7 @@ const Home = () => {
                 fontSize: isMobile ? "12px" : is700 ? "16px" : "18px",
                 lineHeight: isMobile ? "22px" : is700 ? "24px" : "28px",
                 zIndex: 10,
+                borderRadius: 0,
                 ...styles.stackBtn,
               }}
               onClick={handleScan}

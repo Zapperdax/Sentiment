@@ -2,9 +2,11 @@ import { Box, useMediaQuery } from "@mui/material";
 import React from "react";
 import SidebarLink from "../SidebarLink";
 import { ROUTES } from "../../../constants/navigation";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import SentimentLogo from "../../SentimentLogo/SentimentLogo";
+import CreatePost from "../CreatePost/CreatePost";
 
-const BlogSidebar = () => {
+const BlogSidebar = ({ openPostModal }) => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 530px)");
   const isMedium = useMediaQuery("(max-width: 960px)");
@@ -19,7 +21,7 @@ const BlogSidebar = () => {
         display: "flex",
         flexDirection: isMedium ? "row" : "column",
         gap: "20px",
-        justifyContent: "space-evenly",
+        justifyContent: "space-around",
         alignItems: "center",
         width: isMedium ? "calc(100vw - 40px)" : "90px",
         height: isMobile ? "67px" : isMedium ? "80px" : "100vh",
@@ -37,9 +39,13 @@ const BlogSidebar = () => {
         zIndex: 200,
       }}
     >
-      <SidebarLink title="Home" onClick={onHomeClick} />
+      <Link to={ROUTES.HOME}>
+        <SentimentLogo type="symbol" />
+      </Link>
+
+      {/* <SidebarLink title="Home" onClick={onHomeClick} /> */}
       <Box>
-        <SidebarLink title="Create" />
+        <SidebarLink title="Create" onClick={() => openPostModal()} />
       </Box>
     </Box>
   );

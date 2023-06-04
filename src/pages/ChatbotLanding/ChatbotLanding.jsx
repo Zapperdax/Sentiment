@@ -28,16 +28,17 @@ const ChatbotLanding = () => {
             style={{ margin: "1rem 0 1rem" }}
             className="chatButtonContainer"
           >
-            <Button
+            {/* <Button
               sx={{
                 mr: 2,
               }}
               variant="text"
             >
               Learn More
-            </Button>
+            </Button> */}
             <Button
               sx={{
+                borderRadius: 0,
                 bgcolor: "#FF4820",
                 ":hover": {
                   bgcolor: "#AE67FA",

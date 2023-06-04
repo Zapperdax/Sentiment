@@ -1,11 +1,25 @@
-import { Box, Button, CircularProgress, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../../../constants/navigation";
 
-const FormButton = ({ to, type, questionText, linkText,isLoading }) => {
+const FormButton = ({ to, type, questionText, linkText, isLoading }) => {
   const isSmall = useMediaQuery("(min-width: 767px)");
+  const login = type === "login";
+  const register = type === "register";
+  const forgotPassword = type === "forgotPassword";
+  const otp = type === "enterOtp";
+  const resetPassword = type === "resetPassword";
   const styles = {
     container: {
+      marginTop: "12px",
       display: "flex",
       justifyContent: isSmall ? "space-between" : "center",
       alignItems: isSmall ? "space-between" : "center",
@@ -41,14 +55,28 @@ const FormButton = ({ to, type, questionText, linkText,isLoading }) => {
   return (
     <Box sx={styles.container}>
       <Button type="submit" size="large" sx={styles.button}>
-    {!isLoading ? type :  (<CircularProgress size={30} sx={{ color: 'black' }} />)}
-  </Button>
-      <Stack alignItems="flex-start">
-        <Typography sx={styles.description}>{questionText}</Typography>
-        <Link style={styles.link} to={to}>
-          {linkText}
-        </Link>
-      </Stack>
+        {!isLoading ? (
+          forgotPassword ? (
+            "Send OTP"
+          ) : otp ? (
+            "verify"
+          ) : resetPassword ? (
+            "Reset Password"
+          ) : (
+            type
+          )
+        ) : (
+          <CircularProgress size={30} sx={{ color: "black" }} />
+        )}
+      </Button>
+      {register || login ? (
+        <Stack alignItems="flex-start">
+          <Typography sx={styles.description}>{questionText}</Typography>
+          <Link style={styles.link} to={to}>
+            {linkText}
+          </Link>
+        </Stack>
+      ) : null}
     </Box>
   );
 };

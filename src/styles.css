@@ -8,9 +8,9 @@ body {
   font-family: "Manrope";
   .gradient__bg {
     background: radial-gradient(
-      circle at 1% 5%,
-      rgba(0, 40, 83, 0.8) 0%,
-      rgba(4, 12, 24, 0.8) 25%
+      circle at 10% 15%,
+      rgba(0, 30, 63, 0.8) 0%,
+      rgba(4, 12, 24, 0.8) 50%
     );
     /* height: 100vh; */
     /* width: 100vw; */

@@ -1,6 +1,6 @@
 import { Box, Grid, Grow } from "@mui/material";
 import React, { useState } from "react";
-import {Pagination} from '..'
+import { Pagination } from "../";
 
 const VideoLayout = ({ videos }) => {
   const itemsPerPage = 12;

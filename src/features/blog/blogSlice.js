@@ -3,6 +3,32 @@ import { api } from "../../utils/axios";
 
 const initialState = [];
 
+const dateAndNameConversion = (data) => {
+      const date = new Date(data.createdAt);
+      const formattedDate = new Intl.DateTimeFormat("en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }).format(date);
+      console.log(formattedDate);
+      const [month, day, year] = formattedDate.split(" ");
+      const newDate = `${formattedDate.replace(",", "")} ${month}, ${year}`;
+      console.log(newDate);
+      let userName;
+      const pattern = /^([^@]+)/;
+      const match = data.email.match(pattern);
+      if (match) {
+        userName = `@${match[1]}`;
+      }
+
+      data = {
+        ...data,
+        createdAt: newDate,
+        userName: userName,
+      };
+  return data;
+}
+
 export const fetchBlogPosts = createAsyncThunk(
   "blog/fetchBlogPosts",
   async (token) => {
@@ -47,28 +73,7 @@ export const getPostById = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      let data = response.data;
-      const date = new Date(data.createdAt);
-      const formattedDate = new Intl.DateTimeFormat("en-US", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      }).format(date);
-      const [month, day, year] = formattedDate.split(" ");
-      const newDate = `${day.replace(",", "")} ${month}, ${year}`;
-      let userName;
-      const pattern = /^([^@]+)/;
-      const match = data.email.match(pattern);
-      if (match) {
-        userName = `@${match[1]}`;
-      }
-
-      data = {
-        ...data,
-        createdAt: newDate,
-        userName: userName,
-      };
-
+      let data = dateAndNameConversion(response.data);
       return data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -89,8 +94,9 @@ export const postBlog = createAsyncThunk(
           Authorization: `Bearer ${post.token}`,
         },
       });
-
-      return response.data;
+      console.log(response.data);
+      let data = dateAndNameConversion(response.data);
+      return data;
     } catch (error) {
       return error;
     }
@@ -110,7 +116,7 @@ const blogSlice = createSlice({
       .addCase(getPostById.fulfilled, (state, action) => {
         return action.payload;
       }).addCase(postBlog.fulfilled, (state, action)=> {
-        return action.payload;
+        state.push(action.payload);
       } );
   },
 });

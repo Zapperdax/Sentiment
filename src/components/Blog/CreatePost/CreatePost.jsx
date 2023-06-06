@@ -21,6 +21,7 @@ import PostFormAutoComplete from "./LocalComponents/PostFormAutoComplete/PostFor
 import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from "formik";
 import { postBlog } from "../../../features/blog/blogSlice";
+import useToast from "../../../hooks/useToast";
 
 const initialValues = {
   title: "",
@@ -29,6 +30,7 @@ const initialValues = {
 };
 
 const CreatePost = ({ open, onClose }) => {
+  const showToast = useToast();
   const dispatch = useDispatch();
   const {token} = useSelector((state) => state.users.user)
   const isSmall = useMediaQuery("(max-width: 800px)");
@@ -62,8 +64,10 @@ const CreatePost = ({ open, onClose }) => {
         validateOnChange={false}
         onSubmit={(values) => {
           const post = {token: token, values: values}
-          dispatch(postBlog(post)).then((response)=> {
-            console.log(response)
+          dispatch(postBlog(post)).then(()=> {
+            showToast("success", "Post Added", "Your post has been successfully added.");
+            onClose();
+            values = null;
           });
         }}
       >

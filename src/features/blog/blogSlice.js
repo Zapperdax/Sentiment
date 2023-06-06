@@ -38,24 +38,9 @@ export const fetchBlogPosts = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       });
-      const data = response?.data?.map((item) => {
-        const date = new Date(item.createdAt);
-        const formattedDate = new Intl.DateTimeFormat("en-US", {
-          month: "short",
-          day: "numeric",
-        }).format(date);
-        let userName;
-        const pattern = /^([^@]+)/;
-        const match = item.email.match(pattern);
-        if (match) {
-          userName = `@${match[1]}`;
-        }
-
-        return {
-          ...item,
-          createdAt: formattedDate,
-          userName: userName,
-        };
+      let data = [];
+      response?.data?.map((item) => {
+        data.push(dateAndNameConversion(item));
       });
       return data;
     } catch (err) {

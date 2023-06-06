@@ -76,6 +76,28 @@ export const getPostById = createAsyncThunk(
   }
 );
 
+export const postBlog = createAsyncThunk(
+  "postBlog",
+  async (post) => {
+    try {
+      const response = await api.post(`/post`, {
+        title: post.values.title,
+        blogBody: post.values.description,
+        tags: post.values.tags.map(({name})=> name)
+      }, {
+        headers: {
+          Authorization: `Bearer ${post.token}`,
+        },
+      });
+
+      return response.data;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
+
 const blogSlice = createSlice({
   name: "blog",
   initialState,
@@ -87,7 +109,9 @@ const blogSlice = createSlice({
       })
       .addCase(getPostById.fulfilled, (state, action) => {
         return action.payload;
-      });
+      }).addCase(postBlog.fulfilled, (state, action)=> {
+        return action.payload;
+      } );
   },
 });
 

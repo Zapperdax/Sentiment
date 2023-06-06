@@ -18,7 +18,9 @@ import AddPostButton from "./LocalComponents/AddPostButton";
 import PostFormHeader from "./LocalComponents/PostFormHeader/PostFormHeader";
 import PostFormDescriptionField from "./LocalComponents/PostFormDescriptionField/PostPostDescriptionField";
 import PostFormAutoComplete from "./LocalComponents/PostFormAutoComplete/PostFormAutoComplete";
+import { useDispatch, useSelector } from 'react-redux'
 import { Formik } from "formik";
+import { postBlog } from "../../../features/blog/blogSlice";
 
 const initialValues = {
   title: "",
@@ -27,6 +29,8 @@ const initialValues = {
 };
 
 const CreatePost = ({ open, onClose }) => {
+  const dispatch = useDispatch();
+  const {token} = useSelector((state) => state.users.user)
   const isSmall = useMediaQuery("(max-width: 800px)");
   const emotions = [
     { name: "Happy" },
@@ -56,7 +60,12 @@ const CreatePost = ({ open, onClose }) => {
         initialValues={initialValues}
         validateOnBlur={true}
         validateOnChange={false}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={(values) => {
+          const post = {token: token, values: values}
+          dispatch(postBlog(post)).then((response)=> {
+            console.log(response)
+          });
+        }}
       >
         {({ handleSubmit, values, handleChange, setFieldValue, errors }) => (
           <Stack

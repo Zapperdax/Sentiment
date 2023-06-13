@@ -90,9 +90,9 @@ const Navbar = () => {
                 <Link style={styles.linkStyle} to={ROUTES.BLOG}>
                   Blog
                 </Link>
-                <a href="#/" style={styles.linkStyle}>
+                {/* <a href="#/" style={styles.linkStyle}>
                   About
-                </a>
+                </a> */}
               </Stack>
               {!user ? (
                 <Stack gap={3} direction="row" alignItems="center">
@@ -175,11 +175,11 @@ const Navbar = () => {
             Blog
           </Link>
         </MenuItem>
-        <MenuItem sx={{ my: 1 }}>
+        {/* <MenuItem sx={{ my: 1 }}>
           <a href="#/" style={styles.menuItems}>
             About
           </a>
-        </MenuItem>
+        </MenuItem> */}
         <Divider />
 
         {!user ? (
@@ -198,7 +198,7 @@ const Navbar = () => {
           </MenuItem>
         ) : (
           <List>
-            <MenuItem sx={{ my: 1, ...styles.menuItems }}>
+            {/* <MenuItem sx={{ my: 1, ...styles.menuItems }}>
               <ListItemIcon sx={{ color: "#FFF" }}>
                 <AccountCircle />
               </ListItemIcon>
@@ -209,7 +209,7 @@ const Navbar = () => {
                 <Settings />
               </ListItemIcon>
               Settings
-            </MenuItem>
+            </MenuItem> */}
             <MenuItem style={styles.menuItems} onClick={handleLogout}>
               <ListItemIcon sx={{ color: "#FFF" }}>
                 <Logout />
